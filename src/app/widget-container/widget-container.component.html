@@ -1,0 +1,9 @@
+<mat-card [ngSwitch]="widget.type">
+    
+  <app-widget-text *ngSwitchCase="WidgetType.Text" [widget]="widget"></app-widget-text>
+  <app-widget-number *ngSwitchCase="WidgetType.Number" [widget]="widget"></app-widget-number>
+  <app-widget-image *ngSwitchCase="WidgetType.Image" [widget]="widget"></app-widget-image>
+  <div *ngSwitchDefault="">Unexpected type {{widget.type}} != {{WidgetType.Number }}</div>
+  
+
+</mat-card>

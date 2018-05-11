@@ -1,14 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+import { MaterialModule } from './material-module/material-module';
 import { AppComponent } from './app.component';
+import { ControlPageComponent } from './control-page/control-page.component';
+import { WidgetContainerComponent } from './widget-container/widget-container.component';
+import { WidgetNumberComponent } from './widget-number/widget-number.component';
+import { WidgetTextComponent } from './widget-text/widget-text.component';
+import { WidgetImageComponent } from './widget-image/widget-image.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ControlPageComponent,
+    WidgetContainerComponent,
+    WidgetNumberComponent,
+    WidgetTextComponent,
+    WidgetImageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

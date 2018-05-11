@@ -1,0 +1,5 @@
+<mat-grid-list cols="6">
+  <mat-grid-tile *ngFor="let widget of pageWidgets">
+    <app-widget-container [widget]="widget"></app-widget-container>
+  </mat-grid-tile>
+</mat-grid-list>
