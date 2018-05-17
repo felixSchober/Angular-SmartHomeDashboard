@@ -1,4 +1,4 @@
-<mat-card [ngSwitch]="widget.type">
+<mat-card [ngSwitch]="widget.type" [style.width.px]="widget.cardWidth" [style.height.px]="widget.cardHeight">
 
   <app-widget-text *ngSwitchCase="WidgetType.Text" [widget]="widget"></app-widget-text>
   <app-widget-number *ngSwitchCase="WidgetType.Number" [widget]="widget"></app-widget-number>

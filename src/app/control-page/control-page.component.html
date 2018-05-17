@@ -1,5 +1,5 @@
-<mat-grid-list cols="5">
-  <mat-grid-tile *ngFor="let widget of pageWidgets" rowspan="{{widget.sizeY}}" colspan="{{widget.sizeX}}">
+<ul>
+  <li *ngFor="let widget of pageWidgets" class="grid-list">
     <app-widget-container [widget]="widget"></app-widget-container>
-  </mat-grid-tile>
-</mat-grid-list>
+  </li>
+</ul>

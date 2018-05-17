@@ -2,6 +2,8 @@ import * as moment from 'moment';
 import { WidgetAction } from './widgetAction';
 
 let currentWidgetId = 0;
+const standardCardWidth = 150;
+const standardCardHeight = 150;
 
 export class Widget {
   id: number;
@@ -15,6 +17,8 @@ export class Widget {
   dataPrefix: string;
   dataSuffix: string;
   cardColor: string;
+  cardWidth: number;
+  cardHeight: number;
   actions: WidgetAction[];
 
   constructor(name: string,
@@ -38,6 +42,9 @@ export class Widget {
     this.type = widgetType;
     this.sizeX = sizeX || 1;
     this.sizeY = sizeY || 1;
+
+    this.cardWidth = this.sizeX * standardCardWidth;
+    this.cardHeight = this.sizeY * standardCardHeight;
     this.dataPrefix = dataPrefix || '';
     this.dataSuffix = dataSuffix || '';
     this.cardColor = cardColor || '#4CAF50';

@@ -1,0 +1,13 @@
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.grid-list  {
+  display: grid;
+  grid-gap: 800px;
+  max-width: 200px;
+  float: left;
+  padding: 30px;
+}
