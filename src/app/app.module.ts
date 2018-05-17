@@ -10,6 +10,7 @@ import { WidgetContainerComponent } from './widget-container/widget-container.co
 import { WidgetNumberComponent } from './widget-number/widget-number.component';
 import { WidgetTextComponent } from './widget-text/widget-text.component';
 import { WidgetImageComponent } from './widget-image/widget-image.component';
+import { WidgetClockComponent } from './widget-clock/widget-clock.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { WidgetImageComponent } from './widget-image/widget-image.component';
     WidgetContainerComponent,
     WidgetNumberComponent,
     WidgetTextComponent,
-    WidgetImageComponent
+    WidgetImageComponent,
+    WidgetClockComponent
   ],
   imports: [
     BrowserModule,
