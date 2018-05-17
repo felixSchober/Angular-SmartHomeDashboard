@@ -8,16 +8,15 @@ import { Widget, WidgetType } from './../widget';
 })
 export class WidgetContainerComponent implements OnInit {
   @Input() widget: Widget;
+
+  // enum widget type
   WidgetType: typeof WidgetType = WidgetType;
-  widgetType: WidgetType;
-  testType: number;
+
+
   constructor() {
-    this.widgetType = WidgetType.Number;
-    this.testType = 1;
   }
 
   ngOnInit() {
-    console.log('Widget Type: ' + this.widget.type);
   }
 
 
