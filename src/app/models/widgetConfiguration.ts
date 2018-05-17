@@ -3,8 +3,8 @@ import { Widget, WidgetImage, WidgetNumber, WidgetText, WidgetClock } from './wi
 export const WIDGETS: Widget[][] = [
   [
     //new WidgetClock(0, 'TestClock', 2, 1),
-    new WidgetNumber('A', 'Temperature', 'asdasdasdassssssssssssssssssssssssssssss', '', '°'),
-    new WidgetNumber('A', 'Temperature', 'asddddddddddddddddddddddddddddddddddddddddddddddddddd', '', '°'),
+    new WidgetNumber('A', 'Temperature', 'Test', '', '°', 2, 2),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),

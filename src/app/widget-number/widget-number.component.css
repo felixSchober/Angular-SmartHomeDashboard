@@ -4,9 +4,15 @@
   text-align: center;
 }
 
+.mat-card-header-content{
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  justify-content: center;
+}
+
 mat-card-header {
   width: auto;
-  height: 100%;
   margin-left: -24px;
   margin-right: -24px;
   margin-top: -24px;
@@ -27,9 +33,13 @@ mat-card-footer{
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
-.card-subtitle{
+.card-title{
   color: #FFF;
   opacity: 0.7;
   font-size: 1em;
   font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.card-subtitle{
+  overflow: hidden;
 }

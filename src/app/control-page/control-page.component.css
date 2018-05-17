@@ -6,8 +6,6 @@ ul {
 
 .grid-list  {
   display: grid;
-  grid-gap: 800px;
-  max-width: 200px;
   float: left;
-  padding: 30px;
+  padding: 8px;
 }

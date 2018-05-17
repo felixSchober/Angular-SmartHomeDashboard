@@ -2,8 +2,10 @@ import * as moment from 'moment';
 import { WidgetAction } from './widgetAction';
 
 let currentWidgetId = 0;
-const standardCardWidth = 150;
+const standardCardWidth = 185;
 const standardCardHeight = 150;
+const cardMargin = 48; // margin 24 on both sides -> 48
+const cardGridPadding = 16; // 8 on both sides
 
 export class Widget {
   id: number;
@@ -43,13 +45,15 @@ export class Widget {
     this.sizeX = sizeX || 1;
     this.sizeY = sizeY || 1;
 
-    this.cardWidth = this.sizeX * standardCardWidth;
-    this.cardHeight = this.sizeY * standardCardHeight;
+    this.cardWidth = this.sizeX * standardCardWidth + cardMargin * (this.sizeX - 1) + cardGridPadding * (this.sizeX - 1);
+    this.cardHeight = this.sizeY * standardCardHeight + cardMargin * (this.sizeY - 1) + cardGridPadding * (this.sizeY - 1);
     this.dataPrefix = dataPrefix || '';
     this.dataSuffix = dataSuffix || '';
     this.cardColor = cardColor || '#4CAF50';
 
     this.actions = [];
+
+    console.log('Widget ' + this.name + ' (' + this.type + ') created with ' + this.cardWidth + 'x' + this.cardHeight);
   }
 
   getLastUpdatedString(): string {
