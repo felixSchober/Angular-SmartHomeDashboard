@@ -1,2 +1,22 @@
-<mat-card-title>{{widget.title}}</mat-card-title>
-<mat-card-content>{{widget.currentNumber}}</mat-card-content>
+<mat-card-header [style.background-color]="widget.cardColor">
+  <div class="mat-card-header-content">
+    <mat-card-title>
+      <div class="card-number mat-card-header-text">
+        {{widget.dataPrefix}}{{widget.currentNumber}}{{widget.dataSuffix}}
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle class="card-subtitle">{{widget.title}}</mat-card-subtitle>
+  </div>
+
+</mat-card-header>
+
+
+<mat-card-content>
+  <div>
+    {{widget.subtitle}}
+  </div>
+
+</mat-card-content>
+<mat-card-footer>
+  <span class="lastUpdated">Last updated {{widget.getLastUpdatedString()}}</span>
+</mat-card-footer>

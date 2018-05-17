@@ -1,0 +1,35 @@
+.lastUpdated {
+  opacity: 0.5;
+  font-size: 8px;
+  text-align: center;
+}
+
+mat-card-header {
+  width: auto;
+  height: 100%;
+  margin-left: -24px;
+  margin-right: -24px;
+  margin-top: -24px;
+  text-align: center;
+  justify-content: center;
+}
+
+mat-card-footer{
+  text-align: center;
+}
+
+
+.card-number{
+  color: #FFF;
+  opacity: 0.9;
+  font-size: 6em;
+  margin-bottom: 20px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.card-subtitle{
+  color: #FFF;
+  opacity: 0.7;
+  font-size: 1em;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}

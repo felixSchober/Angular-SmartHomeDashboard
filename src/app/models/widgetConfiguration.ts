@@ -1,0 +1,24 @@
+import { Widget, WidgetImage, WidgetNumber, WidgetText, WidgetClock } from './widget';
+
+export const WIDGETS: Widget[][] = [
+  [
+    //new WidgetClock(0, 'TestClock', 2, 1),
+    new WidgetNumber('A', 'Temperature', 'Test Content Subtitle\nwith linebreak', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    //new WidgetNumber(2, 'A', 'AA', 'AAA', '', '', 1, 2),
+    //new WidgetNumber(3, 'A', 'AA', 'AAAAAA', '', '', 1, 2)
+  ],
+  [
+    //new WidgetImage(4, 'MyImage', 'Logo', '', 2, 2, '')
+  ]
+];

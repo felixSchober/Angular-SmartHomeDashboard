@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Widget } from './../widget';
-import { WIDGETS } from './../WidgetConfiguration';
+import { Widget } from '../models/widget';
+import { WIDGETS } from '../models/widgetConfiguration';
 @Component({
   selector: 'app-control-page',
   templateUrl: './control-page.component.html',

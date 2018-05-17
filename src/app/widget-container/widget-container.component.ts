@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Widget, WidgetType } from './../widget';
+import { Widget, WidgetType } from '../models/widget';
 
 @Component({
   selector: 'app-widget-container',

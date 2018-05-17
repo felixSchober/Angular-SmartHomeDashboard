@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Widget} from '../widget';
+import {WidgetNumber} from '../models/widget';
 
 
 @Component({
@@ -8,12 +8,11 @@ import {Widget} from '../widget';
   styleUrls: ['./widget-number.component.css']
 })
 export class WidgetNumberComponent implements OnInit {
-  @Input() widget: Widget;
+  @Input() widget: WidgetNumber;
 
   constructor() { }
 
   ngOnInit() {
-    console.log('Initialize number widget');
   }
 
 }
