@@ -28,7 +28,7 @@ export const WIDGETS: Widget[][] = [
     clockWidget,
     new WidgetNumber('A', 'Temperature', 'Test', '', '°', 2, 1, '#FFF', '#4CAF50', [basicButton, raisedButton], false),
     new WidgetNumber('A', 'Temperature', '', '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]),
-    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetImage('Test', '/assets/images/ARD-HD.png'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),

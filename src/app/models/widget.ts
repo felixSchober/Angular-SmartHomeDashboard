@@ -2,8 +2,8 @@ import * as moment from 'moment';
 import {ActionButtonType, WidgetAction} from './widgetAction';
 
 let currentWidgetId = 0;
-const standardCardWidth = 185;
-const standardCardHeight = 150;
+const standardCardWidth = 115; // 185
+const standardCardHeight = 115;
 const cardMargin = 48; // margin 24 on both sides -> 48
 const cardGridPadding = 16; // 8 on both sides
 
@@ -123,13 +123,11 @@ export class WidgetImage extends Widget {
   imageUrl: string;
 
   constructor(name: string,
-              title: string,
-              subtitle?: string,
+              imageUrl: string,
               sizeX?: number,
-              sizeY?: number,
-              cardColor?: string) {
-    super(name, title, WidgetType.Image, subtitle, null, null, sizeX, sizeY);
-    this.imageUrl = '';
+              sizeY?: number) {
+    super(name, '', WidgetType.Image, '', null, null, sizeX, sizeY);
+    this.imageUrl = imageUrl;
   }
 }
 
