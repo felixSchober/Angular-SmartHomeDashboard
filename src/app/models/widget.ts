@@ -21,6 +21,7 @@ export class Widget {
   dataPrefix: string;
   dataSuffix: string;
   cardColor: string;
+  cardHeaderColor: string;
   cardWidth: number;
   cardHeight: number;
   actions: WidgetAction[];
@@ -35,6 +36,7 @@ export class Widget {
               sizeX?: number,
               sizeY?: number,
               cardColor?: string,
+              cardHeaderColor?: string,
               actions?: WidgetAction[]) {
     this.id = currentWidgetId;
     currentWidgetId++;
@@ -53,7 +55,8 @@ export class Widget {
     this.cardHeight = this.sizeY * standardCardHeight + cardMargin * (this.sizeY - 1) + cardGridPadding * (this.sizeY - 1);
     this.dataPrefix = dataPrefix || '';
     this.dataSuffix = dataSuffix || '';
-    this.cardColor = cardColor || '#4CAF50';
+    this.cardHeaderColor = cardHeaderColor || '#4CAF50';
+    this.cardColor = cardColor || '#FFF';
 
     this.actions = actions || [];
 
@@ -102,12 +105,13 @@ export class WidgetNumber extends Widget {
               sizeX?: number,
               sizeY?: number,
               cardColor?: string,
+              cardHeaderColor?: string,
               actions?: WidgetAction[],
               showHighLow?: boolean) {
-    super(name, title, WidgetType.Number, subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor, actions);
+    super(name, title, WidgetType.Number, subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor, cardHeaderColor, actions);
     this.currentNumber = Math.random() * 3000;
     this.showHighLow = showHighLow || false;
-    if(this.showHighLow) {
+    if (this.showHighLow) {
       this.highValue = this.currentNumber + 10;
       this.lowValue = this.currentNumber - 10;
     }
@@ -124,7 +128,7 @@ export class WidgetImage extends Widget {
               sizeX?: number,
               sizeY?: number,
               cardColor?: string) {
-    super(name, title, WidgetType.Image, subtitle, null, null, sizeX, sizeY, cardColor);
+    super(name, title, WidgetType.Image, subtitle, null, null, sizeX, sizeY);
     this.imageUrl = '';
   }
 }
@@ -132,22 +136,20 @@ export class WidgetImage extends Widget {
 export class WidgetClock extends Widget {
 
   currentTime: Date;
-  currentTimeFormat: string;
 
   constructor(name: string,
-              sizeX: number,
-              sizeY: number) {
-    super(name, '', WidgetType.Clock);
+              sizeX?: number,
+              sizeY?: number,
+              cardColor?: string) {
+    super(name, '', WidgetType.Clock, null, null, null, sizeX, sizeY, cardColor);
     this.currentTime = moment().toDate();
+    moment.locale('de');
   }
 
   updateCurrentTime() {
     this.currentTime = moment().toDate();
-    this.title = moment().format('hh:mm:ss');
-    this.subtitle = moment().format('DD.MM.YY');
-    console.log('tick....');
-
-    setTimeout(this.updateCurrentTime, 1000);
+    this.title = moment().format('LTS');
+    this.subtitle = moment().format('LL');
   }
 }
 

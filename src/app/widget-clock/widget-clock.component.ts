@@ -13,7 +13,10 @@ export class WidgetClockComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.widget.updateCurrentTime();
+    // update clock every second
+    setInterval(() => {
+      this.widget.updateCurrentTime();
+    }, 1000);
   }
 
 }
