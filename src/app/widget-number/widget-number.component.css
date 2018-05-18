@@ -1,8 +1,4 @@
-.lastUpdated {
-  opacity: 0.5;
-  font-size: 8px;
-  text-align: center;
-}
+
 
 .mat-card-header-content{
   display: flex;
@@ -22,14 +18,19 @@ mat-card-header {
 
 mat-card-footer{
   text-align: center;
+  margin-top: -8px;
 }
 
+.lastUpdated {
+  opacity: 0.5;
+  font-size: 8px;
+  text-align: center;
+}
 
 .card-number{
   color: #FFF;
   opacity: 0.9;
-  font-size: 6em;
-  margin-bottom: 20px;
+  font-size: 5.2em;
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
@@ -40,6 +41,23 @@ mat-card-footer{
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
+.card-subtitle-content{
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
 .card-subtitle{
   overflow: hidden;
+  flex: 1;
+  text-align: center;
+}
+
+.card-subtitle-number{
+  font-size: 1.5em;
+}
+
+.card-subtitle-highLow-label{
+  opacity: 0.6;
 }

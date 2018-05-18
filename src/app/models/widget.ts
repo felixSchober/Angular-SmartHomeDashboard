@@ -7,6 +7,8 @@ const standardCardHeight = 150;
 const cardMargin = 48; // margin 24 on both sides -> 48
 const cardGridPadding = 16; // 8 on both sides
 
+
+
 export class Widget {
   id: number;
   name: string;
@@ -86,6 +88,8 @@ export class WidgetNumber extends Widget {
 
 
   currentNumber: number;
+  highValue: number;
+  lowValue: number;
 
   constructor(name: string,
               title: string,
@@ -95,8 +99,10 @@ export class WidgetNumber extends Widget {
               sizeX?: number,
               sizeY?: number,
               cardColor?: string) {
-    super(name, title, WidgetType.Number, subtitle, dataPrefix, dataSuffix, sizeX, sizeY, '#B00020');
-    this.currentNumber = 24;
+    super(name, title, WidgetType.Number, subtitle, dataPrefix, dataSuffix, sizeX, sizeY);
+    this.currentNumber = Math.random() * 3000;
+    this.highValue = this.currentNumber + 10;
+    this.lowValue = this.currentNumber - 10;
   }
 }
 
