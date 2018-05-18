@@ -16,17 +16,6 @@ mat-card-header {
   justify-content: center;
 }
 
-mat-card-footer{
-  text-align: center;
-  margin-top: -8px;
-}
-
-.lastUpdated {
-  opacity: 0.5;
-  font-size: 8px;
-  text-align: center;
-}
-
 .card-number{
   color: #FFF;
   opacity: 0.9;
@@ -60,4 +49,32 @@ mat-card-footer{
 
 .card-subtitle-highLow-label{
   opacity: 0.6;
+}
+
+mat-card-actions{
+  margin-top: -16px;
+  display: flex;
+}
+
+.card-action-button-container{
+  flex: 1;
+  margin: 4px;
+}
+
+.card-action-button{
+  width: 100%;
+}
+
+mat-card-footer{
+  text-align: center;
+
+  position: absolute;
+  bottom: 24px;
+  width: 100%;
+}
+
+.lastUpdated {
+  opacity: 0.5;
+  font-size: 8px;
+  text-align: center;
 }

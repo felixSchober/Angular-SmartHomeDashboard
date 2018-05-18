@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { WidgetAction } from './widgetAction';
+import {ActionButtonType, WidgetAction} from './widgetAction';
 
 let currentWidgetId = 0;
 const standardCardWidth = 185;
@@ -24,8 +24,9 @@ export class Widget {
   cardWidth: number;
   cardHeight: number;
   actions: WidgetAction[];
+  ActionButtonType: typeof ActionButtonType = ActionButtonType;
 
-  constructor(name: string,
+    constructor(name: string,
               title: string,
               widgetType: WidgetType,
               subtitle?: string,
@@ -33,7 +34,8 @@ export class Widget {
               dataSuffix?: string,
               sizeX?: number,
               sizeY?: number,
-              cardColor?: string) {
+              cardColor?: string,
+              actions?: WidgetAction[]) {
     this.id = currentWidgetId;
     currentWidgetId++;
 
@@ -53,7 +55,7 @@ export class Widget {
     this.dataSuffix = dataSuffix || '';
     this.cardColor = cardColor || '#4CAF50';
 
-    this.actions = [];
+    this.actions = actions || [];
 
     console.log('Widget ' + this.name + ' (' + this.type + ') created with ' + this.cardWidth + 'x' + this.cardHeight);
   }
@@ -88,6 +90,7 @@ export class WidgetNumber extends Widget {
 
 
   currentNumber: number;
+  showHighLow: boolean;
   highValue: number;
   lowValue: number;
 
@@ -98,11 +101,16 @@ export class WidgetNumber extends Widget {
               dataSuffix?: string,
               sizeX?: number,
               sizeY?: number,
-              cardColor?: string) {
-    super(name, title, WidgetType.Number, subtitle, dataPrefix, dataSuffix, sizeX, sizeY);
+              cardColor?: string,
+              actions?: WidgetAction[],
+              showHighLow?: boolean) {
+    super(name, title, WidgetType.Number, subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor, actions);
     this.currentNumber = Math.random() * 3000;
-    this.highValue = this.currentNumber + 10;
-    this.lowValue = this.currentNumber - 10;
+    this.showHighLow = showHighLow || false;
+    if(this.showHighLow) {
+      this.highValue = this.currentNumber + 10;
+      this.lowValue = this.currentNumber - 10;
+    }
   }
 }
 
