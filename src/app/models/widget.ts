@@ -9,13 +9,14 @@ const cardGridPadding = 16; // 8 on both sides
 
 
 
-export class Widget {
+export abstract class Widget {
   id: number;
   name: string;
   type: WidgetType;
   title: string;
   subtitle: string;
   updatedAt: Date;
+  updatedAtString: string;
   sizeX: number;
   sizeY: number;
   dataPrefix: string;
@@ -63,9 +64,16 @@ export class Widget {
     console.log('Widget ' + this.name + ' (' + this.type + ') created with ' + this.cardWidth + 'x' + this.cardHeight);
   }
 
-  getLastUpdatedString(): string {
+  private getLastUpdatedString(): string {
     return moment(this.updatedAt).calendar();
   }
+
+  updateLastUpdatedString() {
+      this.updatedAt = new Date();
+      this.updatedAtString = this.getLastUpdatedString();
+  }
+
+  abstract update(data: any): void;
 
   onSelect(widget: Widget): void {
     this.name += ' - ';
@@ -86,6 +94,10 @@ export class WidgetText extends Widget {
               cardColor?: string) {
     super(name, title, WidgetType.Text, subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor);
     this.currentTextContent = '';
+  }
+
+  update(data: any) {
+
   }
 }
 
@@ -116,6 +128,20 @@ export class WidgetNumber extends Widget {
       this.lowValue = this.currentNumber - 10;
     }
   }
+
+  update(data: any) {
+    console.log('[w' + this.id + '] data update.');
+    this.updateLastUpdatedString();
+
+    if (typeof data === 'number') {
+      const newNumber = data as number;
+      this.lowValue = Math.min(this.currentNumber, newNumber);
+      this.highValue = Math.min(this.currentNumber, newNumber);
+      this.currentNumber = newNumber;
+    } else {
+      console.log('[w' + this.id + '] data is not a number.');
+    }
+  }
 }
 
 export class WidgetImage extends Widget {
@@ -129,7 +155,20 @@ export class WidgetImage extends Widget {
     super(name, '', WidgetType.Image, '', null, null, sizeX, sizeY);
     this.imageUrl = imageUrl;
   }
+
+  update(data: any) {
+    console.log('[w' + this.id + '] data update.');
+    this.updateLastUpdatedString();
+
+    if (typeof data === 'string') {
+      this.imageUrl = data as string;
+    } else {
+      console.log('[w' + this.id + '] data is not a number.');
+    }
+  }
 }
+
+
 
 export class WidgetClock extends Widget {
 
@@ -144,6 +183,8 @@ export class WidgetClock extends Widget {
     moment.locale('de');
   }
 
+  update(data: any) {}
+
   updateCurrentTime() {
     this.currentTime = moment().toDate();
     this.title = moment().format('LTS');
@@ -155,5 +196,6 @@ export enum WidgetType {
   Text,
   Number,
   Image,
-  Clock
+  Clock,
+  Graph
 }

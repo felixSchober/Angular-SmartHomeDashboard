@@ -1,0 +1,40 @@
+<mat-card-header [style.background-color]="widget.cardHeaderColor">
+  <div class="mat-card-header-content">
+    <div id="{{widget.d3GraphId}}"></div>
+  </div>
+
+</mat-card-header>
+
+
+<mat-card-content>
+  <div class="card-subtitle-content" *ngIf="widget.showHighLow">
+    <div class="card-subtitle">
+      <div class="card-subtitle-number">{{widget.dataPrefix}}{{transformNumber(widget.lowValue, 2, true)}}{{widget.dataSuffix}}</div>
+      <div class="card-subtitle-highLow-label">Low</div>
+    </div>
+    <div class="card-subtitle">
+      <div class="card-subtitle-number">{{widget.dataPrefix}}{{transformNumber(widget.highValue, 2, true)}}{{widget.dataSuffix}}</div>
+      <div class="card-subtitle-highLow-label">High</div>
+    </div>
+  </div>
+
+
+</mat-card-content>
+
+<mat-card-actions *ngIf="widget.actions.length > 0">
+  <div class="card-action-button-container" *ngFor="let widgetAction of widget.actions" [ngSwitch]="widgetAction.type">
+    <button *ngSwitchCase="widget.ActionButtonType.Basic" class="card-action-button" mat-button color="{{widgetAction.color}}" (click)="widgetAction.execute(widget)">{{widgetAction.title}}</button>
+    <button *ngSwitchCase="widget.ActionButtonType.Raised" [disabled]="widgetAction.disabled" class="card-action-button" mat-raised-button color="{{widgetAction.color}}" (click)="widgetAction.execute(widget)">{{widgetAction.title}}</button>
+    <button *ngSwitchCase="widget.ActionButtonType.Icon" class="card-action-button" mat-icon-button color="{{widgetAction.color}}" (click)="widgetAction.execute(widget)">
+      <mat-icon>{{widgetAction.title}}</mat-icon>
+    </button>
+    <button *ngSwitchCase="widget.ActionButtonType.Fab" mat-fab color="{{widgetAction.color}}" (click)="widgetAction.execute(widget)">{{widgetAction.title}}</button>
+    <button *ngSwitchCase="widget.ActionButtonType.MiniFab" mat-mini-fab color="{{widgetAction.color}}" (click)="widgetAction.execute(widget)">{{widgetAction.title}}</button>
+
+
+  </div>
+</mat-card-actions>
+
+<mat-card-footer>
+  <span class="lastUpdated">Last updated {{widget.getLastUpdatedString()}}</span>
+</mat-card-footer>
