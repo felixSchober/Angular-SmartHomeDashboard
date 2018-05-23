@@ -77,15 +77,44 @@ mat-card-footer{
   text-align: center;
 }
 
-svg {
+::ng-deep svg {
   font-family: "Helvetica Neue", Helvetica;
 }
 
-.line {
+::ng-deep path .graph-line {
+  fill: none;
+  stroke-width: 5px;
+}
+
+::ng-deep .axis path,
+.axis line {
   fill: none;
   stroke: #000;
-  stroke-width: 2px;
+  shape-rendering: crispEdges;
 }
+
+::ng-deep .x.axis path {
+  display: none;
+
+}
+
+::ng-deep .y.axis path {
+  display: none;
+}
+
+::ng-deep .area {
+
+}
+
+::ng-deep .tick line {
+  display: none;
+}
+
+::ng-deep .tick text {
+  color: #000;
+  font-size: 1.5vh;
+}
+
 
 
 

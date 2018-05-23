@@ -23,7 +23,7 @@ const fabButton = new WidgetAction('Fab', ActionButtonType.Fab, '', '', incremen
 const miniFab = new WidgetAction('Mini fab', ActionButtonType.MiniFab, '', '', incrementNumber);
 
 const clockWidget = new WidgetClock('TestClock', 2, 1, '#4CAF50');
-const graphWidget = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, null);
+const graphWidget = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, null, '', '', 'W', 2, 1, null, '#FFF');
 
 export const WIDGETS: Widget[][] = [
   [

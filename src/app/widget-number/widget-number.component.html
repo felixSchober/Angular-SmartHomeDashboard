@@ -2,7 +2,7 @@
   <div class="mat-card-header-content">
     <mat-card-title>
       <div class="card-number mat-card-header-text">
-        {{widget.dataPrefix}}{{transformNumber(widget.currentNumber, 1, true)}}{{widget.dataSuffix}}
+        {{widget.dataPrefix}}{{utils.transformNumber(widget.currentNumber, 1, true)}}{{widget.dataSuffix}}
       </div>
     </mat-card-title>
     <mat-card-subtitle class="card-title">{{widget.title}}</mat-card-subtitle>
@@ -14,11 +14,11 @@
 <mat-card-content>
   <div class="card-subtitle-content" *ngIf="widget.showHighLow">
     <div class="card-subtitle">
-      <div class="card-subtitle-number">{{widget.dataPrefix}}{{transformNumber(widget.lowValue, 2, true)}}{{widget.dataSuffix}}</div>
+      <div class="card-subtitle-number">{{widget.dataPrefix}}{{utils.transformNumber(widget.lowValue, 2, true)}}{{widget.dataSuffix}}</div>
       <div class="card-subtitle-highLow-label">Low</div>
     </div>
     <div class="card-subtitle">
-      <div class="card-subtitle-number">{{widget.dataPrefix}}{{transformNumber(widget.highValue, 2, true)}}{{widget.dataSuffix}}</div>
+      <div class="card-subtitle-number">{{widget.dataPrefix}}{{utils.transformNumber(widget.highValue, 2, true)}}{{widget.dataSuffix}}</div>
       <div class="card-subtitle-highLow-label">High</div>
     </div>
   </div>

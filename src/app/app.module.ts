@@ -13,6 +13,8 @@ import { WidgetImageComponent } from './widget-image/widget-image.component';
 import { WidgetClockComponent } from './widget-clock/widget-clock.component';
 import { WidgetGraphComponent } from './widget-graph/widget-graph.component';
 
+import { Utils } from './utils';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,7 @@ import { WidgetGraphComponent } from './widget-graph/widget-graph.component';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [Utils],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

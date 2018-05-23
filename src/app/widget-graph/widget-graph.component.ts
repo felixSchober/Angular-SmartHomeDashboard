@@ -20,7 +20,7 @@ export class WidgetGraphComponent implements OnInit {
 
     this.widget.d3GraphId = 'd3Graph_' + this.widget.id;
     setTimeout(() => {
-      this.widget.buildLineGraph();
+      this.widget.buildMultiLineGraph();
     }, 800);
   }
 
