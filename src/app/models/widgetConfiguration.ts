@@ -1,6 +1,6 @@
 import { Widget, WidgetImage, WidgetNumber, WidgetText, WidgetClock } from './widget';
 import {ActionButtonType, WidgetAction} from './widgetAction';
-import {WidgetGraph, WidgetGraphType} from './widgetGraph';
+import {WidgetGraph, WidgetGraphType, Margins, WidgetLineGraphParameters} from './widgetGraph';
 
 const incrementNumber = function (sender: any) {
   return new Promise((resolve, reject) => {
@@ -23,7 +23,36 @@ const fabButton = new WidgetAction('Fab', ActionButtonType.Fab, '', '', incremen
 const miniFab = new WidgetAction('Mini fab', ActionButtonType.MiniFab, '', '', incrementNumber);
 
 const clockWidget = new WidgetClock('TestClock', 2, 1, '#4CAF50');
-const graphWidget = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, null, '', '', 'W', 2, 1, null, '#FFF');
+
+// GRAPHS
+const slimGraphMargins = new Margins(4, 0, 0, 0);
+
+const multiSeries = [{
+  name: 'series1',
+  labels: ['1', '2', '3', '4'],
+  values: [900, 980, 999, 891]
+}, {
+  name: 'series2',
+  labels: ['1', '2', '3', '4'],
+  values: [699, 811, 913, 139]
+}];
+
+const singleSeries = [{
+  name: 'series1',
+  labels: ['1', '2', '3', '4'],
+  values: [1, 2, 2, 1]
+}];
+
+const singleSeriesColorFunction = function (d: any): string {
+  return '#FFF';
+};
+
+const singleSeriesGraphParameters = new WidgetLineGraphParameters(singleSeriesColorFunction);
+
+const graphWidgetSlim = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, singleSeriesGraphParameters, slimGraphMargins, '', '', 'W', 1, 1, null, null, [iconButton]);
+graphWidgetSlim.values = singleSeries;
+
+const graphWidgetWide = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, null, null, '', '', 'W', 2, 1, null, 'lightsteelblue', [iconButton]);
 
 export const WIDGETS: Widget[][] = [
   [
@@ -31,7 +60,8 @@ export const WIDGETS: Widget[][] = [
     new WidgetNumber('A', 'Temperature', 'Test', '', '°', 2, 1, '#FFF', '#4CAF50', [basicButton, raisedButton], false),
     new WidgetNumber('A', 'Temperature', '', '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]),
     new WidgetImage('Test', '/assets/images/ARD-HD.png'),
-    graphWidget,
+    graphWidgetSlim,
+    graphWidgetWide,
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),

@@ -1,8 +1,10 @@
 .mat-card-header-content{
-  display: flex;
-  align-items: center;
-  flex-flow: column;
-  justify-content: center;
+  margin-left: -18px;
+  width: 100%;
+}
+
+.d3-container {
+  width: 100%;
 }
 
 mat-card-header {
@@ -13,6 +15,7 @@ mat-card-header {
   text-align: center;
   justify-content: center;
 }
+
 
 .card-number{
   color: #FFF;
@@ -50,7 +53,7 @@ mat-card-header {
 }
 
 mat-card-actions{
-  margin-top: -16px;
+  margin-top: -24px;
   display: flex;
 }
 
@@ -79,6 +82,7 @@ mat-card-footer{
 
 ::ng-deep svg {
   font-family: "Helvetica Neue", Helvetica;
+  margin-bottom: -4px;
 }
 
 ::ng-deep path .graph-line {

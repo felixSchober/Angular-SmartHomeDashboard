@@ -18,6 +18,7 @@ export class WidgetGraph extends Widget {
               title: string,
               graphType: WidgetGraphType,
               graphParameterDictionary: WidgetGraphParameters,
+              margins?: Margins,
               subtitle?: string,
               dataPrefix?: string,
               dataSuffix?: string,
@@ -29,9 +30,16 @@ export class WidgetGraph extends Widget {
     super(name, title, WidgetType.Graph, subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor, cardHeaderColor, actions);
     this.graphType = graphType;
     this.graphWidth = this.cardWidth;
-    this.graphHeight = this.cardHeight - 0;
+    this.graphHeight = this.cardHeight - 24;
     this.graphParameterDictionary = graphParameterDictionary;
-    this.graphMargins = new Margins(15, 20, 28, 0);
+    this.graphMargins = margins || new Margins(4, 20, 28, 4);
+
+    if (!this.graphParameterDictionary) {
+      // create default parameters
+      if (this.graphType === WidgetGraphType.line){
+        this.graphParameterDictionary = new WidgetLineGraphParameters();
+      }
+    }
 
     this.values = [{
       name: 'series1',
@@ -50,6 +58,9 @@ export class WidgetGraph extends Widget {
   }
 
   private getSvgElement() {
+    // update card width based on d3 parent container element
+    this.graphWidth = d3.select('#' + this.d3GraphId).node().getBoundingClientRect().width - this.graphMargins.marginsX();
+
     return d3
       .select('#' + this.d3GraphId)
       .append('svg')
@@ -93,10 +104,11 @@ export class WidgetGraph extends Widget {
     const svg = this.getSvgElement();
     const g = svg.append('g')
       .attr('transform', 'translate(' + this.graphMargins.left + ',' + this.graphMargins.top + ')');
-    const w = this.graphWidth - this.graphMargins.left - this.graphMargins.right;
-    const h = this.graphHeight - this.graphMargins.top - this.graphMargins.bottom;
+    const w = this.graphWidth;
+    const h = this.graphHeight;
 
     const v = this.values;
+    const parameters = this.graphParameterDictionary as WidgetLineGraphParameters;
     const curveFactory = d3.curveBasis;
 
     let xScale;
@@ -127,20 +139,29 @@ export class WidgetGraph extends Widget {
       0,
       d3.max(v, (seriesData) => {
       // return max of the series
-      return d3.max(seriesData.values, (d) => { return d; });
+      return d3.max(seriesData.values, (d) =>  d );
     })
     ]);
 
-    const zScale = d3.scaleOrdinal(d3.schemeCategory10)
-      .domain(v.map((e) => {
-        return e.name;
-      }));
+    // use parameters color function if defined. If not then the d3 colors are used.
+    let zScale;
+    if (parameters.color) {
+      zScale = parameters.color;
+    } else {
+      zScale = d3.scaleOrdinal(d3.schemeCategory10)
+        .domain(v.map((e) => {
+          return e.name;
+        }));
+    }
 
-    const xAxis = d3.axisBottom().scale(xScale).ticks(4);
+    const xAxis = d3.axisBottom().scale(xScale).ticks(parameters.ticks);
     const yAxis = d3.axisLeft()
       .scale(yScale)
       .ticks(4)
       .tickFormat((d) => {
+        if (parameters.ticksFormatter) {
+          return parameters.ticksFormatter(d);
+        }
         return this.dataPrefix + Utils.toK(d) + this.dataSuffix;
       });
 
@@ -186,7 +207,7 @@ export class WidgetGraph extends Widget {
       .enter()
       .append('path')
       .attr('class', 'area')
-      .style('opacity', .2)
+      .style('opacity', parameters.areaOpacity)
       .style('fill', (d) => {
         return zScale(d.name);
       })
@@ -219,7 +240,7 @@ export class WidgetGraph extends Widget {
       .call(xAxis);
 
     // add y axis
-    g.append('g')
+    /*g.append('g')
         .attr('class', 'y axis')
         .call(yAxis)
       .append('text')
@@ -227,15 +248,31 @@ export class WidgetGraph extends Widget {
         .attr('y', 6)
         .attr('dy', '.71em')
         .style('text-anchor', 'end')
-        .text('Cases');
+        .text('Cases');*/
   }
+
+
 }
 
 export abstract class WidgetGraphParameters {
   constructor() {}
 }
 
-export abstract class WidgetBarGraphParameters extends WidgetGraphParameters{
+export class WidgetLineGraphParameters extends WidgetGraphParameters {
+  ticks: number;
+  ticksFormatter: (d: any) => string;
+  areaOpacity: number;
+  color: (d: any) => string;
+
+  constructor(color?: (d: any) => string, ticks?: number, ticksFormatter?: (d: any) => string, areaOpacity?: number) {
+    this.ticks = ticks || 4;
+    this.ticksFormatter = ticksFormatter;
+    this.areaOpacity = areaOpacity || 0.2;
+    this.color = color;
+  }
+}
+
+export abstract class WidgetBarGraphParameters extends WidgetGraphParameters {
   margin: number;
 
   constructor(margin: number) {
@@ -249,7 +286,7 @@ enum xScaleType {
   linear
 }
 
-class Margins {
+export class Margins {
   top: number;
   bottom: number;
   left: number;
@@ -260,6 +297,10 @@ class Margins {
     this.bottom = bottom;
     this.left = left;
     this.right = right;
+  }
+
+  marginsX(): number {
+    return this.left + this.right;
   }
 }
 
