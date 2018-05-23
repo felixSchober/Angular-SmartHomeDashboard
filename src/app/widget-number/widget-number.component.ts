@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {WidgetNumber} from '../models/widget';
 import { Utils } from '../utils';
-
+import { SmartHomeService } from '../services/smart-home.service';
 
 
 @Component({
@@ -12,8 +12,12 @@ import { Utils } from '../utils';
 export class WidgetNumberComponent implements OnInit {
   @Input() widget: WidgetNumber;
 
-  constructor(public utils: Utils) { }
+  constructor(public utils: Utils, private shService: SmartHomeService) { }
 
   ngOnInit() {
+    this.shService.messages.subscribe(msg => {
+      console.log('GOT MESSAGE: ' + msg);
+    });
+    this.shService.sendMsg('Test');
   }
 }

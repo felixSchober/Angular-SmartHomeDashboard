@@ -6,7 +6,7 @@ import * as d3 from 'd3';
 
 
 export class WidgetGraph extends Widget {
-  values: any;
+  values: GraphValues[];
   graphType: WidgetGraphType;
   d3GraphId: string;
   graphHeight: number;
@@ -175,7 +175,7 @@ export class WidgetGraph extends Widget {
     } else if (v[0].labels[0] instanceof Date) {
       xScale = d3.scaleTime()
         .range([0, w])
-        .domain(v[0].labels[0], v[0].labels[v[0].labels.length - 1]);
+        .domain([v[0].labels[0], v[0].labels[v[0].labels.length - 1]]);
       scaleType = xScaleType.date;
     } else {
       console.error('unknown label type.');
@@ -189,19 +189,16 @@ export class WidgetGraph extends Widget {
       .range([h, 0]);
 
     // get the maximum of the data values
-    yScale.domain([
-      0,
-      d3.max(v, (seriesData) => {
+    const maxSeriesValue = d3.max(v, (seriesData) => {
       // return max of the series
       return d3.max(seriesData.values, (d) =>  d );
-    })
-    ]);
+    });
+    yScale.domain([0, maxSeriesValue]);
 
     const zScale = this.colorScale;
 
-    const xAxis = d3.axisBottom().scale(xScale).ticks(parameters.ticks);
-    const yAxis = d3.axisLeft()
-      .scale(yScale)
+    const xAxis = d3.axisBottom(xScale).ticks(parameters.ticks);
+    const yAxis = d3.axisLeft(yScale)
       .ticks(4)
       .tickFormat((d) => {
         if (parameters.ticksFormatter) {
@@ -212,7 +209,8 @@ export class WidgetGraph extends Widget {
 
     const dataKeyFunction = function (d) {
       const result = {
-        name: d.name
+        name: d.name,
+        data: []
       };
 
       // zip values of labels and values together
@@ -270,11 +268,11 @@ export class WidgetGraph extends Widget {
     lines.append('path')
       .attr('class', 'graph-line')
       .attr('fill', 'none')
-      .attr('d', (d) => {
+      .attr('d', (d: any) => {
         const data = dataKeyFunction(d).data;
         return lineGenerator(data);
       })
-      .style('stroke', (d) => {
+      .style('stroke', (d: any) => {
         return zScale(d.name);
       });
 
@@ -318,8 +316,8 @@ export class WidgetLineGraphParameters extends WidgetGraphParameters {
 export abstract class WidgetBarGraphParameters extends WidgetGraphParameters {
   margin: number;
 
-  constructor(margin: number) {
-    super();
+  constructor(color?: (d: any) => string, margin?: number) {
+    super(color);
     this.margin = margin;
   }
 }
@@ -356,6 +354,18 @@ export class Margins {
 
   marginsX(): number {
     return this.left + this.right;
+  }
+}
+
+export class GraphValues {
+  name: string;
+  labels: any[];
+  values: number[];
+
+  constructor(name: string, labels: any[], values: number[]) {
+    this.name = name;
+    this.labels = labels;
+    this.values = values;
   }
 }
 
