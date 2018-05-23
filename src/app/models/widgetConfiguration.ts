@@ -49,10 +49,10 @@ const singleSeriesColorFunction = function (d: any): string {
 
 const singleSeriesGraphParameters = new WidgetLineGraphParameters(singleSeriesColorFunction);
 
-const graphWidgetSlim = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, singleSeriesGraphParameters, slimGraphMargins, '', '', 'W', 1, 1, null, null, [iconButton]);
+const graphWidgetSlim = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, singleSeriesGraphParameters, slimGraphMargins, '', '', 'W', 1, 1, null, null, false, []);
 graphWidgetSlim.values = singleSeries;
 
-const graphWidgetWide = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, null, null, '', '', 'W', 2, 1, null, 'lightsteelblue', [iconButton]);
+const graphWidgetWide = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
 
 export const WIDGETS: Widget[][] = [
   [

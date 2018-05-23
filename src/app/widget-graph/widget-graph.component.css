@@ -7,6 +7,14 @@
   width: 100%;
 }
 
+.card-header-graph-text-overlay {
+  position: absolute;
+  top: 20%;
+  opacity: 0.3;
+  color: #FFF;
+  font-size: 5vh;
+}
+
 mat-card-header {
   width: auto;
   margin-left: -24px;
@@ -55,6 +63,25 @@ mat-card-header {
 mat-card-actions{
   margin-top: -24px;
   display: flex;
+}
+
+.card-legend-item-color {
+  height: 5px;
+  width: 5px;
+}
+
+.card-legend-item-name {
+  margin-left: 4px;
+}
+
+.card-legend-container {
+  flex: 1;
+  margin: 4px;
+}
+
+.card-legend-item{
+  display: flex;
+  align-items: center;
 }
 
 .card-action-button-container{
@@ -116,7 +143,7 @@ mat-card-footer{
 
 ::ng-deep .tick text {
   color: #000;
-  font-size: 1.5vh;
+  font-size: 1.1vh;
 }
 
 

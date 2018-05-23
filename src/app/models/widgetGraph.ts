@@ -13,6 +13,9 @@ export class WidgetGraph extends Widget {
   graphWidth: number;
   graphMargins: Margins;
   graphParameterDictionary: WidgetGraphParameters;
+  colorScale: (d: any) => string;
+  showLegend: boolean;
+  legendItems: LegendItem[];
 
   constructor(name: string,
               title: string,
@@ -26,6 +29,7 @@ export class WidgetGraph extends Widget {
               sizeY?: number,
               cardColor?: string,
               cardHeaderColor?: string,
+              showLegend?: boolean,
               actions?: WidgetAction[]) {
     super(name, title, WidgetType.Graph, subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor, cardHeaderColor, actions);
     this.graphType = graphType;
@@ -33,10 +37,12 @@ export class WidgetGraph extends Widget {
     this.graphHeight = this.cardHeight - 24;
     this.graphParameterDictionary = graphParameterDictionary;
     this.graphMargins = margins || new Margins(4, 20, 28, 4);
+    this.showLegend = showLegend || true;
+    this.legendItems = [];
 
     if (!this.graphParameterDictionary) {
       // create default parameters
-      if (this.graphType === WidgetGraphType.line){
+      if (this.graphType === WidgetGraphType.line) {
         this.graphParameterDictionary = new WidgetLineGraphParameters();
       }
     }
@@ -50,11 +56,57 @@ export class WidgetGraph extends Widget {
       labels: ['1', '2', '3', '4'],
       values: [699, 811, 913, 139]
     }];
+
+    this.redefineColorScale();
+    this.updateLegendItems(this.values);
   }
 
   update(data: any) {
     this.updateLastUpdatedString();
 
+    this.redefineColorScale();
+    this.updateLegendItems(data);
+  }
+
+  // should be called if the series change
+  redefineColorScale() {
+    // use parameters color function if defined. If not then the d3 colors are used.
+    if (this.graphParameterDictionary.color) {
+      this.colorScale = this.graphParameterDictionary.color;
+    } else {
+      this.colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+        .domain(this.values.map((e) => {
+          return e.name;
+        }));
+    }
+  }
+
+  updateLegendItems(data: any) {
+    // no elements so far
+    if (!this.legendItems || this.legendItems.length !== data.length)  {
+      this.legendItems = [];
+      for (let i = 0; i < data.length; i++) {
+        const series = data[i];
+        const seriesColor = this.colorScale(series.name);
+        const li = new LegendItem(series.name, seriesColor);
+        li.currentValue = series.values[series.values.length - 1];
+        this.legendItems.push(li);
+      }
+    } else { // update elements
+      for (let i = 0; i < data.length; i++) {
+        const legendItem = this.legendItems[i];
+        const dataSeries = data[i];
+
+        // series did not change only update most recent value
+        if (legendItem.name === dataSeries.name) {
+          legendItem.currentValue = dataSeries.values[dataSeries.values.length - 1];
+        } else {
+          const seriesColor = this.colorScale(dataSeries.name);
+          this.legendItems[i] = new LegendItem(dataSeries.name, seriesColor);
+          this.legendItems[i].currentValue = dataSeries.values[dataSeries.values.length - 1];
+        }
+      }
+    }
   }
 
   private getSvgElement() {
@@ -101,6 +153,8 @@ export class WidgetGraph extends Widget {
   }
 
   buildMultiLineGraph() {
+    this.update(this.values);
+
     const svg = this.getSvgElement();
     const g = svg.append('g')
       .attr('transform', 'translate(' + this.graphMargins.left + ',' + this.graphMargins.top + ')');
@@ -143,16 +197,7 @@ export class WidgetGraph extends Widget {
     })
     ]);
 
-    // use parameters color function if defined. If not then the d3 colors are used.
-    let zScale;
-    if (parameters.color) {
-      zScale = parameters.color;
-    } else {
-      zScale = d3.scaleOrdinal(d3.schemeCategory10)
-        .domain(v.map((e) => {
-          return e.name;
-        }));
-    }
+    const zScale = this.colorScale;
 
     const xAxis = d3.axisBottom().scale(xScale).ticks(parameters.ticks);
     const yAxis = d3.axisLeft()
@@ -240,35 +285,33 @@ export class WidgetGraph extends Widget {
       .call(xAxis);
 
     // add y axis
-    /*g.append('g')
+    g.append('g')
         .attr('class', 'y axis')
-        .call(yAxis)
-      .append('text')
-        .attr('transform', 'rotate(-90)')
-        .attr('y', 6)
-        .attr('dy', '.71em')
-        .style('text-anchor', 'end')
-        .text('Cases');*/
+        .call(yAxis);
   }
 
 
 }
 
 export abstract class WidgetGraphParameters {
-  constructor() {}
+  color: (d: any) => string;
+
+
+  constructor(color: (d: any) => string) {
+    this.color = color;
+  }
 }
 
 export class WidgetLineGraphParameters extends WidgetGraphParameters {
   ticks: number;
   ticksFormatter: (d: any) => string;
   areaOpacity: number;
-  color: (d: any) => string;
 
   constructor(color?: (d: any) => string, ticks?: number, ticksFormatter?: (d: any) => string, areaOpacity?: number) {
+    super(color);
     this.ticks = ticks || 4;
     this.ticksFormatter = ticksFormatter;
     this.areaOpacity = areaOpacity || 0.2;
-    this.color = color;
   }
 }
 
@@ -284,6 +327,18 @@ export abstract class WidgetBarGraphParameters extends WidgetGraphParameters {
 enum xScaleType {
   date,
   linear
+}
+
+class LegendItem {
+  name: string;
+  color: string;
+  currentValue: number;
+
+  constructor(name: string, color: string) {
+    this.name = name;
+    this.color = color;
+    this.currentValue = -1;
+  }
 }
 
 export class Margins {

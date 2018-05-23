@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {WidgetGraph} from '../models/widgetGraph';
+import { Utils } from '../utils';
+
 
 @Component({
   selector: 'app-widget-graph',
@@ -9,8 +11,7 @@ import {WidgetGraph} from '../models/widgetGraph';
 export class WidgetGraphComponent implements OnInit {
   @Input() widget: WidgetGraph;
 
-  constructor() {
-  }
+  constructor(public utils: Utils) { }
 
   ngOnInit() {
     if (!this.widget) {
