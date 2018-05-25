@@ -5,6 +5,7 @@
   <app-widget-image *ngSwitchCase="WidgetType.Image" [widget]="widget"></app-widget-image>
   <app-widget-clock *ngSwitchCase="WidgetType.Clock" [widget]="widget"></app-widget-clock>
   <app-widget-graph *ngSwitchCase="WidgetType.Graph" [widget]="widget"></app-widget-graph>
-  <div *ngSwitchDefault="">Unexpected type {{widget.type}}</div>
+  <app-widget-status *ngSwitchCase="WidgetType.Status" [widget]="widget"></app-widget-status>
+  <div *ngSwitchDefault="">Unexpected type '{{widget.type}}'</div>
 
 </mat-card>

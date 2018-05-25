@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { filter } from 'rxjs/operators';
 import {WidgetNumber} from '../models/widget';
 import { Utils } from '../utils';
 import { TopicDataService } from '../services/topic-data.service';

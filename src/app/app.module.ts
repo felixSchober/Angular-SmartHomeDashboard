@@ -14,6 +14,7 @@ import { WidgetClockComponent } from './widget-clock/widget-clock.component';
 import { WidgetGraphComponent } from './widget-graph/widget-graph.component';
 
 import { Utils } from './utils';
+import { WidgetStatusComponent } from './widget-status/widget-status.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { Utils } from './utils';
     WidgetTextComponent,
     WidgetImageComponent,
     WidgetClockComponent,
-    WidgetGraphComponent
+    WidgetGraphComponent,
+    WidgetStatusComponent
   ],
   imports: [
     BrowserModule,

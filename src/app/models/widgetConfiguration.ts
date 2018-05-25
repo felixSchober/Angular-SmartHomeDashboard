@@ -1,7 +1,7 @@
 import { Widget, WidgetImage, WidgetNumber, WidgetText, WidgetClock } from './widget';
+import { WidgetStatus } from './widgetStatus';
 import {ActionButtonType, WidgetAction} from './widgetAction';
 import {WidgetGraphLine, Margins, WidgetLineGraphParameters} from './widgetGraph';
-import {checkAndUpdateNode} from "@angular/core/src/view/view";
 
 const incrementNumber = function (sender: any) {
   return new Promise((resolve, reject) => {
@@ -56,13 +56,19 @@ const graphWidgetSlim = new WidgetGraphLine('TestGraph',
   singleSeriesGraphParameters,
   slimGraphMargins, '', '', 'W', 1, 1, null, null, false, []);
 
+const graphWidgetWide = new WidgetGraphLine('TestGraph',
+  'Test Title',
+  null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
+
+const widgetStatus = new WidgetStatus('LightStatus', 'Lights');
+
 setTimeout(() => {
   graphWidgetSlim.update(graphWidgetSlim, singleSeries);
   graphWidgetWide.update(graphWidgetWide, multiSeries);
 }, 800);
 const channelImages = ['/assets/images/ARD-HD.png', '/assets/images/Kabel-1.png'];
 const channelImageWidget = new WidgetImage('ChannelImage', channelImages[0]);
-
+let statusIndex = 0;
 setInterval(() => {
   let v = singleSeries[0].values.shift(); // remove the first element of the array
   singleSeries[0].values.push(v); // add a new element to the array (we're just taking the number we just shift
@@ -79,15 +85,17 @@ setInterval(() => {
   channelImages.push(v);
   channelImageWidget.update(channelImageWidget, channelImages[0]);
 
+  // change status
+  statusIndex = (statusIndex + 1) % 2;
+  widgetStatus.update(widgetStatus, statusIndex);
+
 }, 4000);
 
 
-const graphWidgetWide = new WidgetGraphLine('TestGraph',
-  'Test Title',
-  null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
 
 
-export const WIDGETS: Widget[][] = [
+
+  export const WIDGETS: Widget[][] = [
   [
     clockWidget,
     new WidgetNumber('TestTemperatureWidget1', 'Temperature', 'Test', '', '°', 2, 1, '#FFF', '#4CAF50', [basicButton, raisedButton], false),
@@ -95,7 +103,7 @@ export const WIDGETS: Widget[][] = [
     channelImageWidget,
     graphWidgetSlim,
     graphWidgetWide,
-    new WidgetNumber('TestTemperatureWidget1', 'Temperature', '', '', '°'),
+    widgetStatus,
     new WidgetNumber('A', 'Temperature', '', '', '°', 1, 1, null, null, [], true),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),

@@ -199,5 +199,6 @@ export enum WidgetType {
   Number,
   Image,
   Clock,
-  Graph
+  Graph,
+  Status
 }
