@@ -103,7 +103,7 @@ export class WidgetGraph extends Widget {
       });
 
     // change areas
-    svg.select('.areas')
+    svg.selectAll('.areas')
       .data(this.values)
       .transition()
       .duration(750)

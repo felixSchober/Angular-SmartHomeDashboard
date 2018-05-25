@@ -29,25 +29,20 @@ const slimGraphMargins = new Margins(4, 0, 0, 0);
 
 const multiSeries = [{
   name: 'series1',
-  labels: ['1', '2', '3', '4'],
-  values: [1, 2, 2.5, 1]
+  labels: ['1', '2', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '5'],
+  values: [1, 2, 2.5, 1, 1, 2.5, 3, 2, 2.1, 2, 1.88, 1, 3]
 }, {
   name: 'series2',
-  labels: ['1', '2', '3', '4'],
-  values: [1, 3, 2.1, 2]
+  labels: ['1', '2', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '5'],
+  values: [1, 3, 2.1, 2, 2.5, 3, 3.1, 3.9, 2, 2, 1.9, 2.6, 1.9]
 }];
 
 const singleSeries = [{
   name: 'series1',
-  labels: ['0', '1', '2', '3', '4'],
-  values: [5, 1, 2, 2, 1]
+  labels: ['0', '1', '2', '3', '4', '0', '1', '2', '3', '4', '0', '1', '2', '3', '4', '1'],
+  values: [5, 1, 2, 2, 1, 1, 2, 4, 4, 2, 2, 1, 13, 4, 2, 9]
 }];
 
-const singleSeries_alt = [{
-  name: 'series2',
-  labels: ['0', '1', '2', '3', '4'],
-  values: [0, 3, 2, 2, 3]
-}];
 
 const singleSeriesColorFunction = function (d: any): string {
   return '#FFF';
@@ -66,9 +61,17 @@ setTimeout(() => {
   graphWidgetWide.update(graphWidgetWide, multiSeries);
 }, 800);
 
-setTimeout(() => {
-  graphWidgetSlim.update(graphWidgetSlim, singleSeries_alt);
-}, 8000);
+setInterval(() => {
+  const v = singleSeries[0].values.shift(); // remove the first element of the array
+  singleSeries[0].values.push(v); // add a new element to the array (we're just taking the number we just shift
+  graphWidgetSlim.update(graphWidgetSlim, singleSeries);
+
+  const v = multiSeries[0].values.shift();
+  multiSeries[0].values.push(v);
+  const v = multiSeries[1].values.shift();
+  multiSeries[1].values.push(v);
+  graphWidgetWide.update(graphWidgetWide, multiSeries);
+}, 4000);
 
 const graphWidgetWide = new WidgetGraph('TestGraph',
   'Test Title',
