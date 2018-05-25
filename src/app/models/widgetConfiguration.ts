@@ -63,7 +63,7 @@ export const WIDGETS: Widget[][] = [
     graphWidgetSlim,
     graphWidgetWide,
     new WidgetNumber('TestTemperatureWidget1', 'Temperature', '', '', '°'),
-    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°', 1, 1, null, null, [], true),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),

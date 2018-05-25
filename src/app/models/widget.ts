@@ -131,16 +131,16 @@ export class WidgetNumber extends Widget {
 
   update(widget: Widget, data: any) {
     const widgetNumber = widget as WidgetNumber;
-    console.log('[w' + widgetNumber.name + '] data update.');
     widgetNumber.updateLastUpdatedString();
 
     if (typeof data === 'number') {
       const newNumber = data as number;
-      widgetNumber.lowValue = Math.min(widgetNumber.currentNumber, newNumber);
-      widgetNumber.highValue = Math.min(widgetNumber.currentNumber, newNumber);
+      console.log('[w-' + widgetNumber.name + '] new data (' + newNumber + ')');
+      widgetNumber.lowValue = Math.min(widgetNumber.lowValue, newNumber);
+      widgetNumber.highValue = Math.max(widgetNumber.highValue, newNumber);
       widgetNumber.currentNumber = newNumber;
     } else {
-      console.log('[w' + widgetNumber.name + '] data is not a number.');
+      console.log('[w-' + widgetNumber.name + '] data is not a number.');
     }
   }
 }
