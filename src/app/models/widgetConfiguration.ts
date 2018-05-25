@@ -1,4 +1,4 @@
-import { Widget, WidgetImage, WidgetNumber, WidgetText, WidgetClock } from './widget';
+import {Widget, WidgetImage, WidgetNumber, WidgetText, WidgetClock, WidgetType} from './widget';
 import { WidgetStatus } from './widgetStatus';
 import {ActionButtonType, WidgetAction} from './widgetAction';
 import {WidgetGraphLine, Margins, WidgetLineGraphParameters} from './widgetGraph';
@@ -60,7 +60,7 @@ const graphWidgetWide = new WidgetGraphLine('TestGraph',
   'Test Title',
   null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
 
-const widgetStatus = new WidgetStatus('LightStatus', 'Lights');
+const lightStatusWidget = new WidgetStatus('LightStatus', 'Lights', WidgetType.Status);
 
 setTimeout(() => {
   graphWidgetSlim.update(graphWidgetSlim, singleSeries);
@@ -68,6 +68,7 @@ setTimeout(() => {
 }, 800);
 const channelImages = ['/assets/images/ARD-HD.png', '/assets/images/Kabel-1.png'];
 const channelImageWidget = new WidgetImage('ChannelImage', channelImages[0]);
+const statusWidget = new WidgetStatus('TVActivity', 'TV', WidgetType.StatusImage, channelImages);
 let statusIndex = 0;
 setInterval(() => {
   let v = singleSeries[0].values.shift(); // remove the first element of the array
@@ -81,13 +82,12 @@ setInterval(() => {
   graphWidgetWide.update(graphWidgetWide, multiSeries);
 
   // change channel image
-  v = channelImages.shift();
-  channelImages.push(v);
-  channelImageWidget.update(channelImageWidget, channelImages[0]);
+  statusIndex = (statusIndex + 1) % 2;
+  channelImageWidget.update(channelImageWidget, channelImages[statusIndex]);
 
   // change status
-  statusIndex = (statusIndex + 1) % 2;
-  widgetStatus.update(widgetStatus, statusIndex);
+  lightStatusWidget.update(lightStatusWidget, statusIndex);
+  statusWidget.update(statusWidget, statusIndex);
 
 }, 4000);
 
@@ -103,9 +103,9 @@ setInterval(() => {
     channelImageWidget,
     graphWidgetSlim,
     graphWidgetWide,
-    widgetStatus,
+    lightStatusWidget,
     new WidgetNumber('A', 'Temperature', '', '', '°', 1, 1, null, null, [], true),
-    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    statusWidget,
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
