@@ -1,6 +1,6 @@
 import { Widget, WidgetImage, WidgetNumber, WidgetText, WidgetClock } from './widget';
 import {ActionButtonType, WidgetAction} from './widgetAction';
-import {WidgetGraph, WidgetGraphType, Margins, WidgetLineGraphParameters} from './widgetGraph';
+import {WidgetGraphLine, Margins, WidgetLineGraphParameters} from './widgetGraph';
 
 const incrementNumber = function (sender: any) {
   return new Promise((resolve, reject) => {
@@ -50,9 +50,8 @@ const singleSeriesColorFunction = function (d: any): string {
 
 const singleSeriesGraphParameters = new WidgetLineGraphParameters(null, singleSeriesColorFunction);
 
-const graphWidgetSlim = new WidgetGraph('TestGraph',
+const graphWidgetSlim = new WidgetGraphLine('TestGraph',
   'Test Title',
-  WidgetGraphType.line,
   singleSeriesGraphParameters,
   slimGraphMargins, '', '', 'W', 1, 1, null, null, false, []);
 
@@ -62,20 +61,19 @@ setTimeout(() => {
 }, 800);
 
 setInterval(() => {
-  const v = singleSeries[0].values.shift(); // remove the first element of the array
+  let v = singleSeries[0].values.shift(); // remove the first element of the array
   singleSeries[0].values.push(v); // add a new element to the array (we're just taking the number we just shift
   graphWidgetSlim.update(graphWidgetSlim, singleSeries);
 
-  const v = multiSeries[0].values.shift();
+  v = multiSeries[0].values.shift();
   multiSeries[0].values.push(v);
-  const v = multiSeries[1].values.shift();
+  v = multiSeries[1].values.shift();
   multiSeries[1].values.push(v);
   graphWidgetWide.update(graphWidgetWide, multiSeries);
 }, 4000);
 
-const graphWidgetWide = new WidgetGraph('TestGraph',
+const graphWidgetWide = new WidgetGraphLine('TestGraph',
   'Test Title',
-  WidgetGraphType.line,
   null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
 
 
