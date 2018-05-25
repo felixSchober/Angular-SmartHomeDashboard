@@ -73,7 +73,7 @@ export abstract class Widget {
       this.updatedAtString = this.getLastUpdatedString();
   }
 
-  abstract update(data: any): void;
+  abstract update(widget: Widget, data: any): void;
 
   onSelect(widget: Widget): void {
     this.name += ' - ';
@@ -96,7 +96,7 @@ export class WidgetText extends Widget {
     this.currentTextContent = '';
   }
 
-  update(data: any) {
+  update(widget: Widget, data: any) {
 
   }
 }
@@ -129,17 +129,18 @@ export class WidgetNumber extends Widget {
     }
   }
 
-  update(data: any) {
-    console.log('[w' + this.id + '] data update.');
-    this.updateLastUpdatedString();
+  update(widget: Widget, data: any) {
+    const widgetNumber = widget as WidgetNumber;
+    console.log('[w' + widgetNumber.name + '] data update.');
+    widgetNumber.updateLastUpdatedString();
 
     if (typeof data === 'number') {
       const newNumber = data as number;
-      this.lowValue = Math.min(this.currentNumber, newNumber);
-      this.highValue = Math.min(this.currentNumber, newNumber);
-      this.currentNumber = newNumber;
+      widgetNumber.lowValue = Math.min(widgetNumber.currentNumber, newNumber);
+      widgetNumber.highValue = Math.min(widgetNumber.currentNumber, newNumber);
+      widgetNumber.currentNumber = newNumber;
     } else {
-      console.log('[w' + this.id + '] data is not a number.');
+      console.log('[w' + widgetNumber.name + '] data is not a number.');
     }
   }
 }
@@ -156,7 +157,7 @@ export class WidgetImage extends Widget {
     this.imageUrl = imageUrl;
   }
 
-  update(data: any) {
+  update(widget: Widget, data: any) {
     console.log('[w' + this.id + '] data update.');
     this.updateLastUpdatedString();
 
@@ -183,7 +184,7 @@ export class WidgetClock extends Widget {
     moment.locale('de');
   }
 
-  update(data: any) {}
+  update(widget: Widget, data: any) {}
 
   updateCurrentTime() {
     this.currentTime = moment().toDate();

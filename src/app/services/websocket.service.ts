@@ -8,41 +8,96 @@ import { environment } from '../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+
+/* This class emits a RxJS subject.
+    Components can `subscribe` to this subject as observers
+    and will be notified if any messages are received.
+
+    Components can also call `next()` on the observable part of the subject. This
+    will send a message on the socket to the node server.
+ */
 export class WebsocketService {
 
   private socket;
+  private subject: Rx.Subject<MessageEvent>;
+  private welcomeReceived: boolean;
+
+  constructor() {
+    this.welcomeReceived = false;
+  }
+
+  getSubject(): Rx.Subject<MessageEvent> {
+
+    // if the socket is not connected, connect first
+    if (!this.socket || !this.socket.connected) {
+      // connect to the socket
+      this.socket = io(environment.webSocketUrl);
+
+      // The observable will observe any new messages from the server
+      // and will redirect them to the observers that subscribe to this observable.
+      // obs is the observer that is the parameter for this anonymous function
+      const observable = new Observable(obs => {
+
+        // set timeout and wait for welcome message. If the welcome message was
+        // not received after 5 seconds, close the socket.
+        setTimeout(() => {
+          if (!this.welcomeReceived) {
+            console.error('Welcome message was not received after waiting for 5 seconds. Socket will be closed.');
+            this.socket.disconnect();
+            obs.complete();
+          }
+        }, 5000);
 
 
-  constructor() { }
+        // WELCOME MESSAGE RECEIVED
+        this.socket.on('welcome', (data) => {
+          this.welcomeReceived = true;
+          console.log('Received welcome message from server.');
+        });
 
-  connect(): Rx.Subject<MessageEvent> {
-    // If you aren't familiar with environment variables then
-    // you can hard code `environment.ws_url` as `http://localhost:5000`
-    this.socket = io(environment.webSocketUrl);
+        // NORMAL MESSAGE RECEIVED FROM SOCKET
+        this.socket.on('message', (data) => {
 
-    // We define our observable which will observe any incoming messages
-    // from our socket.io server.
-    const observable = new Observable(observer => {
-      this.socket.on('message', (data) => {
-        console.log('Received message from Websocket Server')
-        observer.next(data);
+          // we've received a message from the socket.
+          // check if message contains topic
+          if (data && data.topic && data.data) {
+            obs.next(data);
+          } else {
+            // data did not contain topic information.
+            console.error('Received socket message but data could not be parsed or does not contain topic information.');
+            console.log(data);
+            obs.error('data could not be parsed or does not contain topic information.');
+          }
+        });
+
+        // LOG MESSAGES RECEIVED FROM NODE SERVER
+        this.socket.on('log', (message) => {
+          console.log('[NODE] ' + message);
+        });
+
+        return () => {
+          this.socket.disconnect();
+          obs.complete();
+        };
       });
-      return () => {
-        this.socket.disconnect();
+
+      // This observer can be used so that the components are able to send messages
+      // over the web socket using the `next()` method.
+      const observer = {
+        next: (data: Object) => {
+          if (this.socket && this.socket.connected) {
+            this.socket.emit('message', JSON.stringify(data));
+          } else {
+            console.error('The socket is not connected. Please connect first.');
+          }
+        },
       };
-    });
 
-    // We define our Observer which will listen to messages
-    // from our other components and send messages back to our
-    // socket server whenever the `next()` method is called.
-    const observer = {
-      next: (data: Object) => {
-        this.socket.emit('message', JSON.stringify(data));
-      },
-    };
+      // we return our Rx.Subject which is a combination
+      // of both an observer and observable.
+      this.subject = Rx.Subject.create(observer, observable);
+    }
 
-    // we return our Rx.Subject which is a combination
-    // of both an observer and observable.
-    return Rx.Subject.create(observer, observable);
+    return this.subject;
   }
 }

@@ -61,7 +61,7 @@ export class WidgetGraph extends Widget {
     this.updateLegendItems(this.values);
   }
 
-  update(data: any) {
+  update(widget: Widget, data: any) {
     this.updateLastUpdatedString();
 
     this.redefineColorScale();
@@ -153,7 +153,7 @@ export class WidgetGraph extends Widget {
   }
 
   buildMultiLineGraph() {
-    this.update(this.values);
+    this.update(this, this.values);
 
     const svg = this.getSvgElement();
     const g = svg.append('g')
@@ -204,7 +204,7 @@ export class WidgetGraph extends Widget {
         if (parameters.ticksFormatter) {
           return parameters.ticksFormatter(d);
         }
-        return this.dataPrefix + Utils.toK(d) + this.dataSuffix;
+        return this.dataPrefix + Utils.toK(d as number) + this.dataSuffix;
       });
 
     const dataKeyFunction = function (d) {
