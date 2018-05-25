@@ -158,13 +158,14 @@ export class WidgetImage extends Widget {
   }
 
   update(widget: Widget, data: any) {
-    console.log('[w' + this.id + '] data update.');
-    this.updateLastUpdatedString();
+    const widgetImage = widget as WidgetImage;
+    console.log('[w' + widgetImage.name + '] data update.');
+    widgetImage.updateLastUpdatedString();
 
     if (typeof data === 'string') {
-      this.imageUrl = data as string;
+      widgetImage.imageUrl = data as string;
     } else {
-      console.log('[w' + this.id + '] data is not a number.');
+      console.log('[w' + widgetImage.name + '] data is not a string.');
     }
   }
 }

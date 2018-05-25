@@ -262,9 +262,6 @@ export class WidgetGraphLine extends WidgetGraph {
   }
 
   protected applyDataChange() {
-
-    console.log('apply line data change');
-
     const svg = this.svgElement;
 
     const lineGenerator = this.lineGenerator();

@@ -15,7 +15,6 @@ export class WidgetNumberComponent implements OnInit {
   constructor(public utils: Utils, private dataService: TopicDataService) { }
 
   ngOnInit() {
-
     const subject$ = this.dataService.getData(this.widget.name)
       .subscribe(
         (data) => {

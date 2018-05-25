@@ -1,6 +1,7 @@
 import { Widget, WidgetImage, WidgetNumber, WidgetText, WidgetClock } from './widget';
 import {ActionButtonType, WidgetAction} from './widgetAction';
 import {WidgetGraphLine, Margins, WidgetLineGraphParameters} from './widgetGraph';
+import {checkAndUpdateNode} from "@angular/core/src/view/view";
 
 const incrementNumber = function (sender: any) {
   return new Promise((resolve, reject) => {
@@ -59,6 +60,8 @@ setTimeout(() => {
   graphWidgetSlim.update(graphWidgetSlim, singleSeries);
   graphWidgetWide.update(graphWidgetWide, multiSeries);
 }, 800);
+const channelImages = ['/assets/images/ARD-HD.png', '/assets/images/Kabel-1.png'];
+const channelImageWidget = new WidgetImage('ChannelImage', channelImages[0]);
 
 setInterval(() => {
   let v = singleSeries[0].values.shift(); // remove the first element of the array
@@ -70,7 +73,14 @@ setInterval(() => {
   v = multiSeries[1].values.shift();
   multiSeries[1].values.push(v);
   graphWidgetWide.update(graphWidgetWide, multiSeries);
+
+  // change channel image
+  v = channelImages.shift();
+  channelImages.push(v);
+  channelImageWidget.update(channelImageWidget, channelImages[0]);
+
 }, 4000);
+
 
 const graphWidgetWide = new WidgetGraphLine('TestGraph',
   'Test Title',
@@ -82,7 +92,7 @@ export const WIDGETS: Widget[][] = [
     clockWidget,
     new WidgetNumber('TestTemperatureWidget1', 'Temperature', 'Test', '', '°', 2, 1, '#FFF', '#4CAF50', [basicButton, raisedButton], false),
     new WidgetNumber('TestTemperatureWidget2', 'Temperature', '', '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]),
-    new WidgetImage('Test', '/assets/images/ARD-HD.png'),
+    channelImageWidget,
     graphWidgetSlim,
     graphWidgetWide,
     new WidgetNumber('TestTemperatureWidget1', 'Temperature', '', '', '°'),
