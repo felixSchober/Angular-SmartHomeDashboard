@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TabNavigationService } from './services/tab-navigation.service';
 
 
 @Component({
@@ -7,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  @Input() selectedTabIndex: number;
+
+  constructor(private navigationServer: TabNavigationService) {
+    this.selectedTabIndex = 0;
+    this.navigationServer.addObserver({
+      next: (newTabIndex: number) => {
+        console.log('[TABS] jump to tab ' + newTabIndex);
+        this.selectedTabIndex = newTabIndex;
+      }
+    });
+  }
 }
