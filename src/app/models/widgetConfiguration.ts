@@ -30,29 +30,51 @@ const slimGraphMargins = new Margins(4, 0, 0, 0);
 const multiSeries = [{
   name: 'series1',
   labels: ['1', '2', '3', '4'],
-  values: [900, 980, 999, 891]
+  values: [1, 2, 2.5, 1]
 }, {
   name: 'series2',
   labels: ['1', '2', '3', '4'],
-  values: [699, 811, 913, 139]
+  values: [1, 3, 2.1, 2]
 }];
 
 const singleSeries = [{
   name: 'series1',
-  labels: ['1', '2', '3', '4'],
-  values: [1, 2, 2, 1]
+  labels: ['0', '1', '2', '3', '4'],
+  values: [5, 1, 2, 2, 1]
+}];
+
+const singleSeries_alt = [{
+  name: 'series2',
+  labels: ['0', '1', '2', '3', '4'],
+  values: [0, 3, 2, 2, 3]
 }];
 
 const singleSeriesColorFunction = function (d: any): string {
   return '#FFF';
 };
 
-const singleSeriesGraphParameters = new WidgetLineGraphParameters(singleSeriesColorFunction);
+const singleSeriesGraphParameters = new WidgetLineGraphParameters(null, singleSeriesColorFunction);
 
-const graphWidgetSlim = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, singleSeriesGraphParameters, slimGraphMargins, '', '', 'W', 1, 1, null, null, false, []);
-graphWidgetSlim.values = singleSeries;
+const graphWidgetSlim = new WidgetGraph('TestGraph',
+  'Test Title',
+  WidgetGraphType.line,
+  singleSeriesGraphParameters,
+  slimGraphMargins, '', '', 'W', 1, 1, null, null, false, []);
 
-const graphWidgetWide = new WidgetGraph('TestGraph', 'Test Title', WidgetGraphType.line, null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
+setTimeout(() => {
+  graphWidgetSlim.update(graphWidgetSlim, singleSeries);
+  graphWidgetWide.update(graphWidgetWide, multiSeries);
+}, 800);
+
+setTimeout(() => {
+  graphWidgetSlim.update(graphWidgetSlim, singleSeries_alt);
+}, 8000);
+
+const graphWidgetWide = new WidgetGraph('TestGraph',
+  'Test Title',
+  WidgetGraphType.line,
+  null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
+
 
 export const WIDGETS: Widget[][] = [
   [
@@ -70,10 +92,8 @@ export const WIDGETS: Widget[][] = [
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
-    //new WidgetNumber(2, 'A', 'AA', 'AAA', '', '', 1, 2),
-    //new WidgetNumber(3, 'A', 'AA', 'AAAAAA', '', '', 1, 2)
   ],
   [
-    //new WidgetImage(4, 'MyImage', 'Logo', '', 2, 2, '')
+    new WidgetNumber('A', 'Temperature', '', '', '°'),
   ]
 ];
