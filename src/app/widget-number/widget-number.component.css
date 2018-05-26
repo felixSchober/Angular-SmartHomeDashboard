@@ -54,14 +54,6 @@ mat-card-actions{
   display: flex;
 }
 
-.card-action-button-container{
-  flex: 1;
-  margin: 4px;
-}
-
-.card-action-button{
-  width: 100%;
-}
 
 mat-card-footer{
   text-align: center;

@@ -1,1 +1,4 @@
 <img mat-card-image src="{{widget.currentStatus}}" alt="{{widget.title}}">
+<mat-card-actions *ngIf="widget.secondaryActions.length > 0">
+  <app-widget-container-actions [widget]="widget"></app-widget-container-actions>
+</mat-card-actions>

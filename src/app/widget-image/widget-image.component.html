@@ -1,1 +1,5 @@
 <img mat-card-image src="{{widget.imageUrl}}" alt="{{widget.title}}">
+<mat-card-actions *ngIf="widget.secondaryActions.length > 0">
+  <app-widget-container-actions [widget]="widget"></app-widget-container-actions>
+</mat-card-actions>
+<app-widget-container-data-update [widget]="widget"></app-widget-container-data-update>

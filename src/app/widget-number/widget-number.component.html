@@ -27,19 +27,10 @@
 </mat-card-content>
 
 <mat-card-actions *ngIf="widget.secondaryActions.length > 0">
-  <div class="card-action-button-container" *ngFor="let widgetAction of widget.secondaryActions" [ngSwitch]="widgetAction.type">
-    <button *ngSwitchCase="widget.ActionButtonType.Basic" class="card-action-button" mat-button color="{{widgetAction.color}}" (click)="widgetAction.execute(widget, $event)">{{widgetAction.title}}</button>
-    <button *ngSwitchCase="widget.ActionButtonType.Raised" [disabled]="widgetAction.disabled" class="card-action-button" mat-raised-button color="{{widgetAction.color}}" (click)="widgetAction.execute(widget, $event)">{{widgetAction.title}}</button>
-    <button *ngSwitchCase="widget.ActionButtonType.Icon" class="card-action-button" mat-icon-button color="{{widgetAction.color}}" (click)="widgetAction.execute(widget, $event)">
-      <mat-icon>{{widgetAction.title}}</mat-icon>
-    </button>
-    <button *ngSwitchCase="widget.ActionButtonType.Fab" mat-fab color="{{widgetAction.color}}" (click)="widgetAction.execute(widget, $event)">{{widgetAction.title}}</button>
-    <button *ngSwitchCase="widget.ActionButtonType.MiniFab" mat-mini-fab color="{{widgetAction.color}}" (click)="widgetAction.execute(widget, $event)">{{widgetAction.title}}</button>
-
-
-  </div>
+  <app-widget-container-actions [widget]="widget"></app-widget-container-actions>
 </mat-card-actions>
 
 <mat-card-footer>
   <span class="lastUpdated">Last updated {{widget.getLastUpdatedString()}}</span>
 </mat-card-footer>
+<app-widget-container-data-update [widget]="widget"></app-widget-container-data-update>

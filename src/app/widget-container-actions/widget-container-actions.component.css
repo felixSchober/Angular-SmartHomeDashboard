@@ -1,0 +1,13 @@
+:host{
+  width: 100%;
+  display: flex;
+}
+
+.card-action-button-container{
+  flex: 1;
+  margin: 4px;
+}
+
+.card-action-button{
+  width: 100%;
+}
