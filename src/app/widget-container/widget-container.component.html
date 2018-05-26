@@ -1,7 +1,7 @@
-<mat-card [ngSwitch]="widget.type" [style.width.px]="widget.cardWidth" [style.height.px]="widget.cardHeight" [style.background-color]="widget.cardColor">
+<mat-card [ngSwitch]="widget.type"  [style.width.px]="widget.cardWidth" [style.height.px]="widget.cardHeight" [style.background-color]="widget.cardColor">
 
   <app-widget-text *ngSwitchCase="WidgetType.Text" [widget]="widget"></app-widget-text>
-  <app-widget-number *ngSwitchCase="WidgetType.Number" [widget]="widget"></app-widget-number>
+  <app-widget-number *ngSwitchCase="WidgetType.Number" [widget]="widget" (click)="widget.onSelect(widget)"></app-widget-number>
   <app-widget-image *ngSwitchCase="WidgetType.Image" [widget]="widget"></app-widget-image>
   <app-widget-clock *ngSwitchCase="WidgetType.Clock" [widget]="widget"></app-widget-clock>
   <app-widget-graph *ngSwitchCase="WidgetType.Graph" [widget]="widget"></app-widget-graph>

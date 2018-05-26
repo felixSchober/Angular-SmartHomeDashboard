@@ -17,11 +17,12 @@ const incrementNumber = function (sender: any) {
   });
 };
 
-const basicButton = new WidgetAction('Basic', ActionButtonType.Basic, 'Topic', 'Message', incrementNumber);
-const raisedButton = new WidgetAction('Raised', ActionButtonType.Raised, '', '', incrementNumber);
-const iconButton = new WidgetAction('favorite', ActionButtonType.Icon, '', '', incrementNumber);
-const fabButton = new WidgetAction('Fab', ActionButtonType.Fab, '', '', incrementNumber);
-const miniFab = new WidgetAction('Mini fab', ActionButtonType.MiniFab, '', '', incrementNumber);
+const basicButton = new WidgetAction('Basic', ActionButtonType.Basic, null, null, null, incrementNumber);
+const raisedButton = new WidgetAction('Raised', ActionButtonType.Raised, 1, 'TEST_TOPIC', {test: 1}, incrementNumber);
+const iconButton = new WidgetAction('favorite', ActionButtonType.Icon, null, '', '', incrementNumber);
+const fabButton = new WidgetAction('Fab', ActionButtonType.Fab, null, '', '', incrementNumber);
+const miniFab = new WidgetAction('Mini fab', ActionButtonType.MiniFab, null, '', '', incrementNumber);
+const primaryNavigation = new WidgetAction('', ActionButtonType.Primary, 1);
 
 const clockWidget = new WidgetClock('TestClock', 2, 1, '#4CAF50');
 
@@ -70,6 +71,7 @@ const channelImages = ['/assets/images/ARD-HD.png', '/assets/images/Kabel-1.png'
 const channelImageWidget = new WidgetImage('ChannelImage', channelImages[0]);
 const statusWidget = new WidgetStatus('TVActivity', 'TV', WidgetType.StatusImage, channelImages);
 let statusIndex = 0;
+
 setInterval(() => {
   let v = singleSeries[0].values.shift(); // remove the first element of the array
   singleSeries[0].values.push(v); // add a new element to the array (we're just taking the number we just shift
@@ -92,14 +94,11 @@ setInterval(() => {
 }, 4000);
 
 
-
-
-
   export const WIDGETS: Widget[][] = [
   [
     clockWidget,
-    new WidgetNumber('TestTemperatureWidget1', 'Temperature', 'Test', '', '°', 2, 1, '#FFF', '#4CAF50', [basicButton, raisedButton], false),
-    new WidgetNumber('TestTemperatureWidget2', 'Temperature', '', '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]),
+    new WidgetNumber('TestTemperatureWidget1', 'Temperature wide', 'Test', '', '°', 2, 1, '#FFF', '#4CAF50', [primaryNavigation, basicButton, raisedButton], false),
+    new WidgetNumber('TestTemperatureWidget2', 'Temperature small', '', '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]),
     channelImageWidget,
     graphWidgetSlim,
     graphWidgetWide,
@@ -109,10 +108,8 @@ setInterval(() => {
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
     new WidgetNumber('A', 'Temperature', '', '', '°'),
-    new WidgetNumber('A', 'Temperature', '', '', '°'),
-    new WidgetNumber('A', 'Temperature', '', '', '°'),
   ],
   [
-    new WidgetNumber('A', 'Temperature', '', '', '°'),
+    new WidgetNumber('A', 'Temperature', '', '', '°', null, null, null, null, [primaryNavigation]),
   ]
 ];

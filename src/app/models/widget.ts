@@ -1,5 +1,8 @@
 import * as moment from 'moment';
 import {ActionButtonType, WidgetAction} from './widgetAction';
+import {TabNavigationService} from "../services/tab-navigation.service";
+import {TopicDataService} from '../services/topic-data.service';
+import { active } from 'd3-transition';
 
 let currentWidgetId = 0;
 const standardCardWidth = 115; // 185
@@ -26,6 +29,10 @@ export abstract class Widget {
   cardWidth: number;
   cardHeight: number;
   actions: WidgetAction[];
+  primaryAction: WidgetAction;
+  secondaryActions: WidgetAction[];
+  tabNavigationService: TabNavigationService;
+  dataService: TopicDataService;
   ActionButtonType: typeof ActionButtonType = ActionButtonType;
 
     constructor(name: string,
@@ -60,6 +67,9 @@ export abstract class Widget {
     this.cardColor = cardColor || '#FFF';
 
     this.actions = actions || [];
+    // search for primary action (click on card to execute)
+    this.primaryAction = this.actions.filter((action) => action.type === ActionButtonType.Primary)[0];
+    this.secondaryActions = this.actions.filter((action) => action.type !== ActionButtonType.Primary);
 
     console.log('Widget ' + this.name + ' (' + this.type + ') created with ' + this.cardWidth + 'x' + this.cardHeight);
   }
@@ -73,10 +83,33 @@ export abstract class Widget {
       this.updatedAtString = this.getLastUpdatedString();
   }
 
+  // inject navigation service into widget
+  setTabNavigationService(tabNavigationService: TabNavigationService) {
+      this.tabNavigationService = tabNavigationService;
+
+      for (const action of this.actions) {
+        action.setTabNavigationService(this.tabNavigationService);
+      }
+  }
+
+  setTopicDataService(dataService: TopicDataService) {
+    this.dataService = dataService;
+
+    for (const action of this.actions) {
+      action.setTopicDataService(this.dataService);
+    }
+  }
+
   abstract update(widget: Widget, data: any): void;
 
-  onSelect(widget: Widget): void {
-    this.name += ' - ';
+  onSelect(sender: Widget): void {
+    if (sender.primaryAction) {
+      sender.primaryAction.execute(sender, null);
+    }
+  }
+
+  toString(): string {
+    return this.name + ' (id ' + this.id + '): ' + this.subtitle;
   }
 }
 

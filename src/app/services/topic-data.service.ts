@@ -21,7 +21,8 @@ export class TopicDataService {
       });
   }
 
-  getData(topic: string): Observable<any>{
+  getData(topic: string): Observable<any> {
+    //noinspection TypeScriptUnresolvedFunction
     return <Observable<any>>this.socketSubject$
       .filter(datum => datum.topic === topic)
       .map(datum => datum.data);
