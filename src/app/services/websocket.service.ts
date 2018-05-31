@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/observable';
+import { Observer } from 'rxjs/Rx';
 import * as Rx from 'rxjs/Rx';
 import { environment } from '../environments/environment';
+import * as moment from 'moment';
 
 
 @Injectable({
@@ -38,42 +40,15 @@ export class WebsocketService {
       // obs is the observer that is the parameter for this anonymous function
       const observable = new Observable(obs => {
 
-        // set timeout and wait for welcome message. If the welcome message was
-        // not received after 5 seconds, close the socket.
-        setTimeout(() => {
-          if (!this.welcomeReceived) {
-            console.error('Welcome message was not received after waiting for 5 seconds. Socket will be closed.');
-            this.socket.disconnect();
-            obs.complete();
-          }
-        }, 5000);
-
-
         // WELCOME MESSAGE RECEIVED
-        this.socket.on('welcome', (data) => {
-          this.welcomeReceived = true;
-          console.log('Received welcome message from server.');
-        });
+        this.socket.on('welcome', this.onWelcomeReceivedHandler);
 
         // NORMAL MESSAGE RECEIVED FROM SOCKET
-        this.socket.on('message', (data) => {
-
-          // we've received a message from the socket
-          // check if message contains topic
-          if (data && data.topic && data.data !== null) {
-            obs.next(data);
-          } else {
-            // data did not contain topic information
-            console.error('Received socket message but data could not be parsed or does not contain topic information.');
-            console.log(data);
-            obs.error('data could not be parsed or does not contain topic information.');
-          }
-        });
+        const messageHandler = this.getOnMessageHandler(obs);
+        this.socket.on('message', messageHandler);
 
         // LOG MESSAGES RECEIVED FROM NODE SERVER
-        this.socket.on('log', (message) => {
-          console.log('[NODE] ' + message);
-        });
+        this.socket.on('log', this.onLogMessageHandler);
 
         return () => {
           this.socket.disconnect();
@@ -99,5 +74,70 @@ export class WebsocketService {
     }
 
     return this.subject;
+  }
+
+  private onWelcomeReceivedHandler(data: any): void {
+    this.welcomeReceived = true;
+    console.log('Received welcome message from server.');
+  }
+
+  private onLogMessageHandler(message: any): void {
+    const logMessage = message as LogMessage;
+    if (!logMessage) {
+      return;
+    }
+
+    const logString = '[NODE] ' + moment(message.time).format() + ' - ' + message.message;
+    if (message.isError) {
+      console.error(logString);
+    } else {
+      console.log(logString);
+    }
+  }
+
+  private getOnMessageHandler(obs: Observer<any>): (message: any) => void {
+    return function (message: any): void {
+      const socketMessage = message as SocketMessage;
+
+      if (socketMessage === null) {
+        console.error('Could not parse socket message: ', message);
+        obs.error('Could not parse socket message');
+        return;
+      }
+
+      // we've received a message from the socket
+      // check if message contains topic
+      if (socketMessage.topic && socketMessage.data !== null) {
+        obs.next(socketMessage);
+      } else {
+        // data did not contain topic information
+        console.error('Received socket message but data could not be parsed or does not contain topic information.');
+        console.log(message);
+        obs.error('data could not be parsed or does not contain topic information.');
+      }
+    };
+  }
+}
+
+class SocketMessage {
+  topic: string;
+  data: any;
+
+  constructor(topic: string, data: any) {
+    this.topic = topic;
+    this.data = data;
+  }
+}
+
+class LogMessage {
+  time: string;
+  message: string;
+  isError: boolean;
+
+
+  constructor(time: string, message: string, isError: boolean) {
+    this.time = time;
+    this.message = message;
+    this.isError = isError;
   }
 }
