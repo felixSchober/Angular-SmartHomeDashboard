@@ -57,8 +57,8 @@ const graphWidgetSlim = new WidgetGraphLine('TestGraph',
   singleSeriesGraphParameters,
   slimGraphMargins, '', '', 'W', 1, 1, null, null, false, []);
 
-const graphWidgetWide = new WidgetGraphLine('TestGraph',
-  'Test Title',
+const graphWidgetWide = new WidgetGraphLine('powerLevelHistory_Total',
+  'Power History',
   null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
 
 const lightStatusWidget = new WidgetStatus('LightStatus', 'Lights', WidgetType.Status);

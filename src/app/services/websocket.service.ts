@@ -60,7 +60,7 @@ export class WebsocketService {
 
           // we've received a message from the socket.
           // check if message contains topic
-          if (data && data.topic && data.data) {
+          if (data && data.topic && data.data !== null) {
             obs.next(data);
           } else {
             // data did not contain topic information.
