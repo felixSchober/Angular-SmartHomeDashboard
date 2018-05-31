@@ -52,8 +52,8 @@ const singleSeriesColorFunction = function (d: any): string {
 
 const singleSeriesGraphParameters = new WidgetLineGraphParameters(null, singleSeriesColorFunction);
 
-const graphWidgetSlim = new WidgetGraphLine('TestGraph',
-  'Test Title',
+const graphWidgetSlim = new WidgetGraphLine('powerLevelHistory_Computer',
+  'Computer',
   singleSeriesGraphParameters,
   slimGraphMargins, '', '', 'W', 1, 1, null, null, false, []);
 
@@ -63,15 +63,18 @@ const graphWidgetWide = new WidgetGraphLine('powerLevelHistory_Total',
 
 const lightStatusWidget = new WidgetStatus('LightStatus', 'Lights', WidgetType.Status);
 
-setTimeout(() => {
-  graphWidgetSlim.update(graphWidgetSlim, singleSeries);
-  graphWidgetWide.update(graphWidgetWide, multiSeries);
-}, 800);
 const channelImages = ['/assets/images/ARD-HD.png', '/assets/images/Kabel-1.png'];
 const channelImageWidget = new WidgetImage('ChannelImage', channelImages[0]);
 const statusWidget = new WidgetStatus('TVActivity', 'TV', WidgetType.StatusImage, channelImages);
 let statusIndex = 0;
 /*
+
+setTimeout(() => {
+  graphWidgetSlim.update(graphWidgetSlim, singleSeries);
+  graphWidgetWide.update(graphWidgetWide, multiSeries);
+}, 800);
+
+
 setInterval(() => {
   let v = singleSeries[0].values.shift(); // remove the first element of the array
   singleSeries[0].values.push(v); // add a new element to the array (we're just taking the number we just shift

@@ -2,8 +2,9 @@ import {WidgetType, Widget} from './widget';
 import {WidgetAction} from './widgetAction';
 import { Utils } from '../utils';
 import * as d3 from 'd3';
+import * as moment from 'moment';
 
-
+const dateRegularExpression = /^(\d{4})(?:-?W(\d+)(?:-?(\d+)D?)?|(?:-(\d+))?-(\d+))(?:[T ](\d+):(\d+)(?::(\d+)(?:\.(\d+))?)?)?(?:Z(-?\d*))?$/;
 
 export abstract class WidgetGraph extends Widget {
   values: GraphValues[];
@@ -24,7 +25,7 @@ export abstract class WidgetGraph extends Widget {
   yAxis: any;
   graphWasBuild: boolean;
 
-  constructor(name: string,
+  protected constructor(name: string,
               title: string,
               margins?: Margins,
               subtitle?: string,
@@ -49,15 +50,27 @@ export abstract class WidgetGraph extends Widget {
 
   update(widget: Widget, data: any) {
     const widgetGraph = widget as WidgetGraph;
+    const graphData = data as GraphValues[];
+
+    // we might need to parse the labels as dates. This is not done before
+    for (const series of graphData) {
+      series.labels = widgetGraph.tryConvertStringArrayToDateArray(series.labels);
+    }
+
+    // auto detect x-scale type if not set by user
+    if (graphData[0].labels[0] instanceof Date && widgetGraph.graphParameterDictionary.scaleType !== XScaleType.date) {
+      console.log('Autodetect xscale type of type date');
+      widgetGraph.graphParameterDictionary.scaleType = XScaleType.date;
+    }
 
     // update values
-    widgetGraph.values = data as GraphValues[];
+    widgetGraph.values = graphData;
 
     widgetGraph.updateLastUpdatedString();
     widgetGraph.redefineScales();
-    widgetGraph.updateLegendItems(data);
+    widgetGraph.updateLegendItems(graphData);
 
-    // create svg element if not already created
+    // create svg element if not already created but only if there is already some data
     if (!widgetGraph.svgElement) {
       widgetGraph.svgElement = widgetGraph.appendSvgElement();
       widgetGraph.buildGraph();
@@ -118,13 +131,30 @@ export abstract class WidgetGraph extends Widget {
 
   protected abstract calculateXScaleDomain(w: number);
 
-  protected createGraphAxis() {
-    const parameters = this.graphParameterDictionary as WidgetLineGraphParameters;
+  protected tryConvertStringArrayToDateArray(labels: string[]) {
 
-    if (!this.xAxis) {
-      this.xAxis = d3.axisBottom(this.xScale).ticks(parameters.ticks);
+    // check first label to see if it is a date
+    const firstLabel = labels[0];
+    const parts = firstLabel.match(dateRegularExpression);
+
+    // conversion won't be possible
+    if (parts === null) {
+      return labels;
     }
 
+    const dateArray: Date[] = [];
+    for (const l of labels) {
+      dateArray.push(new Date(l));
+    }
+    return dateArray;
+  }
+
+  protected createGraphAxis() {
+    this.createGraphXAxis(this.graphParameterDictionary);
+    this.createGraphYAxis(this.graphParameterDictionary);
+  }
+
+  protected createGraphYAxis(parameters: WidgetGraphParameters) {
     if (!this.yAxis) {
       this.yAxis = d3.axisLeft(this.yScale)
         .ticks(parameters.ticks)
@@ -136,6 +166,8 @@ export abstract class WidgetGraph extends Widget {
         });
     }
   }
+
+  protected abstract createGraphXAxis(parameters: WidgetGraphParameters);
 
   protected dataKeyFunction(d: any) {
     const result = {
@@ -311,12 +343,29 @@ export class WidgetGraphLine extends WidgetGraph {
         .range(rangeTuple)
         .domain([0, v[0].labels.length - 1]);
     } else if (v[0].labels[0] instanceof Date) {
+      const from = v[0].labels[0];
+      const till = v[0].labels[v[0].labels.length - 1];
       this.xScale = d3.scaleTime()
         .range(rangeTuple)
-        .domain([v[0].labels[0], v[0].labels[v[0].labels.length - 1]]);
+        .domain([from, till]);
     } else {
       console.error('unknown label type.');
       throw new TypeError('unknown label type ' + typeof v[0].labels[0]);
+    }
+  }
+
+  protected createGraphXAxis(parameters: WidgetGraphParameters) {
+    if (!this.xAxis) {
+      if (parameters.scaleType === XScaleType.linear) {
+        this.xAxis = d3.axisBottom(this.xScale)
+          .ticks(parameters.ticks);
+      } else if (parameters.scaleType === XScaleType.date) {
+        this.xAxis = d3.axisBottom(this.xScale)
+          .ticks(parameters.ticks)
+          .tickFormat((d: any) => {
+            return moment(d).format(parameters.dateFormatString);
+          });
+      }
     }
   }
 
@@ -433,29 +482,35 @@ export class WidgetGraphPoints extends WidgetGraph {
 
 export abstract class WidgetGraphParameters {
   color: (d: any) => string;
+  scaleType: XScaleType;
+  ticks: number;
+  ticksFormatter: (d: any) => string;
+  dateFormatString: string;
 
-
-  constructor(color: (d: any) => string) {
+  protected constructor(scaleType?: XScaleType,
+                        color?: (d: any) => string,
+                        ticks?: number,
+                        ticksFormatter?: (d: any) => string,
+                        dateFormatString?: string) {
+    this.scaleType = scaleType || XScaleType.linear;
     this.color = color;
+    this.ticks = ticks || 4;
+    this.ticksFormatter = ticksFormatter;
+    this.dateFormatString = dateFormatString || 'HH:mm';
   }
 }
 
 export class WidgetLineGraphParameters extends WidgetGraphParameters {
-  ticks: number;
-  ticksFormatter: (d: any) => string;
+
   areaOpacity: number;
-  scaleType: XScaleType;
 
   constructor(scaleType?: XScaleType,
               color?: (d: any) => string,
               ticks?: number,
               ticksFormatter?: (d: any) => string,
               areaOpacity?: number) {
-    super(color);
-    this.ticks = ticks || 4;
-    this.ticksFormatter = ticksFormatter;
+    super(scaleType, color, ticks, ticksFormatter);
     this.areaOpacity = areaOpacity || 0.2;
-    this.scaleType = scaleType || XScaleType.linear;
   }
 }
 
@@ -468,7 +523,7 @@ export abstract class WidgetBarGraphParameters extends WidgetGraphParameters {
   }
 }
 
-enum XScaleType {
+export enum XScaleType {
   date,
   linear
 }

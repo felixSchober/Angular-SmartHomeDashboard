@@ -58,12 +58,12 @@ export class WebsocketService {
         // NORMAL MESSAGE RECEIVED FROM SOCKET
         this.socket.on('message', (data) => {
 
-          // we've received a message from the socket.
+          // we've received a message from the socket
           // check if message contains topic
           if (data && data.topic && data.data !== null) {
             obs.next(data);
           } else {
-            // data did not contain topic information.
+            // data did not contain topic information
             console.error('Received socket message but data could not be parsed or does not contain topic information.');
             console.log(data);
             obs.error('data could not be parsed or does not contain topic information.');
