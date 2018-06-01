@@ -1,3 +1,12 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
 .mat-card-header-content{
   display: flex;
   align-items: center;
@@ -19,6 +28,8 @@ mat-card-header {
   opacity: 0.9;
   font-size: 12vh;
   transform: translateX(-100%);
+  flex: 1;
+  text-align: center;
 }
 
 .card-title{
@@ -27,27 +38,7 @@ mat-card-header {
   font-size: 2.5vh;
   font-family: Roboto,"Helvetica Neue",sans-serif;
   text-align: center;
-}
-
-.card-subtitle-content{
-  margin-top: 8px;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-
-.card-subtitle{
-  overflow: hidden;
-  flex: 1;
-  text-align: center;
-}
-
-.card-subtitle-number{
-  font-size: 3vh;
-}
-
-.card-subtitle-highLow-label{
-  opacity: 0.6;
+  display: block;
 }
 
 mat-card-actions{
@@ -55,18 +46,8 @@ mat-card-actions{
   display: flex;
 }
 
-.card-action-button-container{
-  flex: 1;
-  margin: 4px;
-}
-
-.card-action-button{
-  width: 100%;
-}
-
 mat-card-footer{
   text-align: center;
-
   position: absolute;
   bottom: 24px;
   width: 100%;

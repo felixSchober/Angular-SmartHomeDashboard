@@ -59,9 +59,9 @@ export class WebsocketService {
       // This observer can be used so that the components are able to send messages
       // over the web socket using the `next()` method.
       const observer = {
-        next: (data: Object) => {
+        next: (message: SocketMessage) => {
           if (this.socket && this.socket.connected) {
-            this.socket.emit('message', JSON.stringify(data));
+            this.socket.emit(message.topic, message.data);
           } else {
             console.error('The socket is not connected. Please connect first.');
           }
@@ -119,7 +119,7 @@ export class WebsocketService {
   }
 }
 
-class SocketMessage {
+export class SocketMessage {
   topic: string;
   data: any;
 

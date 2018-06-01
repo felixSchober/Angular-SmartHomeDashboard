@@ -434,7 +434,7 @@ export class WidgetGraphLine extends WidgetGraph {
       .call(this.yAxis);
   }
 }
-
+/*
 export class WidgetGraphBar extends WidgetGraph {
 
   protected calculateXScaleDomain(w: number) {
@@ -479,6 +479,7 @@ export class WidgetGraphPoints extends WidgetGraph {
     return undefined;
   }
 }
+*/
 
 export abstract class WidgetGraphParameters {
   color: (d: any) => string;
@@ -514,14 +515,6 @@ export class WidgetLineGraphParameters extends WidgetGraphParameters {
   }
 }
 
-export abstract class WidgetBarGraphParameters extends WidgetGraphParameters {
-  margin: number;
-
-  constructor(color?: (d: any) => string, margin?: number) {
-    super(color);
-    this.margin = margin;
-  }
-}
 
 export enum XScaleType {
   date,

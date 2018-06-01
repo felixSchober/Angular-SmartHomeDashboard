@@ -18,6 +18,7 @@ import { WidgetStatusComponent } from './widget-status/widget-status.component';
 import { WidgetImageStatusComponent } from './widget-image-status/widget-image-status.component';
 import { WidgetContainerActionsComponent } from './widget-container-actions/widget-container-actions.component';
 import { WidgetContainerDataUpdateComponent } from './widget-container-data-update/widget-container-data-update.component';
+import { WidgetSwitchComponent } from './widget-switch/widget-switch.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { WidgetContainerDataUpdateComponent } from './widget-container-data-upda
     WidgetStatusComponent,
     WidgetImageStatusComponent,
     WidgetContainerActionsComponent,
-    WidgetContainerDataUpdateComponent
+    WidgetContainerDataUpdateComponent,
+    WidgetSwitchComponent
   ],
   imports: [
     BrowserModule,

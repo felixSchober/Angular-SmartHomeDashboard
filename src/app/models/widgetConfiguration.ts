@@ -1,5 +1,5 @@
 import {Widget, WidgetImage, WidgetNumber, WidgetText, WidgetClock, WidgetType} from './widget';
-import { WidgetStatus } from './widgetStatus';
+import {WidgetStatus, WidgetSwitch} from './widgetStatus';
 import {ActionButtonType, WidgetAction} from './widgetAction';
 import {WidgetGraphLine, Margins, WidgetLineGraphParameters} from './widgetGraph';
 
@@ -62,11 +62,17 @@ const graphWidgetWide = new WidgetGraphLine('powerLevelHistory_Total',
   null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
 
 const lightStatusWidget = new WidgetStatus('LightStatus', 'Lights', WidgetType.Status);
+const deskLightWidget = new WidgetSwitch('lightState_Schreibtisch', 'Schreibtisch', WidgetType.SwitchLight,
+  'Schreibtisch', 1, 1, '#E91E63');
 
 const channelImages = ['/assets/images/ARD-HD.png', '/assets/images/Kabel-1.png'];
 const channelImageWidget = new WidgetImage('ChannelImage', channelImages[0]);
 const statusWidget = new WidgetStatus('TVActivity', 'TV', WidgetType.StatusImage, channelImages);
-let statusIndex = 0;
+
+const numberWidget1 = new WidgetNumber('TestTemperatureWidget1', 'Temperature wide', 'Test', '', '°', 2, 1, '#FFF', '#4CAF50', [primaryNavigation, basicButton, raisedButton], false);
+const numberWidget2 = new WidgetNumber('TestTemperatureWidget2', 'Temperature small', '', '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]);
+
+  let statusIndex = 0;
 /*
 
 setTimeout(() => {
@@ -100,12 +106,13 @@ setInterval(() => {
   export const WIDGETS: Widget[][] = [
   [
     clockWidget,
-    new WidgetNumber('TestTemperatureWidget1', 'Temperature wide', 'Test', '', '°', 2, 1, '#FFF', '#4CAF50', [primaryNavigation, basicButton, raisedButton], false),
-    new WidgetNumber('TestTemperatureWidget2', 'Temperature small', '', '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]),
+    numberWidget1,
+    numberWidget2,
     channelImageWidget,
     graphWidgetSlim,
     graphWidgetWide,
     lightStatusWidget,
+    deskLightWidget,
     new WidgetNumber('A', 'Temperature', '', '', '°', 1, 1, null, null, [], true),
     statusWidget,
     new WidgetNumber('A', 'Temperature', '', '', '°'),

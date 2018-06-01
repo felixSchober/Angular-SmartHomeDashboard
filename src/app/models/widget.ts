@@ -1,15 +1,13 @@
 import * as moment from 'moment';
 import {ActionButtonType, WidgetAction} from './widgetAction';
-import {TabNavigationService} from "../services/tab-navigation.service";
+import {TabNavigationService} from '../services/tab-navigation.service';
 import {TopicDataService} from '../services/topic-data.service';
-import { active } from 'd3-transition';
 
 let currentWidgetId = 0;
 const standardCardWidth = 115; // 185
 const standardCardHeight = 115;
 const cardMargin = 48; // margin 24 on both sides -> 48
 const cardGridPadding = 16; // 8 on both sides
-
 
 
 export abstract class Widget {
@@ -203,8 +201,6 @@ export class WidgetImage extends Widget {
   }
 }
 
-
-
 export class WidgetClock extends Widget {
 
   currentTime: Date;
@@ -234,5 +230,9 @@ export enum WidgetType {
   Clock,
   Graph,
   Status,
-  StatusImage
+  StatusImage,
+  Switch,
+  SwitchPlug,
+  SwitchLight,
+  SwitchScene
 }

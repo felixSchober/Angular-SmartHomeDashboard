@@ -1,0 +1,13 @@
+<mat-icon class="status-symbol">{{widget.currentStatus}}</mat-icon>
+<mat-card-subtitle class="card-title">{{widget.title}}</mat-card-subtitle>
+<mat-card-actions *ngIf="widget.secondaryActions.length > 0">
+  <app-widget-container-actions [widget]="widget"></app-widget-container-actions>
+</mat-card-actions>
+
+<mat-card-footer>
+  <span class="lastUpdated">Last updated {{widget.getLastUpdatedString()}}</span>
+</mat-card-footer>
+<app-widget-container-data-update [widget]="widget"></app-widget-container-data-update>
+
+<!-- Primary Action -->
+<app-widget-container-actions [widget]="widget"></app-widget-container-actions>

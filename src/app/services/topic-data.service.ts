@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WebsocketService } from './websocket.service';
+import {SocketMessage, WebsocketService} from './websocket.service';
 import { MockWebsocketService } from './mock-websocket.service';
 import { filter } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs/Rx';
@@ -28,7 +28,7 @@ export class TopicDataService {
       .map(datum => datum.data);
   }
 
-  sendData(data: any) {
+  sendData(data: SocketMessage) {
     this.socketSubject$.next(data);
   }
 }

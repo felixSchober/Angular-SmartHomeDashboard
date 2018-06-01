@@ -1,10 +1,11 @@
 import {Widget} from './widget';
 import { TabNavigationService } from '../services/tab-navigation.service';
 import { TopicDataService } from '../services/topic-data.service';
+import {SocketMessage} from "../services/websocket.service";
 
 export class WidgetAction {
   title: string;
-  executionFunction: (sender: Widget) => Promise<any>;
+  executionFunction: (sender: Widget, dataService: TopicDataService) => Promise<any>;
   socketTopic: string;
   socketMessage: any;
   canExecuteFunction: () => boolean;
@@ -75,17 +76,18 @@ export class WidgetAction {
     this.navigate();
 
     if (this.socketTopic && this.socketMessage) {
+      if (!this.dataService) {
+        throw new Error('DataService was not injected properly.');
+      }
+
       console.log('Send Message ' + this.socketMessage + ' to Topic ' + this.socketTopic);
-      const message = {
-        topic: this.socketTopic,
-        data: this.socketMessage
-      };
+      const message = new SocketMessage(this.socketTopic, this.socketMessage);
       this.dataService.sendData(message);
     }
 
     if (this.executionFunction) {
       console.log('Execute function');
-      this.executionFunction(sender)
+      this.executionFunction(sender, this.dataService)
         .then((result) => {
           console.log(result);
         })
@@ -125,4 +127,31 @@ export enum ActionButtonType {
   Fab,
   MiniFab,
   Primary // whole card
+}
+
+export class SwitchStateChangeCommand {
+  name: string;
+  state: string;
+
+  constructor(name: string, state: StateChangeCommandTypes) {
+    this.name = name;
+    this.state = StateChangeCommandTypes[state];
+  }
+}
+
+export class SceneStateChangeCommand extends SwitchStateChangeCommand {
+  groupId: string;
+  sceneId: string;
+
+  constructor(name: string, state: StateChangeCommandTypes, groupId: string, sceneId: string) {
+    super(name, state);
+    this.groupId = groupId;
+    this.sceneId = sceneId;
+  }
+}
+
+export enum StateChangeCommandTypes {
+  on,
+  off,
+  toggle
 }
