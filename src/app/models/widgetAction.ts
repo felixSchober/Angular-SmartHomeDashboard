@@ -1,11 +1,15 @@
-import {Widget} from './widget';
+import {StateChangeCommandTypes} from '../enums/ActionButtonStateChangeCommandTypes';
+import {ActionButtonType} from '../enums/ActionButtonType';
+import {ISceneStateChangeCommand} from '../Interfaces/ISceneStateChangeCommand';
+import {ISocketMessage} from '../Interfaces/ISocketMessage';
+import {ISwitchStateChangeCommand} from '../Interfaces/ISwitchStateChangeCommand';
+import {IWidget} from '../Interfaces/IWidget';
 import { TabNavigationService } from '../services/tab-navigation.service';
 import { TopicDataService } from '../services/topic-data.service';
-import {SocketMessage} from "../services/websocket.service";
 
 export class WidgetAction {
   title: string;
-  executionFunction: (sender: Widget, dataService: TopicDataService) => Promise<any>;
+  executionFunction: (sender: IWidget, dataService: TopicDataService) => Promise<any>;
   socketTopic: string;
   socketMessage: any;
   canExecuteFunction: () => boolean;
@@ -21,7 +25,7 @@ export class WidgetAction {
               tabDestinationIndex?: number,
               socketTopic?: string,
               socketMessage?: any,
-              execution?: (sender: Widget) => Promise<any>,
+              execution?: (sender: IWidget) => Promise<any>,
               canExecute?: () => boolean,
               color?: string) {
     this.title = title;
@@ -58,7 +62,7 @@ export class WidgetAction {
     this.disabled = this.canExecute();
   }
 
-  execute(sender: Widget, e: any) {
+  execute(sender: IWidget, e: any) {
     // secondary actions will have a mouse event. In this case we need to stop propagation to the
     // card element because otherwise a possible primary action might be triggered.
     if (e) {
@@ -81,7 +85,11 @@ export class WidgetAction {
       }
 
       console.log('Send Message ' + this.socketMessage + ' to Topic ' + this.socketTopic);
-      const message = new SocketMessage(this.socketTopic, this.socketMessage);
+
+      const message: ISocketMessage = {
+        topic: this.socketTopic,
+        data: this.socketMessage
+      };
       this.dataService.sendData(message);
     }
 
@@ -120,16 +128,8 @@ export class WidgetAction {
   }
 }
 
-export enum ActionButtonType {
-  Basic,
-  Raised,
-  Icon,
-  Fab,
-  MiniFab,
-  Primary // whole card
-}
 
-export class SwitchStateChangeCommand {
+export class SwitchStateChangeCommand implements ISwitchStateChangeCommand {
   name: string;
   state: string;
 
@@ -139,7 +139,7 @@ export class SwitchStateChangeCommand {
   }
 }
 
-export class SceneStateChangeCommand extends SwitchStateChangeCommand {
+export class SceneStateChangeCommand extends SwitchStateChangeCommand implements ISceneStateChangeCommand {
   groupId: string;
   sceneId: string;
 
@@ -148,10 +148,4 @@ export class SceneStateChangeCommand extends SwitchStateChangeCommand {
     this.groupId = groupId;
     this.sceneId = sceneId;
   }
-}
-
-export enum StateChangeCommandTypes {
-  on,
-  off,
-  toggle
 }

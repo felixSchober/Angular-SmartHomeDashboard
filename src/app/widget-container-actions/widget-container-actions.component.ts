@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Widget } from '../models/widget';
+import {IWidget} from '../Interfaces/IWidget';
 import { TabNavigationService } from '../services/tab-navigation.service';
 import { TopicDataService } from '../services/topic-data.service';
 
@@ -10,7 +10,7 @@ import { TopicDataService } from '../services/topic-data.service';
 })
 export class WidgetContainerActionsComponent implements OnInit {
 
-  @Input() widget: Widget;
+  @Input() widget: IWidget;
   constructor(private dataService: TopicDataService, private tabNavigation: TabNavigationService) { }
 
   ngOnInit() {

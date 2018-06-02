@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Widget } from '../models/widget';
+import {IWidget} from '../Interfaces/IWidget';
 import { WIDGETS } from '../models/widgetConfiguration';
 @Component({
   selector: 'app-control-page',
@@ -8,7 +8,7 @@ import { WIDGETS } from '../models/widgetConfiguration';
 })
 export class ControlPageComponent implements OnInit {
 
-  pageWidgets: Widget[];
+  pageWidgets: IWidget[];
   rows: number;
   cols: number;
   @Input() tabIndex: number;

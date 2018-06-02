@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WidgetStatus } from '../models/widgetStatus';
+import {WidgetStatus} from '../models/widgets/WidgetStatus';
 
 
 @Component({

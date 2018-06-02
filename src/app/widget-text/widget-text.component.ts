@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Widget} from '../models/widget';
+import {IWidget} from '../Interfaces/IWidget';
 
 
 @Component({
@@ -8,7 +8,7 @@ import {Widget} from '../models/widget';
   styleUrls: ['./widget-text.component.css']
 })
 export class WidgetTextComponent implements OnInit {
-  @Input() widget: Widget;
+  @Input() widget: IWidget;
 
   constructor() { }
 

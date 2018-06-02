@@ -1,7 +1,15 @@
-import {Widget, WidgetImage, WidgetNumber, WidgetText, WidgetClock, WidgetType} from './widget';
-import {WidgetStatus, WidgetSwitch} from './widgetStatus';
-import {ActionButtonType, WidgetAction} from './widgetAction';
-import {WidgetGraphLine, Margins, WidgetLineGraphParameters} from './widgetGraph';
+import {ActionButtonType} from '../enums/ActionButtonType';
+import {WidgetType} from '../enums/WidgetType';
+import {IWidget} from '../Interfaces/IWidget';
+import {GraphMargins} from './Graph/GraphMargins';
+import {GraphParametersLine} from './Graph/GraphParametersLine';
+import { WidgetAction} from './widgetAction';
+import {WidgetClock} from './widgets/WidgetClock';
+import {WidgetGraphLine} from './widgets/WidgetGraphLine';
+import {WidgetImage} from './widgets/WidgetImage';
+import {WidgetNumber} from './widgets/WidgetNumber';
+import {WidgetStatus} from './widgets/WidgetStatus';
+import {WidgetSwitch} from './widgets/WidgetSwitch';
 
 const incrementNumber = function (sender: any) {
   return new Promise((resolve, reject) => {
@@ -27,30 +35,14 @@ const primaryNavigation = new WidgetAction('', ActionButtonType.Primary, 1);
 const clockWidget = new WidgetClock('TestClock', 2, 1, '#4CAF50');
 
 // GRAPHS
-const slimGraphMargins = new Margins(4, 0, 0, 0);
-
-const multiSeries = [{
-  name: 'series1',
-  labels: ['1', '2', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '5'],
-  values: [1, 2, 2.5, 1, 1, 2.5, 3, 2, 2.1, 2, 1.88, 1, 3]
-}, {
-  name: 'series2',
-  labels: ['1', '2', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '5'],
-  values: [1, 3, 2.1, 2, 2.5, 3, 3.1, 3.9, 2, 2, 1.9, 2.6, 1.9]
-}];
-
-const singleSeries = [{
-  name: 'series1',
-  labels: ['0', '1', '2', '3', '4', '0', '1', '2', '3', '4', '0', '1', '2', '3', '4', '1'],
-  values: [5, 1, 2, 2, 1, 1, 2, 4, 4, 2, 2, 1, 13, 4, 2, 9]
-}];
+const slimGraphMargins = new GraphMargins(4, 0, 0, 0);
 
 
 const singleSeriesColorFunction = function (d: any): string {
   return '#FFF';
 };
 
-const singleSeriesGraphParameters = new WidgetLineGraphParameters(null, singleSeriesColorFunction);
+const singleSeriesGraphParameters = new GraphParametersLine(null, singleSeriesColorFunction);
 
 const graphWidgetSlim = new WidgetGraphLine('powerLevelHistory_Computer',
   'Computer',
@@ -69,12 +61,32 @@ const channelImages = ['/assets/images/ARD-HD.png', '/assets/images/Kabel-1.png'
 const channelImageWidget = new WidgetImage('ChannelImage', channelImages[0]);
 const statusWidget = new WidgetStatus('TVActivity', 'TV', WidgetType.StatusImage, channelImages);
 
-const numberWidget1 = new WidgetNumber('TestTemperatureWidget1', 'Temperature wide', 'Test', '', '°', 2, 1, '#FFF', '#4CAF50', [primaryNavigation, basicButton, raisedButton], false);
-const numberWidget2 = new WidgetNumber('TestTemperatureWidget2', 'Temperature small', '', '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]);
+const numberWidget1 = new WidgetNumber('TestTemperatureWidget1', 'Temperature wide', 'Test',
+  '', '°', 2, 1, '#FFF', '#4CAF50', [primaryNavigation,
+    basicButton, raisedButton], false);
 
-  let statusIndex = 0;
+const numberWidget2 = new WidgetNumber('TestTemperatureWidget2', 'Temperature small', '',
+  '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]);
+
 /*
+const multiSeries = [{
+  name: 'series1',
+  labels: ['1', '2', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '5'],
+  values: [1, 2, 2.5, 1, 1, 2.5, 3, 2, 2.1, 2, 1.88, 1, 3]
+}, {
+  name: 'series2',
+  labels: ['1', '2', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '5'],
+  values: [1, 3, 2.1, 2, 2.5, 3, 3.1, 3.9, 2, 2, 1.9, 2.6, 1.9]
+}];
 
+const singleSeries = [{
+  name: 'series1',
+  labels: ['0', '1', '2', '3', '4', '0', '1', '2', '3', '4', '0', '1', '2', '3', '4', '1'],
+  values: [5, 1, 2, 2, 1, 1, 2, 4, 4, 2, 2, 1, 13, 4, 2, 9]
+}];
+
+
+let statusIndex = 0;
 setTimeout(() => {
   graphWidgetSlim.update(graphWidgetSlim, singleSeries);
   graphWidgetWide.update(graphWidgetWide, multiSeries);
@@ -103,7 +115,7 @@ setInterval(() => {
 }, 4000);
 */
 
-  export const WIDGETS: Widget[][] = [
+  export const WIDGETS: IWidget[][] = [
   [
     clockWidget,
     numberWidget1,

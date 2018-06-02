@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { WidgetSwitch} from "../models/widgetStatus";
+import {WidgetSwitch} from '../models/widgets/WidgetSwitch';
 
 @Component({
   selector: 'app-widget-switch',

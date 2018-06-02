@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {WidgetGraph} from '../models/widgetGraph';
+import {WidgetGraphBase} from '../models/widgets/WidgetGraphBase';
 import { Utils } from '../utils';
 
 
@@ -9,7 +9,7 @@ import { Utils } from '../utils';
   styleUrls: ['./widget-graph.component.css']
 })
 export class WidgetGraphComponent implements OnInit {
-  @Input() widget: WidgetGraph;
+  @Input() widget: WidgetGraphBase;
 
   constructor(public utils: Utils) { }
 

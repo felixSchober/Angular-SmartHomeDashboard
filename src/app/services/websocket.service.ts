@@ -5,6 +5,8 @@ import { Observer } from 'rxjs/Rx';
 import * as Rx from 'rxjs/Rx';
 import { environment } from '../environments/environment';
 import * as moment from 'moment';
+import {ISocketLogMessage} from '../Interfaces/ISocketLogMessage';
+import {ISocketMessage} from '../Interfaces/ISocketMessage';
 
 
 @Injectable({
@@ -59,7 +61,7 @@ export class WebsocketService {
       // This observer can be used so that the components are able to send messages
       // over the web socket using the `next()` method.
       const observer = {
-        next: (message: SocketMessage) => {
+        next: (message: ISocketMessage) => {
           if (this.socket && this.socket.connected) {
             this.socket.emit(message.topic, message.data);
           } else {
@@ -82,7 +84,7 @@ export class WebsocketService {
   }
 
   private onLogMessageHandler(message: any): void {
-    const logMessage = message as LogMessage;
+    const logMessage = message as ISocketLogMessage;
     if (!logMessage) {
       return;
     }
@@ -97,7 +99,7 @@ export class WebsocketService {
 
   private getOnMessageHandler(obs: Observer<any>): (message: any) => void {
     return function (message: any): void {
-      const socketMessage = message as SocketMessage;
+      const socketMessage = message as ISocketMessage;
 
       if (socketMessage === null) {
         console.error('Could not parse socket message: ', message);
@@ -116,28 +118,5 @@ export class WebsocketService {
         obs.error('data could not be parsed or does not contain topic information.');
       }
     };
-  }
-}
-
-export class SocketMessage {
-  topic: string;
-  data: any;
-
-  constructor(topic: string, data: any) {
-    this.topic = topic;
-    this.data = data;
-  }
-}
-
-class LogMessage {
-  time: string;
-  message: string;
-  isError: boolean;
-
-
-  constructor(time: string, message: string, isError: boolean) {
-    this.time = time;
-    this.message = message;
-    this.isError = isError;
   }
 }

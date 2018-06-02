@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WidgetImage } from '../models/widget';
+import {WidgetImage} from '../models/widgets/WidgetImage';
 
 @Component({
   selector: 'app-widget-image',

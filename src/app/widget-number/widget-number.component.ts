@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {WidgetNumber} from '../models/widget';
+import {WidgetNumber} from '../models/widgets/WidgetNumber';
 import { Utils } from '../utils';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WidgetClock } from '../models/widget';
+import {WidgetClock} from '../models/widgets/WidgetClock';
 
 
 @Component({
