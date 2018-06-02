@@ -1,9 +1,9 @@
 import {StateChangeCommandTypes} from '../enums/ActionButtonStateChangeCommandTypes';
 import {ActionButtonType} from '../enums/ActionButtonType';
-import {ISceneStateChangeCommand} from '../Interfaces/ISceneStateChangeCommand';
-import {ISocketMessage} from '../Interfaces/ISocketMessage';
-import {ISwitchStateChangeCommand} from '../Interfaces/ISwitchStateChangeCommand';
-import {IWidget} from '../Interfaces/IWidget';
+import {ISceneStateChangeCommand} from '../interfaces/ISceneStateChangeCommand';
+import {ISocketMessage} from '../interfaces/ISocketMessage';
+import {ISwitchStateChangeCommand} from '../interfaces/ISwitchStateChangeCommand';
+import {IWidget} from '../interfaces/IWidget';
 import { TabNavigationService } from '../services/tab-navigation.service';
 import { TopicDataService } from '../services/topic-data.service';
 

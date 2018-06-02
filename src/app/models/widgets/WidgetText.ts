@@ -1,5 +1,5 @@
 import {WidgetType} from '../../enums/WidgetType';
-import {IWidget} from '../../Interfaces/IWidget';
+import {IWidget} from '../../interfaces/IWidget';
 import {WidgetBase} from './WidgetBase';
 
 export class WidgetText extends WidgetBase {

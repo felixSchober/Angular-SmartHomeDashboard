@@ -1,6 +1,6 @@
 import {ActionButtonType} from '../enums/ActionButtonType';
 import {WidgetType} from '../enums/WidgetType';
-import {IWidget} from '../Interfaces/IWidget';
+import {IWidget} from '../interfaces/IWidget';
 import {GraphMargins} from './Graph/GraphMargins';
 import {GraphParametersLine} from './Graph/GraphParametersLine';
 import { WidgetAction} from './widgetAction';

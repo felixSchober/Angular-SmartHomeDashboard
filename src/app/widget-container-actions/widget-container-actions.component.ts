@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {IWidget} from '../Interfaces/IWidget';
+import {IWidget} from '../interfaces/IWidget';
 import { TabNavigationService } from '../services/tab-navigation.service';
 import { TopicDataService } from '../services/topic-data.service';
 

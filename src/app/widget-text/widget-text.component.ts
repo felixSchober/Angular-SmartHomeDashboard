@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {IWidget} from '../Interfaces/IWidget';
+import {IWidget} from '../interfaces/IWidget';
 
 
 @Component({

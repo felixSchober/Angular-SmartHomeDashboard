@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {WidgetType} from '../enums/WidgetType';
-import {IWidget} from '../Interfaces/IWidget';
+import {IWidget} from '../interfaces/IWidget';
 
 @Component({
   selector: 'app-widget-container',

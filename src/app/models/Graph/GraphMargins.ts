@@ -1,4 +1,4 @@
-import {IGraphMargins} from '../../Interfaces/IGraphMargins';
+import {IGraphMargins} from '../../interfaces/IGraphMargins';
 
 export class GraphMargins implements IGraphMargins {
   top: number;

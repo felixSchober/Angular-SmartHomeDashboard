@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ISocketMessage} from '../Interfaces/ISocketMessage';
+import {ISocketMessage} from '../interfaces/ISocketMessage';
 import { WebsocketService} from './websocket.service';
 import { MockWebsocketService } from './mock-websocket.service';
 import { filter } from 'rxjs/operators';

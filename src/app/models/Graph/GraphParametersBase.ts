@@ -1,5 +1,5 @@
 import {GraphXScaleType} from '../../enums/GraphXScaleType';
-import {IGraphParameters} from '../../Interfaces/IGraphParameters';
+import {IGraphParameters} from '../../interfaces/IGraphParameters';
 
 export class GraphParametersBase implements IGraphParameters {
   color: (d: any) => string;

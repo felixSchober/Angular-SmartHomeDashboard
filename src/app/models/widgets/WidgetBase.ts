@@ -1,5 +1,5 @@
 import {WidgetType} from '../../enums/WidgetType';
-import {IWidget} from '../../Interfaces/IWidget';
+import {IWidget} from '../../interfaces/IWidget';
 import {TabNavigationService} from '../../services/tab-navigation.service';
 import {TopicDataService} from '../../services/topic-data.service';
 import {WidgetAction} from '../widgetAction';

@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import {GraphXScaleType} from '../../enums/GraphXScaleType';
-import {IGraphMargins} from '../../Interfaces/IGraphMargins';
-import {IGraphParameters} from '../../Interfaces/IGraphParameters';
+import {IGraphMargins} from '../../interfaces/IGraphMargins';
+import {IGraphParameters} from '../../interfaces/IGraphParameters';
 import {GraphParametersLine} from '../Graph/GraphParametersLine';
 import {WidgetAction} from '../widgetAction';
 import {WidgetGraphBase} from './WidgetGraphBase';

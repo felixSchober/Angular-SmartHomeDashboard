@@ -1,6 +1,6 @@
 import {StateChangeCommandTypes} from '../../enums/ActionButtonStateChangeCommandTypes';
 import {WidgetType} from '../../enums/WidgetType';
-import {IWidget} from '../../Interfaces/IWidget';
+import {IWidget} from '../../interfaces/IWidget';
 import { SwitchStateChangeCommand, WidgetAction} from '../widgetAction';
 import {WidgetStatus} from './WidgetStatus';
 

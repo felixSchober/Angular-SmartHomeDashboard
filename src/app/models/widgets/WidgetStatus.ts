@@ -1,5 +1,5 @@
 import {WidgetType} from '../../enums/WidgetType';
-import {IWidget} from '../../Interfaces/IWidget';
+import {IWidget} from '../../interfaces/IWidget';
 import {WidgetAction} from '../widgetAction';
 import {WidgetBase} from './WidgetBase';
 

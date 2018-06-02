@@ -5,8 +5,8 @@ import { Observer } from 'rxjs/Rx';
 import * as Rx from 'rxjs/Rx';
 import { environment } from '../environments/environment';
 import * as moment from 'moment';
-import {ISocketLogMessage} from '../Interfaces/ISocketLogMessage';
-import {ISocketMessage} from '../Interfaces/ISocketMessage';
+import {ISocketLogMessage} from '../interfaces/ISocketLogMessage';
+import {ISocketMessage} from '../interfaces/ISocketMessage';
 
 
 @Injectable({

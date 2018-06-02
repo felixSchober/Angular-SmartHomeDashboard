@@ -1,4 +1,4 @@
-import {IGraphLegendItem} from '../../Interfaces/IGraphLegendItem';
+import {IGraphLegendItem} from '../../interfaces/IGraphLegendItem';
 
 export class GraphLegendItem implements IGraphLegendItem {
   name: string;
