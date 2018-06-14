@@ -20,7 +20,19 @@ export class WidgetImage extends WidgetBase {
     widgetImage.updateLastUpdatedString();
 
     if (typeof data === 'string') {
-      widgetImage.imageUrl = data as string;
+      let url = data as string;
+
+      // TODO: Cleanup this mess
+      if (url.startsWith('http') || url.startsWith('assets')) {     // is the data string a url?
+        widgetImage.imageUrl = url;
+      } else {                                                      // append with local path to images
+        if (url.endsWith('png') || url.endsWith('jpg') || url.endsWith('jpeg') || url.endsWith('gif')) {
+          url = '/assets/images/' + url;
+        } else {
+          url = '/assets/images/' + url + '.png';
+        }
+        widgetImage.imageUrl = url;
+      }
     } else {
       console.log('[w' + widgetImage.name + '] data is not a string.');
     }

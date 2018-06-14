@@ -26,13 +26,13 @@ export class WidgetSwitch extends WidgetStatus {
 
     if (this.subType === WidgetType.SwitchLight) {
 
-      socketTopic = 'lightState';
+      socketTopic = 'lights';
       socketCommand = new SwitchStateChangeCommand(this.deviceName, StateChangeCommandTypes.toggle);
       this.statusStates = ['power_off', 'wb_sunny'];
 
     } else if (this.subType === WidgetType.SwitchPlug) {
 
-      socketTopic = 'plugState';
+      socketTopic = 'power';
       socketCommand = new SwitchStateChangeCommand(this.deviceName, StateChangeCommandTypes.toggle);
       this.statusStates = ['power_off', 'power'];
 

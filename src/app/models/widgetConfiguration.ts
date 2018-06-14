@@ -54,7 +54,7 @@ const graphWidgetWide = new WidgetGraphLine('powerLevelHistory_Total',
   null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
 
 const lightStatusWidget = new WidgetStatus('LightStatus', 'Lights', WidgetType.Status);
-const deskLightWidget = new WidgetSwitch('lightState_Schreibtisch', 'Schreibtisch', WidgetType.SwitchLight,
+const deskLightWidget = new WidgetSwitch('lights_Schreibtisch', 'Schreibtisch', WidgetType.SwitchLight,
   'Schreibtisch', 1, 1, '#E91E63');
 
 const channelImages = ['/assets/images/ARD-HD.png', '/assets/images/Kabel-1.png'];
