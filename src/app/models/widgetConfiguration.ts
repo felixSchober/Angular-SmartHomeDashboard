@@ -115,23 +115,62 @@ setInterval(() => {
 }, 4000);
 */
 
-  export const WIDGETS: IWidget[][] = [
-  [
-    clockWidget,
-    numberWidget1,
-    numberWidget2,
-    channelImageWidget,
-    graphWidgetSlim,
-    graphWidgetWide,
-    lightStatusWidget,
-    deskLightWidget,
-    new WidgetNumber('A', 'Temperature', '', '', '°', 1, 1, null, null, [], true),
-    statusWidget,
-    new WidgetNumber('A', 'Temperature', '', '', '°'),
-    new WidgetNumber('A', 'Temperature', '', '', '°'),
-    new WidgetNumber('A', 'Temperature', '', '', '°'),
-  ],
-  [
-    new WidgetNumber('A', 'Temperature', '', '', '°', null, null, null, null, [primaryNavigation]),
-  ]
+// Actions
+const goToLightPage = new WidgetAction('', ActionButtonType.Primary, 4);
+const goToTvPage = new WidgetAction('', ActionButtonType.Primary, 4);
+const goToPowerPage = new WidgetAction('', ActionButtonType.Primary, 4);
+
+// Widgets
+const lightWidget = new WidgetNumber('lights_CountOn', 'Lights On', '', '', '', 1, 1, '#ff9800', '#ff9800', [goToLightPage], false);
+const currentActivityWidget = new WidgetStatus('harmony_currentActivity', 'TV', WidgetType.StatusImage, ['netflix'], '', 1, 1, null, null, [goToTvPage]);
+const currentTotalPower = new WidgetNumber('powerLevelValue_Total', 'Total', 'Power', '', 'W', 1, 1, '#fff', '#03a9f4', [goToPowerPage], false);
+
+const calendarTodayWidget = new WidgetNumber('calendar_today', 'Today', 'Calendar', '', '', 1, 1, '#ff9800', '#ff9800');
+
+
+
+export const WIDGETS: IWidget[][] = [
+    [
+      clockWidget,
+      lightWidget,
+      currentActivityWidget,
+      currentTotalPower,
+      calendarTodayWidget
+    ],
+    [],
+    [
+      new WidgetSwitch('lights_Eingang', 'Eingang', WidgetType.SwitchLight, 'Eingang', 1, 1, '#E91E63'),
+      new WidgetSwitch('lights_Schrank', 'Schrank', WidgetType.SwitchLight, 'Schrank', 1, 1, '#E91E63'),
+      new WidgetSwitch('lights_Bad Deckenleiste', 'Bad', WidgetType.SwitchLight, 'Bad Deckenleiste', 1, 1, '#E91E63'),
+
+      new WidgetSwitch('lights_Theke', 'Theke', WidgetType.SwitchLight, 'Theke', 1, 1, '#c2185b'),
+      new WidgetSwitch('lights_Küche Vorraum', 'Vorraum', WidgetType.SwitchLight, 'Küche Vorraum', 1, 1, '#c2185b'),
+      new WidgetSwitch('lights_Arbeitsplatte', 'Arbeitsplattte', WidgetType.SwitchLight, 'Arbeitsplatte', 1, 1, '#c2185b'),
+      new WidgetSwitch('lights_Küche Spot links', 'Küche Links', WidgetType.SwitchLight, 'Küche Spot links', 1, 1, '#c2185b'),
+      new WidgetSwitch('lights_Küche Spot Rechts', 'Küche Rechts', WidgetType.SwitchLight, 'Küche Spot Rechts', 1, 1, '#c2185b'),
+
+      new WidgetSwitch('lights_Ambilight', 'Ambilight', WidgetType.SwitchLight, 'Ambilight', 1, 1, '#9E9E9E'),
+      new WidgetSwitch('lights_Nachttisch', 'Nachttisch', WidgetType.SwitchLight, 'Nachttisch', 1, 1, '#9E9E9E'),
+
+
+
+
+
+    ],
+    [],
+    [
+      clockWidget,
+      numberWidget1,
+      numberWidget2,
+      channelImageWidget,
+      graphWidgetSlim,
+      graphWidgetWide,
+      lightStatusWidget,
+      deskLightWidget,
+      new WidgetNumber('A', 'Temperature', '', '', '°', 1, 1, null, null, [], true),
+      statusWidget,
+      new WidgetNumber('A', 'Temperature', '', '', '°'),
+      new WidgetNumber('A', 'Temperature', '', '', '°'),
+      new WidgetNumber('A', 'Temperature', '', '', '°'),
+    ]
 ];

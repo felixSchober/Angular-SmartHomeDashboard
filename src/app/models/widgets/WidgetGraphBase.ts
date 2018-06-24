@@ -100,7 +100,14 @@ export abstract class WidgetGraphBase extends WidgetBase implements IWidgetGraph
 
     // create svg element if not already created but only if there is already some data
     if (!widgetGraph.svgElement) {
-      widgetGraph.svgElement = widgetGraph.appendSvgElement();
+      const svg = widgetGraph.appendSvgElement();
+
+      // if the widget is not display the svg element is null
+      if (!svg) {
+        console.log('Could not get graph element.');
+        return;
+      }
+      widgetGraph.svgElement = svg;
       widgetGraph.buildGraph();
       return;
     }
@@ -225,6 +232,9 @@ export abstract class WidgetGraphBase extends WidgetBase implements IWidgetGraph
     // update card width based on d3 parent container element
     //noinspection TypeScriptUnresolvedFunction
     const graphElement: any = d3.select('#' + this.d3GraphId).node();
+    if (!graphElement) {
+      return null;
+    }
     this.graphWidth = graphElement.getBoundingClientRect().width - this.graphMargins.marginsX();
 
     return d3

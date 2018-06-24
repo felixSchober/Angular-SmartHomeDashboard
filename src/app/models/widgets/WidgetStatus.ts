@@ -41,7 +41,7 @@ export class WidgetStatus extends WidgetBase {
     } else if (typeof data === 'boolean') {
       const newStatus = data as boolean;
 
-      // new status index = 0 means off. Status 1 is on
+      // new status tabIndex = 0 means off. Status 1 is on
       let newStatusIndex = 0;
       if (newStatus) {
         newStatusIndex = 1;

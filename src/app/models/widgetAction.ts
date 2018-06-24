@@ -114,7 +114,7 @@ export class WidgetAction {
 
     // target is set but tab navigation service was not injected (set)
     if (!this.tabNavigationService) {
-      throw new Error('Tab Destination index is set to ' + this.tabDestinationIndex +
+      throw new Error('Tab Destination tabIndex is set to ' + this.tabDestinationIndex +
         ' but the tab navigation service was not set (injected).');
     }
 
