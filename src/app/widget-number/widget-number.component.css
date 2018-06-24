@@ -17,14 +17,15 @@ mat-card-header {
 .card-number{
   color: #FFF;
   opacity: 0.9;
-  font-size: 8vh;
+  /* font-size: 8vh; */
+  font-size: 52px;
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
 .card-title{
   color: #FFF;
   opacity: 0.7;
-  font-size: 2.5vh;
+  font-size: 18px;
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 

@@ -77,7 +77,7 @@ export abstract class WidgetBase implements IWidget {
   }
 
   private getLastUpdatedString(): string {
-    return moment(this.updatedAt).calendar();
+    return moment(this.updatedAt).format('mm:ss');
   }
 
   updateLastUpdatedString() {

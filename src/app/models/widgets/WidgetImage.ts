@@ -1,3 +1,4 @@
+import { WidgetAction } from './../widgetAction';
 import {WidgetType} from '../../enums/WidgetType';
 import {IWidget} from '../../interfaces/IWidget';
 import {WidgetBase} from './WidgetBase';
@@ -9,8 +10,9 @@ export class WidgetImage extends WidgetBase {
   constructor(name: string,
               imageUrl: string,
               sizeX?: number,
-              sizeY?: number) {
-    super(name, '', WidgetType.Image, '', null, null, sizeX, sizeY);
+              sizeY?: number,
+              actions?: WidgetAction[]) {
+    super(name, '', WidgetType.Image, '', null, null, sizeX, sizeY, null, null, actions);
     this.imageUrl = imageUrl;
   }
 
