@@ -75,6 +75,89 @@
 
         }
       ]
+    },
+
+
+
+
+
+    {
+      "index": 1,
+      "name": "Testing",
+      "icon": "",
+      "widgets": [
+        {
+          "type": "clock",
+          "name": "Clock",
+          "sizeX": 2,
+          "sizeY": 1,
+          "color": "#4CAF50",
+          "actions": []
+        },
+        {
+          "type": "number",
+          "name": "LightsOn",
+          "title": "Lights on",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF",
+          "headerColor": "#4CAF50",
+          "actions": [
+            {
+              "type": "primary",
+              "tabDestinationIndex": 1,
+              "socketTopic": "",
+              "socketMessage": {}
+            }
+          ]
+
+        },
+        {
+          "type": "statusImage",
+          "name": "harmony_activity",
+          "title": "TV",
+          "statusValues": [
+            "netflix",
+            "tv"
+          ],
+          "sizeX": 1,
+          "sizeY": 1,
+          "actions": [
+            {
+              "type": "primary",
+              "tabDestinationIndex": 2,
+              "socketTopic": "",
+              "socketMessage": {}
+            }
+          ]
+        },
+        {
+          "type": "status",
+          "name": "total_power",
+          "title": "Lights",
+          "icons": [
+            "power",
+            "power_off"
+          ],
+          "subtitle": "",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF",
+          "headerColor": "#4CAF50",
+          "actions": [
+            {
+              "type": "primary",
+              "tabDestinationIndex": 3,
+              "socketTopic": "",
+              "socketMessage": {}
+            }
+          ]
+
+        }
+      ]
     }
   ]
 }

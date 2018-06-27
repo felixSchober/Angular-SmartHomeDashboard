@@ -122,7 +122,7 @@ const goToPowerPage = new WidgetAction('', ActionButtonType.Primary, 4);
 
 // Widgets
 const lightWidget = new WidgetNumber('lights_CountOn', 'Lights On', '', '', '', 1, 1, '#ff9800', '#ff9800', [goToLightPage], false);
-const currentActivityWidget = new WidgetStatus('harmony_currentActivity', 'TV', WidgetType.StatusImage, ['netflix'], '', 1, 1, null, null, [goToTvPage]);
+const currentActivityWidget = new WidgetImage('harmony_currentActivity', 'assets/images/harmony.jpg', 1, 1, [goToTvPage]);
 const currentTotalPower = new WidgetNumber('powerLevelValue_Total', 'Total', 'Power', '', 'W', 1, 1, '#fff', '#03a9f4', [goToPowerPage], false);
 
 const calendarTodayWidget = new WidgetNumber('calendar_today', 'Today', 'Calendar', '', '', 1, 1, '#ff9800', '#ff9800');
