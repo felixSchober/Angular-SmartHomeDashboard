@@ -7,6 +7,18 @@ export class WidgetClock extends WidgetBase {
 
   currentTime: Date;
 
+  static parser = function(data: any): WidgetClock {
+    if (data.type !== 'clock') {
+      throw Error('Widget type is not clock');
+    }
+
+    if (!data.name) {
+      throw Error('Could not create clock widget: Name is not set');
+    }
+
+    return new WidgetClock(data.name, data.sizeX, data.sizeY, data.cardColor);
+  };
+
   constructor(name: string,
               sizeX?: number,
               sizeY?: number,
@@ -23,4 +35,6 @@ export class WidgetClock extends WidgetBase {
     this.title = moment().format('LTS');
     this.subtitle = moment().format('LL');
   }
+
+  
 }

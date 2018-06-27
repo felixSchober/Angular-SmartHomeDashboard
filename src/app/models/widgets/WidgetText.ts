@@ -14,7 +14,11 @@ export class WidgetText extends WidgetBase {
               sizeX?: number,
               sizeY?: number,
               cardColor?: string) {
-    super(name, title, WidgetType.Text, subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor);
+    super(name,
+      title,
+      WidgetType.Text,
+      subtitle,
+      dataPrefix, dataSuffix, sizeX, sizeY, cardColor);
     this.currentTextContent = '';
   }
 

@@ -53,7 +53,8 @@ export abstract class WidgetGraphBase extends WidgetBase implements IWidgetGraph
     return dateArray;
   }
 
-  protected constructor(name: string,
+  protected constructor(
+                        name: string,
                         title: string,
                         margins?: IGraphMargins,
                         subtitle?: string,
@@ -65,7 +66,8 @@ export abstract class WidgetGraphBase extends WidgetBase implements IWidgetGraph
                         cardHeaderColor?: string,
                         showLegend?: boolean,
                         actions?: WidgetAction[]) {
-    super(name, title, WidgetType.Graph, subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor, cardHeaderColor, actions);
+    super(name, title, WidgetType.Graph, subtitle, dataPrefix,
+      dataSuffix, sizeX, sizeY, cardColor, cardHeaderColor, actions);
     this.graphWidth = this.cardWidth;
     this.graphHeight = this.cardHeight - 24;
     this.graphMargins = margins || new GraphMargins(4, 20, 28, 4);

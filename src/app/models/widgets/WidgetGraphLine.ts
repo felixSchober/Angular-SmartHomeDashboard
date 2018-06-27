@@ -6,9 +6,61 @@ import {GraphParametersLine} from '../Graph/GraphParametersLine';
 import {WidgetAction} from '../widgetAction';
 import {WidgetGraphBase} from './WidgetGraphBase';
 import * as moment from 'moment';
+import { IWidget } from '../../interfaces/IWidget';
+import { GraphMargins } from '../Graph/GraphMargins';
 
 export class WidgetGraphLine extends WidgetGraphBase {
   curveFactory: any;
+
+  static parser = function(data: any): IWidget {
+    if (data.type !== 'lineGraph') {
+      throw Error('Widget type is not lineGraph');
+    }
+
+    if (!data.name) {
+      throw Error('Could not create lineGraph widget: Name is not set');
+    }
+
+    if (!data.title) {
+      throw Error('Could not create lineGraph widget: title is not set');
+    }
+
+    if (!data.parameters) {
+      throw Error('Could not create lineGraph widget: parameters is not set');
+    }
+
+    // parse parameters
+    let colorFunction: (d: any) => string;
+    if (data.parameters.singleSeriesColorFunction) {
+      colorFunction = function (d: any): string {
+        return '#FFF';
+      };
+    } else {
+      colorFunction = null;
+    }
+
+    let scaleType: GraphXScaleType;
+    if (data.parameters.scaleType) {
+      if (data.parameters.scaleType === 'linear') {
+        scaleType = GraphXScaleType.linear;
+      } else if (data.parameters.scaleType === 'date') {
+        scaleType = GraphXScaleType.date;
+      }
+    }
+
+    const lineParameters = new GraphParametersLine(scaleType,
+      colorFunction,
+      data.parameters.ticks,
+      data.parameters.ticksFormatterFunctionType,
+      data.parameters.areaOpacity);
+
+    const margins = data.margins as GraphMargins;
+    const actions = WidgetAction.parseActionArray(data.actions);
+
+    return new WidgetGraphLine(data.name, data.title, lineParameters, margins,
+      data.subtitle, data.dataPrefix, data.dataSuffix, data.sizeX,
+      data.sizeY, data.cardColor, data.cardHeaderColor, data.showLegend, actions);
+  };
 
   constructor(
     name: string,

@@ -37,7 +37,8 @@ export abstract class WidgetBase implements IWidget {
   dataService: TopicDataService;
   ActionButtonType: typeof ActionButtonType = ActionButtonType;
 
-  protected constructor(name: string,
+  protected constructor(
+              name: string,
               title: string,
               widgetType: WidgetType,
               subtitle?: string,
@@ -48,6 +49,7 @@ export abstract class WidgetBase implements IWidget {
               cardColor?: string,
               cardHeaderColor?: string,
               actions?: WidgetAction[]) {
+
     this.id = currentWidgetId;
     currentWidgetId++;
 
@@ -57,6 +59,7 @@ export abstract class WidgetBase implements IWidget {
 
     // TODO: Change to not defined.
     this.updatedAt = moment().toDate();
+
     this.type = widgetType;
     this.sizeX = sizeX || 1;
     this.sizeY = sizeY || 1;
@@ -72,7 +75,6 @@ export abstract class WidgetBase implements IWidget {
     // search for primary action (click on card to execute)
     this.primaryAction = this.actions.filter((action) => action.type === ActionButtonType.Primary)[0];
     this.secondaryActions = this.actions.filter((action) => action.type !== ActionButtonType.Primary);
-
     console.log('Widget ' + this.name + ' (' + this.type + ') created with ' + this.cardWidth + 'x' + this.cardHeight);
   }
 

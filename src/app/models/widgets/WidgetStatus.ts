@@ -8,6 +8,27 @@ export class WidgetStatus extends WidgetBase {
   statusStates: string[];
   currentStatus: string;
 
+  static parser = function(data: any): IWidget {
+    if (data.type !== 'status') {
+      throw Error('Widget type is not status');
+    }
+
+    if (!data.name) {
+      throw Error('Could not create status widget: Name is not set');
+    }
+
+    if (!data.title) {
+      throw Error('Could not create status widget: Title is not set');
+    }
+
+    const widgetType = WidgetType.Status;
+    const icons = data.icons;
+    const actions = WidgetAction.parseActionArray(data.actions);
+
+    return new WidgetStatus(data.name, data.title, widgetType, icons, data.subtitle,
+      data.sizeX, data.sizeY, data.cardColor, data.cardHeaderColor, actions);
+  };
+
 
   constructor(name: string, title: string, type: WidgetType, statusIcons?: string[],
               subtitle?: string, sizeX?: number, sizeY?: number, cardColor?: string,

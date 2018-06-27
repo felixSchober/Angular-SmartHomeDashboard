@@ -26,7 +26,7 @@
           "headerColor": "#4CAF50",
           "actions": [
             {
-              "type": "primary",
+              "type": "Primary",
               "tabDestinationIndex": 1,
               "socketTopic": "",
               "socketMessage": {}
@@ -46,7 +46,7 @@
           "sizeY": 1,
           "actions": [
             {
-              "type": "primary",
+              "type": "Primary",
               "tabDestinationIndex": 2,
               "socketTopic": "",
               "socketMessage": {}
@@ -66,7 +66,7 @@
           "headerColor": "#4CAF50",
           "actions": [
             {
-              "type": "primary",
+              "type": "Primary",
               "tabDestinationIndex": 3,
               "socketTopic": "",
               "socketMessage": {}
@@ -76,11 +76,6 @@
         }
       ]
     },
-
-
-
-
-
     {
       "index": 1,
       "name": "Testing",
@@ -107,27 +102,22 @@
           "headerColor": "#4CAF50",
           "actions": [
             {
-              "type": "primary",
+              "type": "Primary",
               "tabDestinationIndex": 1,
               "socketTopic": "",
               "socketMessage": {}
             }
           ]
 
-        },
+        },        
         {
-          "type": "statusImage",
+          "type": "image",
           "name": "harmony_activity",
-          "title": "TV",
-          "statusValues": [
-            "netflix",
-            "tv"
-          ],
           "sizeX": 1,
           "sizeY": 1,
           "actions": [
             {
-              "type": "primary",
+              "type": "Primary",
               "tabDestinationIndex": 2,
               "socketTopic": "",
               "socketMessage": {}
@@ -149,13 +139,54 @@
           "headerColor": "#4CAF50",
           "actions": [
             {
-              "type": "primary",
+              "type": "Primary",
               "tabDestinationIndex": 3,
               "socketTopic": "",
               "socketMessage": {}
             }
           ]
-
+        }, 
+        {
+          "type": "lineGraph",
+          "name": "powerLevelHistory_Total",
+          "title": "Power History",
+          "parameters": {
+            "scaleType": "date",
+            "singleSeriesColorFunction": true,
+            "ticks": 5,
+            "ticksFormatterFunctionType": null,
+            "areaOpacity": 0.8
+          },
+          "margins": {
+            "top": 4,
+            "bottom": 20,
+            "left": 28,
+            "right": 4
+          },
+          "dataPrefix": "",
+          "dataSuffix": "",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF",
+          "headerColor": "#4CAF50",
+          "showLegend": true,
+          "actions": [
+            {
+              "type": "Primary",
+              "tabDestinationIndex": 3,
+              "socketTopic": "",
+              "socketMessage": {}
+            }
+          ]
+        }, 
+        {
+          "type": "switch",
+          "name": "lights_Schreibtisch",
+          "deviceName": "lights_Schreibtisch",
+          "title": "Schreibtisch",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF"
         }
       ]
     }

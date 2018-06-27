@@ -2,10 +2,38 @@ import {StateChangeCommandTypes} from '../../enums/ActionButtonStateChangeComman
 import {WidgetType} from '../../enums/WidgetType';
 import {SceneStateChangeCommand, WidgetAction} from '../widgetAction';
 import {WidgetSwitch} from './WidgetSwitch';
+import { IWidget } from '../../interfaces/IWidget';
 
 export class WidgetSwitchScene extends WidgetSwitch {
   sceneId: string;
   groupId: string;
+
+  static parser = function(data: any): IWidget {
+    if (data.type !== 'switchScene') {
+      throw Error('Widget type is not switchScene');
+    }
+
+    if (!data.name) {
+      throw Error('Could not create switchScene widget: Name is not set');
+    }
+
+    if (!data.title) {
+      throw Error('Could not create switchScene widget: Title is not set');
+    }
+
+    if (!data.sceneId) {
+      throw Error('Could not create swiswitchScenetch widget: deviceName is not set');
+    }
+
+    if (!data.groupId) {
+      throw Error('Could not create swiswitchScenetch widget: deviceName is not set');
+    }
+
+    const icons = data.icons;
+
+    return new WidgetSwitchScene(data.name, data.title, data.sceneId, data.groupId,
+      data.sizeX, data.sizeY, data.cardColor);
+  };
 
   constructor(name: string, title: string, sceneId: string, groupId: string, sizeX?: number, sizeY?: number, cardColor?: string) {
     super(name, title, WidgetType.SwitchScene, '', sizeX, sizeY, cardColor);

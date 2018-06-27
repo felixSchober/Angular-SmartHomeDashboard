@@ -7,6 +7,19 @@ export class WidgetImage extends WidgetBase {
 
   imageUrl: string;
 
+  static parser = function(data: any): IWidget {
+    if (data.type !== 'image') {
+      throw Error('Widget type is not image');
+    }
+
+    if (!data.name) {
+      throw Error('Could not create image widget: Name is not set');
+    }
+    const actions = WidgetAction.parseActionArray(data.actions);
+
+    return new WidgetImage(data.name, data.imageUrl, data.sizeX, data.sizeY, actions);
+  };
+
   constructor(name: string,
               imageUrl: string,
               sizeX?: number,

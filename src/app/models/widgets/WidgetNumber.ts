@@ -11,6 +11,25 @@ export class WidgetNumber extends WidgetBase {
   highValue: number;
   lowValue: number;
 
+  static parser = function(data: any): IWidget {
+    if (data.type !== 'number') {
+      throw Error('Widget type is not number');
+    }
+
+    if (!data.name) {
+      throw Error('Could not create number widget: Name is not set');
+    }
+
+    if (!data.title) {
+      throw Error('Could not create number widget: Title is not set');
+    }
+
+    const actions = WidgetAction.parseActionArray(data.actions);
+
+    return new WidgetNumber(data.name, data.title, data.subtitle, data.dataPrefix, data.dataSuffix,
+      data.sizeX, data.sizeY, data.cardColor, data.cardHeaderColor, actions, data.showHighLow);
+  };
+
   constructor(name: string,
               title: string,
               subtitle?: string,
@@ -22,7 +41,8 @@ export class WidgetNumber extends WidgetBase {
               cardHeaderColor?: string,
               actions?: WidgetAction[],
               showHighLow?: boolean) {
-    super(name, title, WidgetType.Number, subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor, cardHeaderColor, actions);
+    super(name, title, WidgetType.Number,
+      subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor, cardHeaderColor, actions);
     this.currentNumber = -1;
     this.showHighLow = showHighLow || false;
     if (this.showHighLow) {

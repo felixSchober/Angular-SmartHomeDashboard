@@ -20,6 +20,39 @@ export class WidgetAction {
   tabNavigationService: TabNavigationService;
   dataService: TopicDataService;
 
+  static parseActionArray(data: ReadonlyArray<any>): WidgetAction[] {
+    const result: WidgetAction[] = [];
+    data.forEach(actionData => {
+      result.push(WidgetAction.parseAction(actionData));
+    });
+    return result;
+  }
+
+  private static parseAction(data: any): WidgetAction {
+
+    if (!data.type) {
+      throw Error('Could not create action. data type was not set');
+    }
+
+    // parse action type
+    const buttonType: ActionButtonType = ActionButtonType['' + data.type];
+
+    if (!buttonType) {
+      throw Error('Could not create action. data type could not be parsed');
+    }
+    let title: string;
+    if (buttonType !== ActionButtonType.Primary) {
+      if (!data.title) {
+        throw Error('Could not create action. title was not set');
+      }
+      title = data.title;
+    } else {
+      title = '';
+    }
+
+    return new WidgetAction(title, buttonType, data.tabDestinationIndex, data.socketTopic, data.socketMessage);
+  }
+
   constructor(title: string,
               type: ActionButtonType,
               tabDestinationIndex?: number,
