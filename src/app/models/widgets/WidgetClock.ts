@@ -16,7 +16,7 @@ export class WidgetClock extends WidgetBase {
       throw Error('Could not create clock widget: Name is not set');
     }
 
-    return new WidgetClock(data.name, data.sizeX, data.sizeY, data.cardColor);
+    return new WidgetClock(data.name, data.sizeX, data.sizeY, data.color);
   };
 
   constructor(name: string,

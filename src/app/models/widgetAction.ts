@@ -22,6 +22,10 @@ export class WidgetAction {
 
   static parseActionArray(data: ReadonlyArray<any>): WidgetAction[] {
     const result: WidgetAction[] = [];
+    if (!data) {
+      return [];
+    }
+
     data.forEach(actionData => {
       result.push(WidgetAction.parseAction(actionData));
     });

@@ -54,12 +54,15 @@ export class WidgetGraphLine extends WidgetGraphBase {
       data.parameters.ticksFormatterFunctionType,
       data.parameters.areaOpacity);
 
-    const margins = data.margins as GraphMargins;
+    let margins: GraphMargins;
+    if (data.margins) {
+          margins = new GraphMargins(data.margins.top, data.margins.bottom, data.margins.left, data.margins.right);
+    }
     const actions = WidgetAction.parseActionArray(data.actions);
 
     return new WidgetGraphLine(data.name, data.title, lineParameters, margins,
       data.subtitle, data.dataPrefix, data.dataSuffix, data.sizeX,
-      data.sizeY, data.cardColor, data.cardHeaderColor, data.showLegend, actions);
+      data.sizeY, data.cardColor, data.headerColor, data.showLegend, actions);
   };
 
   constructor(

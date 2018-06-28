@@ -27,7 +27,7 @@ export class WidgetNumber extends WidgetBase {
     const actions = WidgetAction.parseActionArray(data.actions);
 
     return new WidgetNumber(data.name, data.title, data.subtitle, data.dataPrefix, data.dataSuffix,
-      data.sizeX, data.sizeY, data.cardColor, data.cardHeaderColor, actions, data.showHighLow);
+      data.sizeX, data.sizeY, data.cardColor, data.headerColor, actions, data.showHighLow);
   };
 
   constructor(name: string,
