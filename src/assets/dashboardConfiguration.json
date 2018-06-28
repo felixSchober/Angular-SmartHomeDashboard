@@ -1,7 +1,214 @@
 {
-  "pages": [
+  "pages": [    
     {
       "index": 0,
+      "name": "Kitchen",
+      "icon": "",
+      "widgets": [
+        {
+          "type": "clock",
+          "name": "Clock",
+          "sizeX": 2,
+          "sizeY": 1,
+          "color": "#4CAF50",
+          "actions": []
+        },
+        {
+          "type": "switchPlug",
+          "name": "power_Kochplatte",
+          "sizeX": 1,
+          "sizeY": 1,
+          "color": "#f44336",
+          "deviceName": "Kochplatte",
+          "title": "Kochplatte"
+        },
+        {
+          "type": "switch",
+          "name": "lights_Küche Spot links",
+          "deviceName": "Küche Spot links",
+          "title": "Küche Links",
+          "sizeX": 1,
+          "sizeY": 1,
+          "color": "#f44336"
+        },
+        {
+          "type": "switch",
+          "name": "lights_Küche Spot rechts",
+          "deviceName": "Küche Spot rechts",
+          "title": "Küche Rechts",
+          "sizeX": 1,
+          "sizeY": 1,
+          "color": "#f44336"
+        },
+        {
+          "type": "lineGraph",
+          "name": "powerLevelHistory_Kochplatte",
+          "title": "Kochplatte",
+          "parameters": {
+            "scaleType": "date",
+            "singleSeriesColorFunction": true            
+          },
+          "margins": {
+            "top": 4,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          },
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 2,
+          "sizeY": 2,
+          "cardColor": "#FFF",
+          "headerColor": "#ff9800",
+          "showLegend": true
+        },
+        {
+          "type": "image",
+          "name": "harmony_currentActivity",
+          "sizeX": 1,
+          "sizeY": 1,
+          "actions": [
+            {
+              "type": "Primary",
+              "tabDestinationIndex": 2,
+              "socketTopic": "",
+              "socketMessage": {}
+            }
+          ]
+        },
+        {
+          "type": "number",
+          "name": "espressoWeek",
+          "title": "Week",
+          "subtitle": "Espresso",
+          "dataPrefix": "",
+          "dataSuffix": "",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF",
+          "headerColor": "#607d8b"
+        }, 
+        {
+          "type": "number",
+          "name": "espressoTotal",
+          "title": "Total",
+          "subtitle": "Espresso",
+          "dataPrefix": "",
+          "dataSuffix": "",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF",
+          "headerColor": "#607d8b"
+        },         
+        {
+          "type": "switch",
+          "name": "lights_Arbeitsplatte",
+          "deviceName": "Arbeitsplatte",
+          "title": "Arbeitsplatte",
+          "sizeX": 2,
+          "sizeY": 1,
+          "color": "#4CAF50"
+        },
+        {
+          "type": "switchPlug",
+          "name": "power_Espresso",
+          "sizeX": 1,
+          "sizeY": 1,
+          "color": "#607d8b",
+          "deviceName": "Espresso",
+          "title": "Espresso Maschine"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "Power",
+      "icon": "",
+      "widgets": [      
+        {
+          "type": "number",
+          "name": "powerLevelValue_Total",
+          "title": "Total Power",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF",
+          "headerColor": "#4CAF50",
+          "showHighLow": true
+        },  
+        {
+          "type": "number",
+          "name": "powerLevelValue_Computer",
+          "title": "Computer",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF",
+          "headerColor": "#4CAF50",
+          "showHighLow": true
+        },
+        {
+          "type": "number",
+          "name": "powerLevelValue_Media",
+          "title": "Media",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF",
+          "headerColor": "#4CAF50",
+          "showHighLow": true
+        },
+        {
+          "type": "number",
+          "name": "powerLevelValue_Kitchen",
+          "title": "Küche",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF",
+          "headerColor": "#4CAF50",
+          "showHighLow": true
+        },
+        {
+          "type": "number",
+          "name": "powerLevelValue_Kochplatte",
+          "title": "Kochplatte",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1,
+          "cardColor": "#FFF",
+          "headerColor": "#4CAF50",
+          "showHighLow": true
+        },        
+        {
+          "type": "lineGraph",
+          "name": "powerLevelHistory_Total",
+          "title": "Power",
+          "parameters": {
+            "scaleType": "date"
+          },
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 5,
+          "sizeY": 2,
+          "cardColor": "#FFF",
+          "headerColor": "#FFF",
+          "showLegend": true
+        }        
+      ]
+    },
+    {
+      "index": 1,
       "name": "Living",
       "icon": "",
       "widgets": [
@@ -187,6 +394,72 @@
           "sizeX": 1,
           "sizeY": 1,
           "cardColor": "#FFF"
+        }
+      ]
+    },
+
+    {
+      "index": 2,
+      "name": "Position Test",
+      "icon": "",
+      "widgets": [
+        
+               
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
+        },
+        {
+          "type": "image",
+          "name": "harmony_activity"
         }
       ]
     }
