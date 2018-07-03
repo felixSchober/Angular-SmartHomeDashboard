@@ -1,5 +1,1 @@
-<mat-tab-group [(selectedIndex)]="selectedTabIndex">
-  <mat-tab label="{{page.name}}" *ngFor="let page of widgetTabs">
-    <app-control-page [tabIndex]="page.tabIndex" [pageWidgets]="page.widgets"></app-control-page>
-  </mat-tab>
-</mat-tab-group>
+<router-outlet></router-outlet>

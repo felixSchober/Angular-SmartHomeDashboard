@@ -1,4 +1,3 @@
-import * as widgetConfigurationData from './../../assets/dashboardConfiguration.json';
 import { IWidget } from '../interfaces/IWidget';
 import { WidgetConfigurationModel } from '../models/widget-configuration.model';
 import { WidgetClock } from '../models/widgets/WidgetClock';
@@ -9,11 +8,27 @@ import { WidgetNumber } from '../models/widgets/WidgetNumber';
 import { WidgetSwitch } from '../models/widgets/WidgetSwitch';
 import { WidgetSwitchScene } from '../models/widgets/WidgetSwitchScene';
 
+// Configurations
+import * as widgetConfigurationDevice_kitchen from './../../assets/configuration/dashboardConfig_kitchen.json';
+import * as widgetConfigurationDevice_living from './../../assets/configuration/dashboardConfig_living.json';
+import * as widgetConfigurationDevice_entrace from './../../assets/configuration/dashboardConfig_entrance.json';
+
 export class ConfigurationLoader {
-    static loadConfiguration(): WidgetConfigurationModel[] {
+
+    static loadConfiguration(deviceId: string): WidgetConfigurationModel[] {
+
+        let widgetConfigurationData: any;
+        if (deviceId === 'kitchen') {
+            widgetConfigurationData = widgetConfigurationDevice_kitchen;
+        } else if (deviceId === 'living') {
+            widgetConfigurationData = widgetConfigurationDevice_living;
+        } else if (deviceId === 'entrance') {
+            widgetConfigurationData = widgetConfigurationDevice_entrace;
+        }
+
         const result: WidgetConfigurationModel[] = [];
 
-        ConfigurationLoader.validate();
+        ConfigurationLoader.validate(widgetConfigurationData);
 
         const pages = widgetConfigurationData.default.pages;
 
@@ -67,7 +82,7 @@ export class ConfigurationLoader {
         return result;
     }
 
-    private static validate() {
+    private static validate(widgetConfigurationData) {
         if (!widgetConfigurationData) {
             throw Error('Could not load widget configuration data.');
         }

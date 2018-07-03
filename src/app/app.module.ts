@@ -19,6 +19,8 @@ import { WidgetImageStatusComponent } from './widget-image-status/widget-image-s
 import { WidgetContainerActionsComponent } from './widget-container-actions/widget-container-actions.component';
 import { WidgetContainerDataUpdateComponent } from './widget-container-data-update/widget-container-data-update.component';
 import { WidgetSwitchComponent } from './widget-switch/widget-switch.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +36,14 @@ import { WidgetSwitchComponent } from './widget-switch/widget-switch.component';
     WidgetImageStatusComponent,
     WidgetContainerActionsComponent,
     WidgetContainerDataUpdateComponent,
-    WidgetSwitchComponent
+    WidgetSwitchComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    AppRoutingModule
   ],
   providers: [Utils],
   bootstrap: [AppComponent]
