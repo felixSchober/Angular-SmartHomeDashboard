@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 import { WidgetConfigurationModel } from '../models/widget-configuration.model';
 import { TabNavigationService } from '../services/tab-navigation.service';
 import { ConfigurationLoader } from '../shared/configuration-loader';
@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 })
 export class DashboardComponent implements OnInit {
   @Input() selectedTabIndex: number;
+  //@HostBinding('class.indigo-pink-dark') darkTheme = true;
   public widgetTabs: WidgetConfigurationModel[];
 
   constructor(
@@ -19,6 +20,8 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location
   ) {
+    //this.darkTheme = true;
+
     this.selectedTabIndex = 0;
     this.widgetTabs = [];
 

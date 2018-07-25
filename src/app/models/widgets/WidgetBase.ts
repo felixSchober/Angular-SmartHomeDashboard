@@ -68,14 +68,21 @@ export abstract class WidgetBase implements IWidget {
     this.cardHeight = this.sizeY * standardCardHeight + cardMargin * (this.sizeY - 1) + cardGridPadding * (this.sizeY - 1);
     this.dataPrefix = dataPrefix || '';
     this.dataSuffix = dataSuffix || '';
-    this.cardHeaderColor = cardHeaderColor || '#4CAF50';
-    this.cardColor = cardColor || '#FFF';
+    this.cardHeaderColor = cardHeaderColor;
+    this.cardColor = cardColor;
 
     this.actions = actions || [];
     // search for primary action (click on card to execute)
     this.primaryAction = this.actions.filter((action) => action.type === ActionButtonType.Primary)[0];
     this.secondaryActions = this.actions.filter((action) => action.type !== ActionButtonType.Primary);
     console.log('Widget ' + this.name + ' (' + this.type + ') created with ' + this.cardWidth + 'x' + this.cardHeight);
+  }
+
+  public isDefaultCardColor(element: string): boolean {
+    if (element) {
+      return false;
+    }
+    return true;
   }
 
   private getLastUpdatedString(): string {

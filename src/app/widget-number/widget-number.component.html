@@ -1,4 +1,4 @@
-<mat-card-header [style.background-color]="widget.cardHeaderColor">
+<mat-card-header [style.background-color]="widget.isDefaultCardColor(widget.cardHeaderColor) ? '' : widget.cardHeaderColor">
   <div class="mat-card-header-content">
     <mat-card-title>
       <div class="card-number mat-card-header-text">

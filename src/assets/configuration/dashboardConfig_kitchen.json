@@ -10,7 +10,6 @@
           "name": "Clock",
           "sizeX": 2,
           "sizeY": 1,
-          "color": "#4CAF50",
           "actions": []
         },
         {
@@ -18,7 +17,6 @@
           "name": "power_Kochplatte",
           "sizeX": 1,
           "sizeY": 1,
-          "color": "#f44336",
           "deviceName": "Kochplatte",
           "title": "Kochplatte"
         },
@@ -28,8 +26,7 @@
           "deviceName": "Küche Spot links",
           "title": "Küche Links",
           "sizeX": 1,
-          "sizeY": 1,
-          "color": "#f44336"
+          "sizeY": 1
         },
         {
           "type": "switch",
@@ -37,8 +34,7 @@
           "deviceName": "Küche Spot rechts",
           "title": "Küche Rechts",
           "sizeX": 1,
-          "sizeY": 1,
-          "color": "#f44336"
+          "sizeY": 1
         },
         {
           "type": "lineGraph",
@@ -58,8 +54,6 @@
           "dataSuffix": "W",
           "sizeX": 2,
           "sizeY": 2,
-          "cardColor": "#FFF",
-          "headerColor": "#ff9800",
           "showLegend": true
         },
         {
@@ -85,9 +79,7 @@
           "dataPrefix": "",
           "dataSuffix": "",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#607d8b"
+          "sizeY": 1
         }, 
         {
           "type": "number",
@@ -97,9 +89,7 @@
           "dataPrefix": "",
           "dataSuffix": "",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#607d8b"
+          "sizeY": 1
         },         
         {
           "type": "switch",
@@ -107,15 +97,13 @@
           "deviceName": "Arbeitsplatte",
           "title": "Arbeitsplatte",
           "sizeX": 2,
-          "sizeY": 1,
-          "color": "#4CAF50"
+          "sizeY": 1
         },
         {
           "type": "switchPlug",
           "name": "power_Espresso",
           "sizeX": 1,
           "sizeY": 1,
-          "color": "#607d8b",
           "deviceName": "Espresso",
           "title": "Espresso Maschine"
         }
@@ -135,8 +123,6 @@
           "dataSuffix": "W",
           "sizeX": 1,
           "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
           "showHighLow": true
         },  
         {
@@ -148,8 +134,6 @@
           "dataSuffix": "W",
           "sizeX": 1,
           "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
           "showHighLow": true
         },
         {
@@ -161,8 +145,6 @@
           "dataSuffix": "W",
           "sizeX": 1,
           "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
           "showHighLow": true
         },
         {
@@ -174,8 +156,6 @@
           "dataSuffix": "W",
           "sizeX": 1,
           "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
           "showHighLow": true
         },
         {
@@ -187,8 +167,6 @@
           "dataSuffix": "W",
           "sizeX": 1,
           "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
           "showHighLow": true
         },        
         {
@@ -202,8 +180,6 @@
           "dataSuffix": "W",
           "sizeX": 5,
           "sizeY": 2,
-          "cardColor": "#FFF",
-          "headerColor": "#FFF",
           "showLegend": true
         }        
       ]
@@ -218,7 +194,6 @@
           "name": "Clock",
           "sizeX": 2,
           "sizeY": 1,
-          "color": "#4CAF50",
           "actions": []
         },        
         {
