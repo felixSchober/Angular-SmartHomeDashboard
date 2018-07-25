@@ -6,6 +6,7 @@ import {ISwitchStateChangeCommand} from '../interfaces/ISwitchStateChangeCommand
 import {IWidget} from '../interfaces/IWidget';
 import { TabNavigationService } from '../services/tab-navigation.service';
 import { TopicDataService } from '../services/topic-data.service';
+import { WidgetType } from '../enums/WidgetType';
 
 export class WidgetAction {
   title: string;
@@ -55,6 +56,37 @@ export class WidgetAction {
     }
 
     return new WidgetAction(title, buttonType, data.tabDestinationIndex, data.socketTopic, data.socketMessage);
+  }
+
+  public static getPrimarySwitchAction(type: WidgetType, deviceName: string): WidgetAction {
+    let socketTopic = '';
+    let socketCommand: SwitchStateChangeCommand;
+
+    if (type === WidgetType.SwitchLight) {
+
+      socketTopic = 'lights';
+      socketCommand = new SwitchStateChangeCommand(deviceName, StateChangeCommandTypes.toggle);
+
+    } else if (type === WidgetType.SwitchPlug) {
+
+      socketTopic = 'power';
+      socketCommand = new SwitchStateChangeCommand(deviceName, StateChangeCommandTypes.toggle);
+
+    } else if (type === WidgetType.SwitchHarmony) {
+
+      socketTopic = 'harmony_activity';
+      socketCommand = new SwitchStateChangeCommand(deviceName, StateChangeCommandTypes.on);
+
+    } else if (type === WidgetType.SwitchScene) {
+      // do nothing.. the action will be initialized later.
+      return null;
+    } else {
+      throw new Error('Unknown Switch Type: ' + WidgetType[type] + '. ' +
+        'Only WidgetType.SwitchLight & WidgetType.SwitchPlug are allowed.');
+    }
+
+    // add a build-in primary action to change the status of the light
+    return new WidgetAction('', ActionButtonType.Primary, null, socketTopic, socketCommand);
   }
 
   constructor(title: string,

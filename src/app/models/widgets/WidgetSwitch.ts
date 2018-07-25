@@ -39,37 +39,10 @@ export class WidgetSwitch extends WidgetStatus {
 
     this.deviceName = deviceName;
     this.subType = subType;
-    this.primaryAction = this.getPrimaryCommand();
+    this.primaryAction = WidgetAction.getPrimarySwitchAction(subType, this.deviceName);
     this.actions = [this.primaryAction];
   }
 
-  protected getPrimaryCommand(): WidgetAction {
-    let socketTopic = '';
-    let socketCommand: SwitchStateChangeCommand;
-
-    if (this.subType === WidgetType.SwitchLight) {
-
-      socketTopic = 'lights';
-      socketCommand = new SwitchStateChangeCommand(this.deviceName, StateChangeCommandTypes.toggle);
-      this.statusStates = ['power_off', 'wb_sunny'];
-
-    } else if (this.subType === WidgetType.SwitchPlug) {
-
-      socketTopic = 'power';
-      socketCommand = new SwitchStateChangeCommand(this.deviceName, StateChangeCommandTypes.toggle);
-      this.statusStates = ['power_off', 'power'];
-
-    } else if (this.subType === WidgetType.SwitchScene) {
-      // do nothing.. the action will be initialized later.
-      return null;
-    } else {
-      throw new Error('Unknown Switch Type: ' + WidgetType[this.subType] + '. ' +
-        'Only WidgetType.SwitchLight & WidgetType.SwitchPlug are allowed.');
-    }
-
-    // add a build-in primary action to change the status of the light
-    return new WidgetAction('', this.ActionButtonType.Primary, null, socketTopic, socketCommand);
-  }
 
   update(widget: IWidget, data: any): void {
     super.update(widget, data);

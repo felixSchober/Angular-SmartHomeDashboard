@@ -14,6 +14,7 @@ export class WidgetContainerDataUpdateComponent implements OnInit {
   constructor(private dataService: TopicDataService) { }
 
   ngOnInit() {
+    console.log('[DATAUPDATE COMP] Subscribe to topic ' + this.widget.name + ' on behalf of widget');
     const subject$ = this.dataService.getData(this.widget.name)
       .subscribe(
         (data) => {

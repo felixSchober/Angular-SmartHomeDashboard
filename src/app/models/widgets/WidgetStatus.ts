@@ -35,8 +35,8 @@ export class WidgetStatus extends WidgetBase {
               cardHeaderColor?: string, actions?: WidgetAction[]) {
     super(name, title, type, subtitle, null, null, sizeX, sizeY, cardColor, cardHeaderColor, actions);
 
-    if (this.type === WidgetType.Status) {
-      this.statusStates = statusIcons || ['power', 'power_off'];
+    if (this.type === WidgetType.Status || this.type === WidgetType.Switch) {
+      this.statusStates = statusIcons || ['power_off', 'power'];
       this.currentStatus = 'not_interested';
     } else {
       this.statusStates = statusIcons || [];

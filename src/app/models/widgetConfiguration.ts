@@ -1,176 +1,176 @@
-import {ActionButtonType} from '../enums/ActionButtonType';
-import {WidgetType} from '../enums/WidgetType';
-import {IWidget} from '../interfaces/IWidget';
-import {GraphMargins} from './Graph/GraphMargins';
-import {GraphParametersLine} from './Graph/GraphParametersLine';
-import { WidgetAction} from './widgetAction';
-import {WidgetClock} from './widgets/WidgetClock';
-import {WidgetGraphLine} from './widgets/WidgetGraphLine';
-import {WidgetImage} from './widgets/WidgetImage';
-import {WidgetNumber} from './widgets/WidgetNumber';
-import {WidgetStatus} from './widgets/WidgetStatus';
-import {WidgetSwitch} from './widgets/WidgetSwitch';
+// import {ActionButtonType} from '../enums/ActionButtonType';
+// import {WidgetType} from '../enums/WidgetType';
+// import {IWidget} from '../interfaces/IWidget';
+// import {GraphMargins} from './Graph/GraphMargins';
+// import {GraphParametersLine} from './Graph/GraphParametersLine';
+// import { WidgetAction} from './widgetAction';
+// import {WidgetClock} from './widgets/WidgetClock';
+// import {WidgetGraphLine} from './widgets/WidgetGraphLine';
+// import {WidgetImage} from './widgets/WidgetImage';
+// import {WidgetNumber} from './widgets/WidgetNumber';
+// import {WidgetStatus} from './widgets/WidgetStatus';
+// import {WidgetSwitch} from './widgets/WidgetSwitch';
 
-const incrementNumber = function (sender: any) {
-  return new Promise((resolve, reject) => {
-    // is sender a widget?
-    this.disabled = true;
-    if (sender instanceof WidgetNumber) {
-      const senderWidget = sender as WidgetNumber;
-      senderWidget.currentNumber++;
-      resolve(senderWidget.currentNumber);
-    } else {
-      reject('Sender is not a numberWidget');
-    }
-  });
-};
+// const incrementNumber = function (sender: any) {
+//   return new Promise((resolve, reject) => {
+//     // is sender a widget?
+//     this.disabled = true;
+//     if (sender instanceof WidgetNumber) {
+//       const senderWidget = sender as WidgetNumber;
+//       senderWidget.currentNumber++;
+//       resolve(senderWidget.currentNumber);
+//     } else {
+//       reject('Sender is not a numberWidget');
+//     }
+//   });
+// };
 
-const basicButton = new WidgetAction('Basic', ActionButtonType.Basic, null, null, null, incrementNumber);
-const raisedButton = new WidgetAction('Raised', ActionButtonType.Raised, 1, 'TEST_TOPIC', {test: 1}, incrementNumber);
-const iconButton = new WidgetAction('favorite', ActionButtonType.Icon, null, '', '', incrementNumber);
-const fabButton = new WidgetAction('Fab', ActionButtonType.Fab, null, '', '', incrementNumber);
-const miniFab = new WidgetAction('Mini fab', ActionButtonType.MiniFab, null, '', '', incrementNumber);
-const primaryNavigation = new WidgetAction('', ActionButtonType.Primary, 1);
+// const basicButton = new WidgetAction('Basic', ActionButtonType.Basic, null, null, null, incrementNumber);
+// const raisedButton = new WidgetAction('Raised', ActionButtonType.Raised, 1, 'TEST_TOPIC', {test: 1}, incrementNumber);
+// const iconButton = new WidgetAction('favorite', ActionButtonType.Icon, null, '', '', incrementNumber);
+// const fabButton = new WidgetAction('Fab', ActionButtonType.Fab, null, '', '', incrementNumber);
+// const miniFab = new WidgetAction('Mini fab', ActionButtonType.MiniFab, null, '', '', incrementNumber);
+// const primaryNavigation = new WidgetAction('', ActionButtonType.Primary, 1);
 
-const clockWidget = new WidgetClock('TestClock', 2, 1, '#4CAF50');
+// const clockWidget = new WidgetClock('TestClock', 2, 1, '#4CAF50');
 
-// GRAPHS
-const slimGraphMargins = new GraphMargins(4, 0, 0, 0);
-
-
-const singleSeriesColorFunction = function (d: any): string {
-  return '#FFF';
-};
-
-const singleSeriesGraphParameters = new GraphParametersLine(null, singleSeriesColorFunction);
-
-const graphWidgetSlim = new WidgetGraphLine('powerLevelHistory_Computer',
-  'Computer',
-  singleSeriesGraphParameters,
-  slimGraphMargins, '', '', 'W', 1, 1, null, null, false, []);
-
-const graphWidgetWide = new WidgetGraphLine('powerLevelHistory_Total',
-  'Power History',
-  null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
-
-const lightStatusWidget = new WidgetStatus('LightStatus', 'Lights', WidgetType.Status);
-const deskLightWidget = new WidgetSwitch('lights_Schreibtisch', 'Schreibtisch', WidgetType.SwitchLight,
-  'Schreibtisch', 1, 1, '#E91E63');
-
-const channelImages = ['/assets/images/ARD-HD.png', '/assets/images/Kabel-1.png'];
-const channelImageWidget = new WidgetImage('ChannelImage', channelImages[0]);
-const statusWidget = new WidgetStatus('TVActivity', 'TV', WidgetType.StatusImage, channelImages);
-
-const numberWidget1 = new WidgetNumber('TestTemperatureWidget1', 'Temperature wide', 'Test',
-  '', '°', 2, 1, '#FFF', '#4CAF50', [primaryNavigation,
-    basicButton, raisedButton], false);
-
-const numberWidget2 = new WidgetNumber('TestTemperatureWidget2', 'Temperature small', '',
-  '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]);
-
-/*
-const multiSeries = [{
-  name: 'series1',
-  labels: ['1', '2', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '5'],
-  values: [1, 2, 2.5, 1, 1, 2.5, 3, 2, 2.1, 2, 1.88, 1, 3]
-}, {
-  name: 'series2',
-  labels: ['1', '2', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '5'],
-  values: [1, 3, 2.1, 2, 2.5, 3, 3.1, 3.9, 2, 2, 1.9, 2.6, 1.9]
-}];
-
-const singleSeries = [{
-  name: 'series1',
-  labels: ['0', '1', '2', '3', '4', '0', '1', '2', '3', '4', '0', '1', '2', '3', '4', '1'],
-  values: [5, 1, 2, 2, 1, 1, 2, 4, 4, 2, 2, 1, 13, 4, 2, 9]
-}];
+// // GRAPHS
+// const slimGraphMargins = new GraphMargins(4, 0, 0, 0);
 
 
-let statusIndex = 0;
-setTimeout(() => {
-  graphWidgetSlim.update(graphWidgetSlim, singleSeries);
-  graphWidgetWide.update(graphWidgetWide, multiSeries);
-}, 800);
+// const singleSeriesColorFunction = function (d: any): string {
+//   return '#FFF';
+// };
+
+// const singleSeriesGraphParameters = new GraphParametersLine(null, singleSeriesColorFunction);
+
+// const graphWidgetSlim = new WidgetGraphLine('powerLevelHistory_Computer',
+//   'Computer',
+//   singleSeriesGraphParameters,
+//   slimGraphMargins, '', '', 'W', 1, 1, null, null, false, []);
+
+// const graphWidgetWide = new WidgetGraphLine('powerLevelHistory_Total',
+//   'Power History',
+//   null, null, '', '', 'W', 2, 1, null, '#FFF', false, []);
+
+// const lightStatusWidget = new WidgetStatus('LightStatus', 'Lights', WidgetType.Status);
+// const deskLightWidget = new WidgetSwitch('lights_Schreibtisch', 'Schreibtisch', WidgetType.SwitchLight,
+//   'Schreibtisch', 1, 1, '#E91E63');
+
+// const channelImages = ['/assets/images/ARD-HD.png', '/assets/images/Kabel-1.png'];
+// const channelImageWidget = new WidgetImage('ChannelImage', channelImages[0]);
+// const statusWidget = new WidgetStatus('TVActivity', 'TV', WidgetType.StatusImage, channelImages);
+
+// const numberWidget1 = new WidgetNumber('TestTemperatureWidget1', 'Temperature wide', 'Test',
+//   '', '°', 2, 1, '#FFF', '#4CAF50', [primaryNavigation,
+//     basicButton, raisedButton], false);
+
+// const numberWidget2 = new WidgetNumber('TestTemperatureWidget2', 'Temperature small', '',
+//   '', '°', 1, 1, '', '', [iconButton, fabButton, miniFab]);
+
+// /*
+// const multiSeries = [{
+//   name: 'series1',
+//   labels: ['1', '2', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '5'],
+//   values: [1, 2, 2.5, 1, 1, 2.5, 3, 2, 2.1, 2, 1.88, 1, 3]
+// }, {
+//   name: 'series2',
+//   labels: ['1', '2', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '5'],
+//   values: [1, 3, 2.1, 2, 2.5, 3, 3.1, 3.9, 2, 2, 1.9, 2.6, 1.9]
+// }];
+
+// const singleSeries = [{
+//   name: 'series1',
+//   labels: ['0', '1', '2', '3', '4', '0', '1', '2', '3', '4', '0', '1', '2', '3', '4', '1'],
+//   values: [5, 1, 2, 2, 1, 1, 2, 4, 4, 2, 2, 1, 13, 4, 2, 9]
+// }];
 
 
-setInterval(() => {
-  let v = singleSeries[0].values.shift(); // remove the first element of the array
-  singleSeries[0].values.push(v); // add a new element to the array (we're just taking the number we just shift
-  graphWidgetSlim.update(graphWidgetSlim, singleSeries);
-
-  v = multiSeries[0].values.shift();
-  multiSeries[0].values.push(v);
-  v = multiSeries[1].values.shift();
-  multiSeries[1].values.push(v);
-  graphWidgetWide.update(graphWidgetWide, multiSeries);
-
-  // change channel image
-  statusIndex = (statusIndex + 1) % 2;
-  channelImageWidget.update(channelImageWidget, channelImages[statusIndex]);
-
-  // change status
-  lightStatusWidget.update(lightStatusWidget, statusIndex);
-  statusWidget.update(statusWidget, statusIndex);
-
-}, 4000);
-*/
-
-// Actions
-const goToLightPage = new WidgetAction('', ActionButtonType.Primary, 4);
-const goToTvPage = new WidgetAction('', ActionButtonType.Primary, 4);
-const goToPowerPage = new WidgetAction('', ActionButtonType.Primary, 4);
-
-// Widgets
-const lightWidget = new WidgetNumber('lights_CountOn', 'Lights On', '', '', '', 1, 1, '#ff9800', '#ff9800', [goToLightPage], false);
-const currentActivityWidget = new WidgetImage('harmony_currentActivity', 'assets/images/harmony.jpg', 1, 1, [goToTvPage]);
-const currentTotalPower = new WidgetNumber('powerLevelValue_Total', 'Total', 'Power', '', 'W', 1, 1, '#fff', '#03a9f4', [goToPowerPage], false);
-
-const calendarTodayWidget = new WidgetNumber('calendar_today', 'Today', 'Calendar', '', '', 1, 1, '#ff9800', '#ff9800');
+// let statusIndex = 0;
+// setTimeout(() => {
+//   graphWidgetSlim.update(graphWidgetSlim, singleSeries);
+//   graphWidgetWide.update(graphWidgetWide, multiSeries);
+// }, 800);
 
 
+// setInterval(() => {
+//   let v = singleSeries[0].values.shift(); // remove the first element of the array
+//   singleSeries[0].values.push(v); // add a new element to the array (we're just taking the number we just shift
+//   graphWidgetSlim.update(graphWidgetSlim, singleSeries);
 
-export const WIDGETS: IWidget[][] = [
-    [
-      clockWidget,
-      lightWidget,
-      currentActivityWidget,
-      currentTotalPower,
-      calendarTodayWidget
-    ],
-    [],
-    [
-      new WidgetSwitch('lights_Eingang', 'Eingang', WidgetType.SwitchLight, 'Eingang', 1, 1, '#E91E63'),
-      new WidgetSwitch('lights_Schrank', 'Schrank', WidgetType.SwitchLight, 'Schrank', 1, 1, '#E91E63'),
-      new WidgetSwitch('lights_Bad Deckenleiste', 'Bad', WidgetType.SwitchLight, 'Bad Deckenleiste', 1, 1, '#E91E63'),
+//   v = multiSeries[0].values.shift();
+//   multiSeries[0].values.push(v);
+//   v = multiSeries[1].values.shift();
+//   multiSeries[1].values.push(v);
+//   graphWidgetWide.update(graphWidgetWide, multiSeries);
 
-      new WidgetSwitch('lights_Theke', 'Theke', WidgetType.SwitchLight, 'Theke', 1, 1, '#c2185b'),
-      new WidgetSwitch('lights_Küche Vorraum', 'Vorraum', WidgetType.SwitchLight, 'Küche Vorraum', 1, 1, '#c2185b'),
-      new WidgetSwitch('lights_Arbeitsplatte', 'Arbeitsplattte', WidgetType.SwitchLight, 'Arbeitsplatte', 1, 1, '#c2185b'),
-      new WidgetSwitch('lights_Küche Spot links', 'Küche Links', WidgetType.SwitchLight, 'Küche Spot links', 1, 1, '#c2185b'),
-      new WidgetSwitch('lights_Küche Spot Rechts', 'Küche Rechts', WidgetType.SwitchLight, 'Küche Spot Rechts', 1, 1, '#c2185b'),
+//   // change channel image
+//   statusIndex = (statusIndex + 1) % 2;
+//   channelImageWidget.update(channelImageWidget, channelImages[statusIndex]);
 
-      new WidgetSwitch('lights_Ambilight', 'Ambilight', WidgetType.SwitchLight, 'Ambilight', 1, 1, '#9E9E9E'),
-      new WidgetSwitch('lights_Nachttisch', 'Nachttisch', WidgetType.SwitchLight, 'Nachttisch', 1, 1, '#9E9E9E'),
+//   // change status
+//   lightStatusWidget.update(lightStatusWidget, statusIndex);
+//   statusWidget.update(statusWidget, statusIndex);
+
+// }, 4000);
+// */
+
+// // Actions
+// const goToLightPage = new WidgetAction('', ActionButtonType.Primary, 4);
+// const goToTvPage = new WidgetAction('', ActionButtonType.Primary, 4);
+// const goToPowerPage = new WidgetAction('', ActionButtonType.Primary, 4);
+
+// // Widgets
+// const lightWidget = new WidgetNumber('lights_CountOn', 'Lights On', '', '', '', 1, 1, '#ff9800', '#ff9800', [goToLightPage], false);
+// const currentActivityWidget = new WidgetImage('harmony_currentActivity', 'assets/images/harmony.jpg', 1, 1, [goToTvPage]);
+// const currentTotalPower = new WidgetNumber('powerLevelValue_Total', 'Total', 'Power', '', 'W', 1, 1, '#fff', '#03a9f4', [goToPowerPage], false);
+
+// const calendarTodayWidget = new WidgetNumber('calendar_today', 'Today', 'Calendar', '', '', 1, 1, '#ff9800', '#ff9800');
 
 
 
+// export const WIDGETS: IWidget[][] = [
+//     [
+//       clockWidget,
+//       lightWidget,
+//       currentActivityWidget,
+//       currentTotalPower,
+//       calendarTodayWidget
+//     ],
+//     [],
+//     [
+//       new WidgetSwitch('lights_Eingang', 'Eingang', WidgetType.SwitchLight, 'Eingang', 1, 1, '#E91E63'),
+//       new WidgetSwitch('lights_Schrank', 'Schrank', WidgetType.SwitchLight, 'Schrank', 1, 1, '#E91E63'),
+//       new WidgetSwitch('lights_Bad Deckenleiste', 'Bad', WidgetType.SwitchLight, 'Bad Deckenleiste', 1, 1, '#E91E63'),
+
+//       new WidgetSwitch('lights_Theke', 'Theke', WidgetType.SwitchLight, 'Theke', 1, 1, '#c2185b'),
+//       new WidgetSwitch('lights_Küche Vorraum', 'Vorraum', WidgetType.SwitchLight, 'Küche Vorraum', 1, 1, '#c2185b'),
+//       new WidgetSwitch('lights_Arbeitsplatte', 'Arbeitsplattte', WidgetType.SwitchLight, 'Arbeitsplatte', 1, 1, '#c2185b'),
+//       new WidgetSwitch('lights_Küche Spot links', 'Küche Links', WidgetType.SwitchLight, 'Küche Spot links', 1, 1, '#c2185b'),
+//       new WidgetSwitch('lights_Küche Spot Rechts', 'Küche Rechts', WidgetType.SwitchLight, 'Küche Spot Rechts', 1, 1, '#c2185b'),
+
+//       new WidgetSwitch('lights_Ambilight', 'Ambilight', WidgetType.SwitchLight, 'Ambilight', 1, 1, '#9E9E9E'),
+//       new WidgetSwitch('lights_Nachttisch', 'Nachttisch', WidgetType.SwitchLight, 'Nachttisch', 1, 1, '#9E9E9E'),
 
 
-    ],
-    [],
-    [
-      clockWidget,
-      numberWidget1,
-      numberWidget2,
-      channelImageWidget,
-      graphWidgetSlim,
-      graphWidgetWide,
-      lightStatusWidget,
-      deskLightWidget,
-      new WidgetNumber('A', 'Temperature', '', '', '°', 1, 1, null, null, [], true),
-      statusWidget,
-      new WidgetNumber('A', 'Temperature', '', '', '°'),
-      new WidgetNumber('A', 'Temperature', '', '', '°'),
-      new WidgetNumber('A', 'Temperature', '', '', '°'),
-    ]
-];
+
+
+
+//     ],
+//     [],
+//     [
+//       clockWidget,
+//       numberWidget1,
+//       numberWidget2,
+//       channelImageWidget,
+//       graphWidgetSlim,
+//       graphWidgetWide,
+//       lightStatusWidget,
+//       deskLightWidget,
+//       new WidgetNumber('A', 'Temperature', '', '', '°', 1, 1, null, null, [], true),
+//       statusWidget,
+//       new WidgetNumber('A', 'Temperature', '', '', '°'),
+//       new WidgetNumber('A', 'Temperature', '', '', '°'),
+//       new WidgetNumber('A', 'Temperature', '', '', '°'),
+//     ]
+// ];

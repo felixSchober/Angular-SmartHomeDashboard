@@ -65,6 +65,7 @@
         {
           "type": "image",
           "name": "harmony_currentActivity",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
           "sizeY": 1,
           "actions": [
@@ -208,8 +209,8 @@
       ]
     },
     {
-      "index": 1,
-      "name": "Living",
+      "index": 2,
+      "name": "TV",
       "icon": "",
       "widgets": [
         {
@@ -219,107 +220,11 @@
           "sizeY": 1,
           "color": "#4CAF50",
           "actions": []
-        },
-        {
-          "type": "number",
-          "name": "LightsOn",
-          "title": "Lights on",
-          "subtitle": "",
-          "dataPrefix": "",
-          "dataSuffix": "",
-          "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 1,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-
-        },
-        {
-          "type": "statusImage",
-          "name": "harmony_activity",
-          "title": "TV",
-          "statusValues": [
-            "netflix",
-            "tv"
-          ],
-          "sizeX": 1,
-          "sizeY": 1,
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 2,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-        },
-        {
-          "type": "number",
-          "name": "total_power",
-          "title": "Total Power",
-          "subtitle": "",
-          "dataPrefix": "",
-          "dataSuffix": "W",
-          "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 3,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-
-        }
-      ]
-    },
-    {
-      "index": 1,
-      "name": "Testing",
-      "icon": "",
-      "widgets": [
-        {
-          "type": "clock",
-          "name": "Clock",
-          "sizeX": 2,
-          "sizeY": 1,
-          "color": "#4CAF50",
-          "actions": []
-        },
-        {
-          "type": "number",
-          "name": "LightsOn",
-          "title": "Lights on",
-          "subtitle": "",
-          "dataPrefix": "",
-          "dataSuffix": "",
-          "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 1,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-
         },        
         {
           "type": "image",
-          "name": "harmony_activity",
+          "name": "harmony_currentActivity",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
           "sizeY": 1,
           "actions": [
@@ -332,136 +237,81 @@
           ]
         },
         {
-          "type": "status",
-          "name": "total_power",
-          "title": "Lights",
-          "icons": [
-            "power",
-            "power_off"
-          ],
-          "subtitle": "",
+          "type": "imageSwitch",
+          "name": "harmony_activity_Fernsehen_state",
+          "deviceName": "Fernsehen",
+          "imageUrl": "Fernsehen.png",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 3,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-        }, 
+          "sizeY": 1
+        },
         {
-          "type": "lineGraph",
-          "name": "powerLevelHistory_Total",
-          "title": "Power History",
-          "parameters": {
-            "scaleType": "date",
-            "singleSeriesColorFunction": true,
-            "ticks": 5,
-            "ticksFormatterFunctionType": null,
-            "areaOpacity": 0.8
-          },
-          "margins": {
-            "top": 4,
-            "bottom": 20,
-            "left": 28,
-            "right": 4
-          },
-          "dataPrefix": "",
-          "dataSuffix": "",
+          "type": "imageSwitch",
+          "name": "harmony_activity_Amazon Video_state",
+          "deviceName": "Amazon Video",
+          "imageUrl": "Amazon Video.png",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "showLegend": true,
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 3,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-        }, 
+          "sizeY": 1
+        },
         {
-          "type": "switch",
-          "name": "lights_Schreibtisch",
-          "deviceName": "lights_Schreibtisch",
-          "title": "Schreibtisch",
+          "type": "imageSwitch",
+          "name": "harmony_activity_Netflix_state",
+          "deviceName": "Netflix",
+          "imageUrl": "Netflix.png",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF"
-        }
-      ]
-    },
-
-    {
-      "index": 2,
-      "name": "Position Test",
-      "icon": "",
-      "widgets": [
-        
-               
-        {
-          "type": "image",
-          "name": "harmony_activity"
+          "sizeY": 1
         },
         {
-          "type": "image",
-          "name": "harmony_activity"
+          "type": "imageSwitch",
+          "name": "harmony_activity_Starte Apple TV_state",
+          "deviceName": "Starte Apple TV",
+          "imageUrl": "Starte Apple TV.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
         },
         {
-          "type": "image",
-          "name": "harmony_activity"
+          "type": "imageSwitch",
+          "name": "harmony_activity_Radio_state",
+          "deviceName": "Radio",
+          "imageUrl": "Radio.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
+        },     
+        {
+          "type": "imageSwitch",
+          "name": "harmony_activity_Airplay Music_state",
+          "deviceName": "Airplay Music",
+          "imageUrl": "Airplay Music.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
         },
         {
-          "type": "image",
-          "name": "harmony_activity"
+          "type": "imageSwitch",
+          "name": "harmony_activity_iTunes_state",
+          "deviceName": "iTunes",
+          "imageUrl": "iTunes.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
         },
         {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
+          "type": "imageSwitch",
+          "name": "harmony_activity_XBOX_state",
+          "deviceName": "XBOX",
+          "imageUrl": "XBOX.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
         }
       ]
     }
+    
+
+    
   ]
 }

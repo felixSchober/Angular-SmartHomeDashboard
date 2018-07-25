@@ -51,6 +51,9 @@ export class ConfigurationLoader {
                         case 'image':
                             widgetInstance = WidgetImage.parser(widget);
                             break;
+                        case 'imageSwitch':
+                            widgetInstance = WidgetImage.parser(widget);
+                            break;
                         case 'number':
                             widgetInstance = WidgetNumber.parser(widget);
                             break;
