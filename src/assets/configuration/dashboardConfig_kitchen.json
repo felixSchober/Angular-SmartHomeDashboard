@@ -240,6 +240,15 @@
         },
         {
           "type": "imageSwitch",
+          "name": "harmony_activity_Continue Netflix_state",
+          "deviceName": "Continue Netflix",
+          "imageUrl": "Continue Netflix.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "imageSwitch",
           "name": "harmony_activity_Starte Apple TV_state",
           "deviceName": "Starte Apple TV",
           "imageUrl": "Starte Apple TV.png",
@@ -280,6 +289,30 @@
           "deviceName": "XBOX",
           "imageUrl": "XBOX.png",
           "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "switch",
+          "name": "lights_Ambilight",
+          "deviceName": "Ambilight",
+          "title": "Ambilight",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "switch",
+          "name": "lights_Nachttisch",
+          "deviceName": "Nachttisch",
+          "title": "Nachttisch",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "switch",
+          "name": "lights_Deckenstrahler",
+          "deviceName": "Deckenstrahler",
+          "title": "Deckenstrahler",
           "sizeX": 1,
           "sizeY": 1
         }

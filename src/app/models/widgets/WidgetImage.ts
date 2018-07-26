@@ -73,9 +73,9 @@ export class WidgetImage extends WidgetBase {
 
       // on
       if (status) {
-        widgetImage.imageUrl = this.imageBasePath + this.imageUpdatePrefix + 'off/' + this.baseImageUrl;
-      } else {
         widgetImage.imageUrl = this.imageBasePath + this.imageUpdatePrefix + 'on/' + this.baseImageUrl;
+      } else {
+        widgetImage.imageUrl = this.imageBasePath + this.imageUpdatePrefix + 'off/' + this.baseImageUrl;
       }
     }
 
