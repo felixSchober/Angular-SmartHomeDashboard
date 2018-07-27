@@ -108,7 +108,9 @@ export class WidgetAction {
     this.disabled = !this.canExecute();
     this.tabDestinationIndex = tabDestinationIndex || -1;
 
-    this.audio = new Audio('assets/beep.wav');
+    const audioNumber = Math.floor(Math.random() * 6) + 1;
+    const audioPath = `assets/beep${audioNumber}.mp3`;
+    this.audio = new Audio(audioPath);
 
     console.log('Action ' + this.title + ' created with type ' + type);
   }
