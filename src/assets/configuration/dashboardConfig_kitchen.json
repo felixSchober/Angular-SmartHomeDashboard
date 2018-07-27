@@ -204,10 +204,11 @@
           "sizeY": 1,
           "actions": [
             {
-              "type": "Primary",
-              "tabDestinationIndex": 2,
-              "socketTopic": "",
-              "socketMessage": {}
+              "type": "Primary",              
+              "socketTopic": "harmony_activity",
+              "socketMessage": {
+                "state": "off"
+              }
             }
           ]
         },
