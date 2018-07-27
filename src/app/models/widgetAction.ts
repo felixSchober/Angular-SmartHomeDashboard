@@ -20,6 +20,7 @@ export class WidgetAction {
   tabDestinationIndex: number;
   tabNavigationService: TabNavigationService;
   dataService: TopicDataService;
+  audio: HTMLAudioElement;
 
   static parseActionArray(data: ReadonlyArray<any>): WidgetAction[] {
     const result: WidgetAction[] = [];
@@ -107,6 +108,8 @@ export class WidgetAction {
     this.disabled = !this.canExecute();
     this.tabDestinationIndex = tabDestinationIndex || -1;
 
+    this.audio = new Audio('assets/beep.wav');
+
     console.log('Action ' + this.title + ' created with type ' + type);
   }
 
@@ -144,6 +147,9 @@ export class WidgetAction {
       console.log('Function can not execute.');
       return false;
     }
+
+    this.audio.load();
+    this.audio.play();
 
     // navigate to tab if this was set
     this.navigate();
