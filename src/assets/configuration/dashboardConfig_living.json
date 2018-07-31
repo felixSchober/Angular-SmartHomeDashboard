@@ -10,40 +10,159 @@
           "name": "Clock",
           "sizeX": 2,
           "sizeY": 1,
-          "color": "#4CAF50",
           "actions": []
         },
         {
+          "type": "number",
+          "name": "powerLevelValue_Total",
+          "title": "Total Power",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1,
+          "showHighLow": true
+        },          
+        {
+          "type": "number",
+          "name": "powerLevelValue_Computer",
+          "title": "Computer",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1,
+          "showHighLow": true
+        },
+        {
+          "type": "number",
+          "name": "powerLevelValue_Media",
+          "title": "Media",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1,
+          "showHighLow": true
+        },
+        {
+          "type": "number",
+          "name": "powerLevelValue_Kitchen",
+          "title": "Küche",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1,
+          "showHighLow": true
+        },
+        {
+          "type": "number",
+          "name": "powerLevelValue_Kochplatte",
+          "title": "Kochplatte",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1,
+          "showHighLow": true
+        },        
+        {
+          "type": "lineGraph",
+          "name": "powerLevelHistory_Total",
+          "title": "Power",
+          "parameters": {
+            "scaleType": "date"
+          },
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 2,
+          "sizeY": 2,
+          "showLegend": false
+        },   
+        {
           "type": "switchPlug",
-          "name": "power_Kochplatte",
+          "name": "power_Computer",
           "sizeX": 1,
           "sizeY": 1,
-          "color": "#f44336",
-          "deviceName": "Kochplatte",
-          "title": "Kochplatte"
+          "deviceName": "Computer",
+          "title": "Computer"
+        },  
+        {
+          "type": "switch",
+          "name": "lights_Nachttisch",
+          "deviceName": "Nachttisch",
+          "title": "Nachttisch",
+          "sizeX": 1,
+          "sizeY": 1
         },
         {
           "type": "switch",
-          "name": "lights_Küche Spot links",
-          "deviceName": "Küche Spot links",
-          "title": "Küche Links",
+          "name": "lights_Küche Vorraum",
+          "deviceName": "Küche Vorraum",
+          "title": "Küche Vorraum",
           "sizeX": 1,
-          "sizeY": 1,
-          "color": "#f44336"
+          "sizeY": 1
         },
         {
           "type": "switch",
-          "name": "lights_Küche Spot rechts",
-          "deviceName": "Küche Spot rechts",
-          "title": "Küche Rechts",
+          "name": "lights_Schreibtisch",
+          "deviceName": "Schreibtisch",
+          "title": "Schreibtisch",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "switch",
+          "name": "lights_Theke",
+          "deviceName": "Theke",
+          "title": "Theke",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "switch",
+          "name": "lights_Decke",
+          "deviceName": "Decke",
+          "title": "Decke",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "switch",
+          "name": "lights_Deckenstrahler",
+          "deviceName": "Deckenstrahler",
+          "title": "Deckenstrahler",
+          "sizeX": 1,
+          "sizeY": 1
+        },   
+        {
+          "type": "switch",
+          "name": "lights_Ambilight",
+          "deviceName": "Ambilight",
+          "title": "Ambilight",
+          "sizeX": 2,
+          "sizeY": 1
+        },
+        {
+          "type": "image",
+          "name": "harmony_currentActivity",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
           "sizeY": 1,
-          "color": "#f44336"
+          "actions": [
+            {
+              "type": "Primary",
+              "tabDestinationIndex": 2,
+              "socketTopic": "",
+              "socketMessage": {}
+            }
+          ]
         },
         {
           "type": "lineGraph",
-          "name": "powerLevelHistory_Kochplatte",
-          "title": "Kochplatte",
+          "name": "powerLevelHistory_Media",
+          "title": "Media",
           "parameters": {
             "scaleType": "date",
             "singleSeriesColorFunction": true            
@@ -57,67 +176,51 @@
           "dataPrefix": "",
           "dataSuffix": "W",
           "sizeX": 2,
-          "sizeY": 2,
-          "cardColor": "#FFF",
-          "headerColor": "#ff9800",
+          "sizeY": 1,
+          "showLegend": true
+        }
+        ,
+        {
+          "type": "lineGraph",
+          "name": "hueTemp_temperature_kitchen_history",
+          "title": "°C",
+          "parameters": {
+            "scaleType": "date"
+          },
+          "numberPrecision": 2,
+          "dataPrefix": "",
+          "dataSuffix": "°C",
+          "sizeX": 2,
+          "sizeY": 1,
           "showLegend": true
         },
         {
-          "type": "image",
-          "name": "harmony_currentActivity",
+          "type": "imageSwitch",
+          "name": "harmony_activity_Fernsehen_state",
+          "deviceName": "Fernsehen",
+          "imageUrl": "Fernsehen.png",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
-          "sizeY": 1,
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 2,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
+          "sizeY": 1
         },
         {
-          "type": "number",
-          "name": "espressoWeek",
-          "title": "Week",
-          "subtitle": "Espresso",
-          "dataPrefix": "",
-          "dataSuffix": "",
+          "type": "imageSwitch",
+          "name": "harmony_activity_Continue Netflix_state",
+          "deviceName": "Continue Netflix",
+          "imageUrl": "Continue Netflix.png",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#607d8b"
-        }, 
-        {
-          "type": "number",
-          "name": "espressoTotal",
-          "title": "Total",
-          "subtitle": "Espresso",
-          "dataPrefix": "",
-          "dataSuffix": "",
-          "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#607d8b"
-        },         
-        {
-          "type": "switch",
-          "name": "lights_Arbeitsplatte",
-          "deviceName": "Arbeitsplatte",
-          "title": "Arbeitsplatte",
-          "sizeX": 2,
-          "sizeY": 1,
-          "color": "#4CAF50"
+          "sizeY": 1
         },
         {
-          "type": "switchPlug",
-          "name": "power_Espresso",
+          "type": "imageSwitch",
+          "name": "harmony_activity_Starte Apple TV_state",
+          "deviceName": "Starte Apple TV",
+          "imageUrl": "Starte Apple TV.png",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
-          "sizeY": 1,
-          "color": "#607d8b",
-          "deviceName": "Espresso",
-          "title": "Espresso Maschine"
-        }
+          "sizeY": 1
+        }          
       ]
     },
     {
@@ -132,10 +235,8 @@
           "subtitle": "",
           "dataPrefix": "",
           "dataSuffix": "W",
-          "sizeX": 1,
+          "sizeX": 2,
           "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
           "showHighLow": true
         },  
         {
@@ -146,10 +247,7 @@
           "dataPrefix": "",
           "dataSuffix": "W",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "showHighLow": true
+          "sizeY": 1
         },
         {
           "type": "number",
@@ -159,10 +257,7 @@
           "dataPrefix": "",
           "dataSuffix": "W",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "showHighLow": true
+          "sizeY": 1
         },
         {
           "type": "number",
@@ -172,10 +267,17 @@
           "dataPrefix": "",
           "dataSuffix": "W",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "showHighLow": true
+          "sizeY": 1
+        },
+        {
+          "type": "number",
+          "name": "powerLevelValue_Espresso",
+          "title": "Kaffee",
+          "subtitle": "",
+          "dataPrefix": "",
+          "dataSuffix": "W",
+          "sizeX": 1,
+          "sizeY": 1
         },
         {
           "type": "number",
@@ -185,10 +287,7 @@
           "dataPrefix": "",
           "dataSuffix": "W",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "showHighLow": true
+          "sizeY": 1
         },        
         {
           "type": "lineGraph",
@@ -199,17 +298,15 @@
           },
           "dataPrefix": "",
           "dataSuffix": "W",
-          "sizeX": 5,
-          "sizeY": 2,
-          "cardColor": "#FFF",
-          "headerColor": "#FFF",
+          "sizeX": 7,
+          "sizeY": 3,
           "showLegend": true
-        }        
+        }         
       ]
     },
     {
-      "index": 1,
-      "name": "Living",
+      "index": 2,
+      "name": "TV",
       "icon": "",
       "widgets": [
         {
@@ -217,251 +314,191 @@
           "name": "Clock",
           "sizeX": 2,
           "sizeY": 1,
-          "color": "#4CAF50",
           "actions": []
-        },
-        {
-          "type": "number",
-          "name": "LightsOn",
-          "title": "Lights on",
-          "subtitle": "",
-          "dataPrefix": "",
-          "dataSuffix": "",
-          "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 1,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-
-        },
-        {
-          "type": "statusImage",
-          "name": "harmony_activity",
-          "title": "TV",
-          "statusValues": [
-            "netflix",
-            "tv"
-          ],
-          "sizeX": 1,
-          "sizeY": 1,
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 2,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-        },
-        {
-          "type": "number",
-          "name": "total_power",
-          "title": "Total Power",
-          "subtitle": "",
-          "dataPrefix": "",
-          "dataSuffix": "W",
-          "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 3,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-
-        }
-      ]
-    },
-    {
-      "index": 1,
-      "name": "Testing",
-      "icon": "",
-      "widgets": [
-        {
-          "type": "clock",
-          "name": "Clock",
-          "sizeX": 2,
-          "sizeY": 1,
-          "color": "#4CAF50",
-          "actions": []
-        },
-        {
-          "type": "number",
-          "name": "LightsOn",
-          "title": "Lights on",
-          "subtitle": "",
-          "dataPrefix": "",
-          "dataSuffix": "",
-          "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 1,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-
         },        
         {
           "type": "image",
-          "name": "harmony_activity",
+          "name": "harmony_currentActivity",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
           "sizeY": 1,
           "actions": [
             {
-              "type": "Primary",
-              "tabDestinationIndex": 2,
-              "socketTopic": "",
-              "socketMessage": {}
+              "type": "Primary",              
+              "socketTopic": "harmony_activity",
+              "socketMessage": {
+                "state": "off"
+              }
             }
           ]
         },
         {
-          "type": "status",
-          "name": "total_power",
-          "title": "Lights",
-          "icons": [
-            "power",
-            "power_off"
-          ],
-          "subtitle": "",
+          "type": "imageSwitch",
+          "name": "harmony_activity_Fernsehen_state",
+          "deviceName": "Fernsehen",
+          "imageUrl": "Fernsehen.png",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 3,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-        }, 
+          "sizeY": 1
+        },
         {
-          "type": "lineGraph",
-          "name": "powerLevelHistory_Total",
-          "title": "Power History",
-          "parameters": {
-            "scaleType": "date",
-            "singleSeriesColorFunction": true,
-            "ticks": 5,
-            "ticksFormatterFunctionType": null,
-            "areaOpacity": 0.8
-          },
-          "margins": {
-            "top": 4,
-            "bottom": 20,
-            "left": 28,
-            "right": 4
-          },
-          "dataPrefix": "",
-          "dataSuffix": "",
+          "type": "imageSwitch",
+          "name": "harmony_activity_Amazon Video_state",
+          "deviceName": "Amazon Video",
+          "imageUrl": "Amazon Video.png",
+          "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF",
-          "headerColor": "#4CAF50",
-          "showLegend": true,
-          "actions": [
-            {
-              "type": "Primary",
-              "tabDestinationIndex": 3,
-              "socketTopic": "",
-              "socketMessage": {}
-            }
-          ]
-        }, 
+          "sizeY": 1
+        },
+        {
+          "type": "imageSwitch",
+          "name": "harmony_activity_Netflix_state",
+          "deviceName": "Netflix",
+          "imageUrl": "Netflix.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "imageSwitch",
+          "name": "harmony_activity_Continue Netflix_state",
+          "deviceName": "Continue Netflix",
+          "imageUrl": "Continue Netflix.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "imageSwitch",
+          "name": "harmony_activity_Starte Apple TV_state",
+          "deviceName": "Starte Apple TV",
+          "imageUrl": "Starte Apple TV.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "imageSwitch",
+          "name": "harmony_activity_Radio_state",
+          "deviceName": "Radio",
+          "imageUrl": "Radio.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
+        },     
+        {
+          "type": "imageSwitch",
+          "name": "harmony_activity_Airplay Music_state",
+          "deviceName": "Airplay Music",
+          "imageUrl": "Airplay Music.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "imageSwitch",
+          "name": "harmony_activity_iTunes_state",
+          "deviceName": "iTunes",
+          "imageUrl": "iTunes.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "imageSwitch",
+          "name": "harmony_activity_XBOX_state",
+          "deviceName": "XBOX",
+          "imageUrl": "XBOX.png",
+          "imageUpdatePrefix": "harmony/activities/",
+          "sizeX": 1,
+          "sizeY": 1
+        },
         {
           "type": "switch",
-          "name": "lights_Schreibtisch",
-          "deviceName": "lights_Schreibtisch",
-          "title": "Schreibtisch",
+          "name": "lights_Ambilight",
+          "deviceName": "Ambilight",
+          "title": "Ambilight",
           "sizeX": 1,
-          "sizeY": 1,
-          "cardColor": "#FFF"
+          "sizeY": 1
+        },
+        {
+          "type": "switch",
+          "name": "lights_Nachttisch",
+          "deviceName": "Nachttisch",
+          "title": "Nachttisch",
+          "sizeX": 1,
+          "sizeY": 1
+        },
+        {
+          "type": "switch",
+          "name": "lights_Deckenstrahler",
+          "deviceName": "Deckenstrahler",
+          "title": "Deckenstrahler",
+          "sizeX": 1,
+          "sizeY": 1
         }
       ]
     },
-
     {
-      "index": 2,
-      "name": "Position Test",
+      "index": 3,
+      "name": "Wetter",
       "icon": "",
-      "widgets": [
-        
-               
+      "widgets": [      
         {
-          "type": "image",
-          "name": "harmony_activity"
+          "type": "number",
+          "name": "hueTemp_temperature_entrance_current",
+          "title": "Eingang",
+          "subtitle": "Temperatur",
+          "numberPrecision": 2,
+          "dataPrefix": "",
+          "dataSuffix": "°C",
+          "sizeX": 3,
+          "sizeY": 1,
+          "showHighLow": true
+        },  
+        {
+          "type": "number",
+          "name": "hueTemp_temperature_kitchen_current",
+          "title": "Küche",
+          "subtitle": "Temperatur",
+          "numberPrecision": 2,
+          "dataPrefix": "",
+          "dataSuffix": "°C",
+          "sizeX": 4,
+          "sizeY": 1,
+          "showHighLow": true
+        },              
+        {
+          "type": "lineGraph",
+          "name": "hueTemp_temperature_entrance_history",
+          "title": "Temperatur Eingang",
+          "parameters": {
+            "scaleType": "date"
+          },
+          "numberPrecision": 2,
+          "dataPrefix": "",
+          "dataSuffix": "°C",
+          "sizeX": 3,
+          "sizeY": 3,
+          "showLegend": true
         },
         {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        },
-        {
-          "type": "image",
-          "name": "harmony_activity"
-        }
+          "type": "lineGraph",
+          "name": "hueTemp_temperature_kitchen_history",
+          "title": "Temperatur Küche",
+          "parameters": {
+            "scaleType": "date"
+          },
+          "numberPrecision": 2,
+          "dataPrefix": "",
+          "dataSuffix": "°C",
+          "sizeX": 4,
+          "sizeY": 3,
+          "showLegend": true
+        }        
       ]
     }
+
+    
   ]
 }

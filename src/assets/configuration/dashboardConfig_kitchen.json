@@ -339,7 +339,7 @@
         {
           "type": "number",
           "name": "hueTemp_temperature_kitchen_current",
-          "title": "Eingang",
+          "title": "Küche",
           "subtitle": "Temperatur",
           "numberPrecision": 2,
           "dataPrefix": "",
