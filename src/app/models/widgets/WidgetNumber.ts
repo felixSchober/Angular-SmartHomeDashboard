@@ -7,6 +7,7 @@ export class WidgetNumber extends WidgetBase {
 
 
   currentNumber: number;
+  numberPrecision: number;
   showHighLow: boolean;
   highValue: number;
   lowValue: number;
@@ -26,13 +27,14 @@ export class WidgetNumber extends WidgetBase {
 
     const actions = WidgetAction.parseActionArray(data.actions);
 
-    return new WidgetNumber(data.name, data.title, data.subtitle, data.dataPrefix, data.dataSuffix,
+    return new WidgetNumber(data.name, data.title, data.subtitle, data.numberPrecision, data.dataPrefix, data.dataSuffix,
       data.sizeX, data.sizeY, data.cardColor, data.headerColor, actions, data.showHighLow);
   };
 
   constructor(name: string,
               title: string,
               subtitle?: string,
+              numberPrecision?: number,
               dataPrefix?: string,
               dataSuffix?: string,
               sizeX?: number,
@@ -44,6 +46,7 @@ export class WidgetNumber extends WidgetBase {
     super(name, title, WidgetType.Number,
       subtitle, dataPrefix, dataSuffix, sizeX, sizeY, cardColor, cardHeaderColor, actions);
     this.currentNumber = -1;
+    this.numberPrecision = numberPrecision || 0;
     this.showHighLow = showHighLow || false;
     if (this.showHighLow) {
       this.highValue = Number.MIN_SAFE_INTEGER;

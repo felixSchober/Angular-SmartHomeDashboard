@@ -60,7 +60,7 @@ export class WidgetGraphLine extends WidgetGraphBase {
     }
     const actions = WidgetAction.parseActionArray(data.actions);
 
-    return new WidgetGraphLine(data.name, data.title, lineParameters, margins,
+    return new WidgetGraphLine(data.name, data.title, lineParameters, data.numberPrecision, margins,
       data.subtitle, data.dataPrefix, data.dataSuffix, data.sizeX,
       data.sizeY, data.cardColor, data.headerColor, data.showLegend, actions);
   };
@@ -69,6 +69,7 @@ export class WidgetGraphLine extends WidgetGraphBase {
     name: string,
     title: string,
     graphParameterDictionary: IGraphParameters,
+    numberPrecision?: number,
     margins?: IGraphMargins,
     subtitle?: string,
     dataPrefix?: string,
@@ -79,7 +80,7 @@ export class WidgetGraphLine extends WidgetGraphBase {
     cardHeaderColor?: string,
     showLegend?: boolean,
     actions?: WidgetAction[]) {
-    super(name, title, margins, subtitle,
+    super(name, title, numberPrecision, margins, subtitle,
       dataPrefix, dataSuffix, sizeX, sizeY, cardColor, cardHeaderColor, showLegend, actions);
     this.curveFactory = d3.curveBasis;
 

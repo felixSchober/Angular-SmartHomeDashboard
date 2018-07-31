@@ -13,7 +13,7 @@
     <div class="card-legend-container" *ngFor="let seriesItem of widget.legendItems">
       <div class="card-legend-item">
         <div class="card-legend-item-color" [style.background-color]="seriesItem.color"></div>
-        <div class="card-legend-item-name">{{seriesItem.name}}: ({{widget.dataPrefix}}{{utils.transformNumber(seriesItem.currentValue, 0, true)}}{{widget.dataSuffix}})</div>
+        <div class="card-legend-item-name">{{seriesItem.name}}: ({{widget.dataPrefix}}{{utils.transformNumber(seriesItem.currentValue, widget.numberPrecision, true)}}{{widget.dataSuffix}})</div>
       </div>
 
     </div>

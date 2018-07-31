@@ -318,8 +318,66 @@
           "sizeY": 1
         }
       ]
+    },
+    {
+      "index": 3,
+      "name": "Wetter",
+      "icon": "",
+      "widgets": [      
+        {
+          "type": "number",
+          "name": "hueTemp_temperature_entrance_current",
+          "title": "Eingang",
+          "subtitle": "Temperatur",
+          "numberPrecision": 2,
+          "dataPrefix": "",
+          "dataSuffix": "°C",
+          "sizeX": 2,
+          "sizeY": 1,
+          "showHighLow": true
+        },  
+        {
+          "type": "number",
+          "name": "hueTemp_temperature_kitchen_current",
+          "title": "Eingang",
+          "subtitle": "Temperatur",
+          "numberPrecision": 2,
+          "dataPrefix": "",
+          "dataSuffix": "°C",
+          "sizeX": 3,
+          "sizeY": 1,
+          "showHighLow": true
+        },              
+        {
+          "type": "lineGraph",
+          "name": "hueTemp_temperature_entrance_history",
+          "title": "Temperatur Eingang",
+          "parameters": {
+            "scaleType": "date"
+          },
+          "numberPrecision": 2,
+          "dataPrefix": "",
+          "dataSuffix": "°C",
+          "sizeX": 2,
+          "sizeY": 2,
+          "showLegend": true
+        },
+        {
+          "type": "lineGraph",
+          "name": "hueTemp_temperature_kitchen_history",
+          "title": "Temperatur Küche",
+          "parameters": {
+            "scaleType": "date"
+          },
+          "numberPrecision": 2,
+          "dataPrefix": "",
+          "dataSuffix": "°C",
+          "sizeX": 3,
+          "sizeY": 2,
+          "showLegend": true
+        }        
+      ]
     }
-    
 
     
   ]

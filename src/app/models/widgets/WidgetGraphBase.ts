@@ -14,7 +14,7 @@ import {WidgetAction} from '../widgetAction';
 import {WidgetBase} from './WidgetBase';
 
 // noinspection TsLint
-const dateRegularExpression = /^(\d{4})(?:-?W(\d+)(?:-?(\d+)D?)?|(?:-(\d+))?-(\d+))(?:[T ](\d+):(\d+)(?::(\d+)(?:\.(\d+))?)?)?(?:Z(-?\d*))?$/;
+const dateRegularExpression = /^(\d{4})-0?(\d+)-0?(\d+)[T]0?(\d+):0?(\d+):0?(\d+)/;
 
 export abstract class WidgetGraphBase extends WidgetBase implements IWidgetGraph {
   values: IGraphValues[];
@@ -28,6 +28,7 @@ export abstract class WidgetGraphBase extends WidgetBase implements IWidgetGraph
   yScale: any;
   showLegend: boolean;
   legendItems: IGraphLegendItem[];
+  numberPrecision: number;
 
   //noinspection JSAnnotator
   svgElement: d3.Selection<any, any, any, any>;
@@ -56,6 +57,7 @@ export abstract class WidgetGraphBase extends WidgetBase implements IWidgetGraph
   protected constructor(
                         name: string,
                         title: string,
+                        numberPrecision?: number,
                         margins?: IGraphMargins,
                         subtitle?: string,
                         dataPrefix?: string,
@@ -74,6 +76,7 @@ export abstract class WidgetGraphBase extends WidgetBase implements IWidgetGraph
     this.showLegend = showLegend || true;
     this.legendItems = [];
     this.graphWasBuild = false;
+    this.numberPrecision = numberPrecision || 0;
 
     this.values = [];
   }
