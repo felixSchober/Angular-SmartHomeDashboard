@@ -36,10 +36,15 @@ export abstract class WidgetGraphBase extends WidgetBase implements IWidgetGraph
   yAxis: any;
   graphWasBuild: boolean;
 
-  protected static tryConvertStringArrayToDateArray(labels: string[]) {
+  protected static tryConvertStringArrayToDateArray(labels: any[]) {
 
     // check first label to see if it is a date
     const firstLabel = labels[0];
+
+    if (!firstLabel || firstLabel instanceof Date) {
+      return labels;
+    }
+
     const parts = firstLabel.match(dateRegularExpression);
 
     // conversion won't be possible
