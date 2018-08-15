@@ -66,6 +66,9 @@ export class ConfigurationLoader {
                         case 'switchPlug':
                             widgetInstance = WidgetSwitch.parser(widget);
                             break;
+                        case 'switchMusicPlayer':
+                            widgetInstance = WidgetSwitch.parser(widget);
+                            break;
                         case 'switchScene':
                             widgetInstance = WidgetSwitchScene.parser(widget);
                             break;

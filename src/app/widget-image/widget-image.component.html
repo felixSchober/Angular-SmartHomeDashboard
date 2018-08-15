@@ -1,3 +1,3 @@
-<img mat-card-image src="{{widget.imageUrl}}" alt="{{widget.title}}">
+<img mat-card-image [src]="widget.imageUrl" alt="{{widget.title}}">
 <app-widget-container-data-update [widget]="widget"></app-widget-container-data-update>
 <app-widget-container-actions [widget]="widget"></app-widget-container-actions>

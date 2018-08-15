@@ -36,7 +36,7 @@ export class WidgetSwitchScene extends WidgetSwitch {
   };
 
   constructor(name: string, title: string, sceneId: string, groupId: string, sizeX?: number, sizeY?: number, cardColor?: string) {
-    super(name, title, WidgetType.SwitchScene, '', sizeX, sizeY, cardColor);
+    super(name, title, WidgetType.SwitchScene, '', null, null, sizeX, sizeY, cardColor);
     this.statusStates = ['filter', 'collections'];
     this.sceneId = sceneId;
     this.groupId = groupId;

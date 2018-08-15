@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {WidgetImage} from '../models/widgets/WidgetImage';
+import { DomSanitizer } from '../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-widget-image',
@@ -9,9 +10,12 @@ import {WidgetImage} from '../models/widgets/WidgetImage';
 export class WidgetImageComponent implements OnInit {
 
   @Input() widget: WidgetImage;
-  constructor() { }
+  constructor(private domSanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    if (this.widget) {
+      this.widget.sanitizer = this.domSanitizer;
+    }
   }
 
 }

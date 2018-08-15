@@ -78,6 +78,11 @@ export class WidgetAction {
       socketTopic = 'harmony_activity';
       socketCommand = new SwitchStateChangeCommand(deviceName, StateChangeCommandTypes.on);
 
+    } else if (type === WidgetType.SwitchMusic) {
+
+      socketTopic = 'music_player';
+      socketCommand = new SwitchStateChangeCommand(deviceName, StateChangeCommandTypes.toggle);
+
     } else if (type === WidgetType.SwitchScene) {
       // do nothing.. the action will be initialized later.
       return null;

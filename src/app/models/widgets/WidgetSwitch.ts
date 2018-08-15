@@ -12,8 +12,8 @@ export class WidgetSwitch extends WidgetStatus {
   deviceName: string;
 
   static parser = function(data: any): IWidget {
-    if (data.type !== 'switch' && data.type !== 'switchPlug') {
-      throw Error('Widget type is not switch or switchPlug');
+    if (data.type !== 'switch' && data.type !== 'switchPlug' && data.type !== 'switchMusicPlayer') {
+      throw Error('Widget type is not switch or switchPlug or switchMusicPlayer');
     }
 
     if (!data.name) {
@@ -28,14 +28,29 @@ export class WidgetSwitch extends WidgetStatus {
       throw Error('Could not create switch widget: deviceName is not set');
     }
 
-    const widgetType = data.type === 'switch' ? WidgetType.SwitchLight : WidgetType.SwitchPlug;
+    let widgetType: WidgetType;
+    if (data.type === 'switch') {
+      widgetType = WidgetType.SwitchLight;
+    } else if (data.type === 'switchPlug') {
+      widgetType = WidgetType.SwitchPlug;
+    } else if (data.type === 'switchMusicPlayer') {
+      widgetType = WidgetType.SwitchMusic;
+    }
 
-    return new WidgetSwitch(data.name, data.title, widgetType, data.deviceName,
+    return new WidgetSwitch(data.name, data.title, widgetType, data.deviceName, data.icons, data.startStatus,
       data.sizeX, data.sizeY, data.color);
   };
 
-  constructor(name: string, title: string, subType: WidgetType, deviceName: string, sizeX?: number, sizeY?: number, cardColor?: string) {
-    super(name, title, WidgetType.Switch, null, null, sizeX, sizeY, cardColor, cardColor, null);
+  constructor(name: string,
+    title: string,
+    subType: WidgetType,
+    deviceName: string,
+    icons?: string[],
+    startStatus?: string,
+    sizeX?: number,
+    sizeY?: number,
+    cardColor?: string) {
+    super(name, title, WidgetType.Switch, icons, startStatus, null, sizeX, sizeY, cardColor, cardColor, null);
 
     this.deviceName = deviceName;
     this.subType = subType;

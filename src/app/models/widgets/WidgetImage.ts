@@ -2,16 +2,18 @@ import { WidgetAction } from './../widgetAction';
 import {WidgetType} from '../../enums/WidgetType';
 import {IWidget} from '../../interfaces/IWidget';
 import {WidgetBase} from './WidgetBase';
+import { DomSanitizer, SafeUrl } from '../../../../node_modules/@angular/platform-browser';
 
 export class WidgetImage extends WidgetBase {
 
   private readonly imageBasePath = '/assets/images/';
 
-  imageUrl: string;
+  imageUrl: SafeUrl;
   baseImageUrl: string;
   imageUpdatePrefix: string;
   isSwitch: boolean;
   deviceName: string;
+  sanitizer: DomSanitizer;
 
   static parser = function(data: any): IWidget {
     if (data.type !== 'image' && data.type !== 'imageSwitch') {
@@ -77,21 +79,22 @@ export class WidgetImage extends WidgetBase {
       } else {
         widgetImage.imageUrl = this.imageBasePath + this.imageUpdatePrefix + 'off/' + this.baseImageUrl;
       }
-    }
+    } else if (typeof data === 'string') {
+      const url = data as string;
 
-    if (typeof data === 'string') {
-      let url = data as string;
+      if (!this.sanitizer) {
+        console.error('[w' + widgetImage.name + '] dom sanitizer is not set.');
+        return;
+      }
 
-      // TODO: Cleanup this mess
       if (url.startsWith('http') || url.startsWith('assets')) {     // is the data string a url?
-        widgetImage.imageUrl = url;
-      } else {                                                      // append with local path to images
-        if (url.endsWith('png') || url.endsWith('jpg') || url.endsWith('jpeg') || url.endsWith('gif')) {
-          // url = this.imageBasePath + url;
-        } else {
-          url += '.png';
-        }
-        widgetImage.imageUrl = this.imageBasePath + this.imageUpdatePrefix + url;
+        widgetImage.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+      } else if (url.startsWith('data:image')) { // base64
+        widgetImage.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+      } else if (url.endsWith('png') || url.endsWith('jpg') || url.endsWith('jpeg') || url.endsWith('gif')) { // local image with extension
+        widgetImage.imageUrl =  this.sanitizer.bypassSecurityTrustResourceUrl(this.imageBasePath + this.imageUpdatePrefix + url);
+      } else { // append with local path to images
+        widgetImage.imageUrl =  this.sanitizer.bypassSecurityTrustResourceUrl(this.imageBasePath + this.imageUpdatePrefix + url + '.png');
       }
     } else {
       console.log('[w' + widgetImage.name + '] data is not a string.');

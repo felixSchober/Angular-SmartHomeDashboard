@@ -25,22 +25,23 @@ export class WidgetStatus extends WidgetBase {
     const icons = data.icons;
     const actions = WidgetAction.parseActionArray(data.actions);
 
-    return new WidgetStatus(data.name, data.title, widgetType, icons, data.subtitle,
+    return new WidgetStatus(data.name, data.title, widgetType, icons, data.startStatus, data.subtitle,
       data.sizeX, data.sizeY, data.cardColor, data.cardHeaderColor, actions);
   };
 
 
-  constructor(name: string, title: string, type: WidgetType, statusIcons?: string[],
+  constructor(name: string, title: string, type: WidgetType, statusIcons?: string[], startStatus?: string,
               subtitle?: string, sizeX?: number, sizeY?: number, cardColor?: string,
               cardHeaderColor?: string, actions?: WidgetAction[]) {
     super(name, title, type, subtitle, null, null, sizeX, sizeY, cardColor, cardHeaderColor, actions);
 
     if (this.type === WidgetType.Status || this.type === WidgetType.Switch) {
       this.statusStates = statusIcons || ['power_off', 'power'];
-      this.currentStatus = 'not_interested';
+      this.currentStatus = startStatus || 'not_interested';
     } else {
+      startStatus = startStatus || 'not_interested';
       this.statusStates = statusIcons || [];
-      this.currentStatus = this.statusStates.length > 0 ? this.statusStates[0] : 'not_interested';
+      this.currentStatus = this.statusStates.length > 0 ? this.statusStates[0] : startStatus;
     }
 
   }
