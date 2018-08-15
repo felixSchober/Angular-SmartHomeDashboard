@@ -1,0 +1,9 @@
+<mat-card-content class="card-title">
+    <p class="song">{{widget.song}}</p>
+    <p>{{widget.artist}}</p>
+    <p>{{widget.album}}</p>
+</mat-card-content>
+<mat-card-actions *ngIf="widget.secondaryActions.length > 0">
+  <app-widget-container-actions [widget]="widget"></app-widget-container-actions>
+</mat-card-actions>
+<app-widget-container-data-update [widget]="widget"></app-widget-container-data-update>

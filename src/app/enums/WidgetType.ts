@@ -11,5 +11,6 @@ export enum WidgetType {
   SwitchLight,
   SwitchHarmony,
   SwitchScene,
-  SwitchMusic
+  SwitchMusic,
+  MusicTrack
 }

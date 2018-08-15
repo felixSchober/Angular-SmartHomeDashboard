@@ -507,22 +507,21 @@
           "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
           "sizeY": 1
-        },
+        },   
         {
-          "type": "image",
-          "name": "music_playlist_1_cover",
+          "type": "switchMusicPlayer",
+          "name": "music_player_mute",
+          "deviceName": "Skip",
+          "title": " ",
+          "startStatus": "volume_mute",
           "sizeX": 1,
-          "sizeY": 1,
-          "actions": [
-            {
-              "type": "Primary",              
-              "socketTopic": "music_playlist",
-              "socketMessage": {
-                "folder": "Dashboard",
-                "index": 1
-              }
-            }
-          ]
+          "sizeY": 1
+        },     
+        {
+          "type": "musicTrack",
+          "name": "music_currentTrack",
+          "sizeX": 3,
+          "sizeY": 1
         },
         {
           "type": "switchMusicPlayer",
@@ -550,7 +549,55 @@
           "startStatus": "skip_next",
           "sizeX": 1,
           "sizeY": 1
-        }           
+        },
+        {
+          "type": "image",
+          "name": "music_playlist_0_cover",
+          "sizeX": 1,
+          "sizeY": 1,
+          "actions": [
+            {
+              "type": "Primary",              
+              "socketTopic": "music_playlist",
+              "socketMessage": {
+                "folder": "Dashboard",
+                "index": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "name": "music_playlist_1_cover",
+          "sizeX": 1,
+          "sizeY": 1,
+          "actions": [
+            {
+              "type": "Primary",              
+              "socketTopic": "music_playlist",
+              "socketMessage": {
+                "folder": "Dashboard",
+                "index": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "name": "music_playlist_2_cover",
+          "sizeX": 1,
+          "sizeY": 1,
+          "actions": [
+            {
+              "type": "Primary",              
+              "socketTopic": "music_playlist",
+              "socketMessage": {
+                "folder": "Dashboard",
+                "index": 2
+              }
+            }
+          ]
+        }
       ]
     }
 

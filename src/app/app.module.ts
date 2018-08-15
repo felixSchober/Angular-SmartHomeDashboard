@@ -21,6 +21,7 @@ import { WidgetContainerDataUpdateComponent } from './widget-container-data-upda
 import { WidgetSwitchComponent } from './widget-switch/widget-switch.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { WidgetPlayerCurrentTrackComponent } from './widget-player-current-track/widget-player-current-track.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     WidgetContainerActionsComponent,
     WidgetContainerDataUpdateComponent,
     WidgetSwitchComponent,
-    DashboardComponent
+    DashboardComponent,
+    WidgetPlayerCurrentTrackComponent
   ],
   imports: [
     BrowserModule,

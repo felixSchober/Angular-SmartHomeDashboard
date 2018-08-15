@@ -12,6 +12,7 @@ import { WidgetSwitchScene } from '../models/widgets/WidgetSwitchScene';
 import * as widgetConfigurationDevice_kitchen from './../../assets/configuration/dashboardConfig_kitchen.json';
 import * as widgetConfigurationDevice_living from './../../assets/configuration/dashboardConfig_living.json';
 import * as widgetConfigurationDevice_entrace from './../../assets/configuration/dashboardConfig_entrance.json';
+import { WidgetCurrentTrack } from '../models/widgets/WidgetCurrentTrack';
 
 export class ConfigurationLoader {
 
@@ -71,6 +72,9 @@ export class ConfigurationLoader {
                             break;
                         case 'switchScene':
                             widgetInstance = WidgetSwitchScene.parser(widget);
+                            break;
+                        case 'musicTrack':
+                            widgetInstance = WidgetCurrentTrack.parser(widget);
                             break;
                         default:
                             throw Error('Could not match widget type ' + widget.type);

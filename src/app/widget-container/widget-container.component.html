@@ -8,6 +8,7 @@
   <app-widget-status *ngSwitchCase="WidgetType.Status" [widget]="widget" (click)="widget.onSelect(widget)"></app-widget-status>
   <app-widget-image-status *ngSwitchCase="WidgetType.StatusImage" [widget]="widget" (click)="widget.onSelect(widget)"></app-widget-image-status>
   <app-widget-switch *ngSwitchCase="WidgetType.Switch" [widget]="widget" (click)="widget.onSelect(widget)"></app-widget-switch>
+  <app-widget-player-current-track *ngSwitchCase="WidgetType.MusicTrack" [widget]="widget" (click)="widget.onSelect(widget)"></app-widget-player-current-track>
   <div *ngSwitchDefault="">Unexpected type '{{widget.type}}'</div>
 
 </mat-card>
