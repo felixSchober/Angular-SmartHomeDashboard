@@ -2,7 +2,7 @@
   <div class="mat-card-header-content">
     <mat-card-title>
       <div class="card-number mat-card-header-text">
-        {{widget.dataPrefix}}{{utils.transformNumber(widget.currentNumber, widget.numberPrecision, true)}}{{widget.dataSuffix}}
+        {{widget.dataPrefix}}<span countUp [endVal]="utils.transformNumber(widget.currentNumber, widget.numberPrecision, true)">0</span>{{widget.dataSuffix}}
       </div>
     </mat-card-title>
     <mat-card-subtitle class="card-title">{{widget.title}}</mat-card-subtitle>

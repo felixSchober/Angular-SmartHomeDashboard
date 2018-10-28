@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { CountUpModule } from 'countup.js-angular2';
 
 import { MaterialModule } from './material-module/material-module';
 import { AppComponent } from './app.component';
@@ -45,7 +45,8 @@ import { WidgetPlayerCurrentTrackComponent } from './widget-player-current-track
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CountUpModule
   ],
   providers: [Utils],
   bootstrap: [AppComponent]
