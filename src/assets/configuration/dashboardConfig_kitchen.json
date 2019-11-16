@@ -1,5 +1,5 @@
 {
-  "pages": [    
+  "pages": [
     {
       "index": 0,
       "name": "Start",
@@ -42,7 +42,7 @@
           "title": "Kochplatte",
           "parameters": {
             "scaleType": "date",
-            "singleSeriesColorFunction": true            
+            "singleSeriesColorFunction": true
           },
           "margins": {
             "top": 4,
@@ -73,24 +73,24 @@
         },
         {
           "type": "number",
-          "name": "espressoWeek",
+          "name": "coffee_week",
           "title": "Week",
           "subtitle": "Espresso",
           "dataPrefix": "",
           "dataSuffix": "",
           "sizeX": 1,
           "sizeY": 1
-        }, 
+        },
         {
           "type": "number",
-          "name": "espressoTotal",
+          "name": "coffee_total",
           "title": "Total",
           "subtitle": "Espresso",
           "dataPrefix": "",
           "dataSuffix": "",
           "sizeX": 1,
           "sizeY": 1
-        },         
+        },
         {
           "type": "switch",
           "name": "lights_Arbeitsplatte",
@@ -113,7 +113,7 @@
       "index": 1,
       "name": "Power",
       "icon": "",
-      "widgets": [      
+      "widgets": [
         {
           "type": "number",
           "name": "powerLevelValue_Total",
@@ -124,7 +124,7 @@
           "sizeX": 1,
           "sizeY": 1,
           "showHighLow": true
-        },  
+        },
         {
           "type": "number",
           "name": "powerLevelValue_Computer",
@@ -168,7 +168,7 @@
           "sizeX": 1,
           "sizeY": 1,
           "showHighLow": true
-        },        
+        },
         {
           "type": "lineGraph",
           "name": "powerLevelHistory_Total",
@@ -181,7 +181,7 @@
           "sizeX": 5,
           "sizeY": 2,
           "showLegend": true
-        }        
+        }
       ]
     },
     {
@@ -195,7 +195,7 @@
           "sizeX": 2,
           "sizeY": 1,
           "actions": []
-        },        
+        },
         {
           "type": "image",
           "name": "harmony_currentActivity",
@@ -204,7 +204,7 @@
           "sizeY": 1,
           "actions": [
             {
-              "type": "Primary",              
+              "type": "Primary",
               "socketTopic": "harmony_activity",
               "socketMessage": {
                 "state": "off"
@@ -265,7 +265,7 @@
           "imageUpdatePrefix": "harmony/activities/",
           "sizeX": 1,
           "sizeY": 1
-        },     
+        },
         {
           "type": "imageSwitch",
           "name": "harmony_activity_Airplay Music_state",
@@ -323,7 +323,7 @@
       "index": 3,
       "name": "Wetter",
       "icon": "",
-      "widgets": [      
+      "widgets": [
         {
           "type": "number",
           "name": "hueTemp_temperature_entrance_current",
@@ -335,7 +335,7 @@
           "sizeX": 2,
           "sizeY": 1,
           "showHighLow": true
-        },  
+        },
         {
           "type": "number",
           "name": "hueTemp_temperature_kitchen_current",
@@ -347,7 +347,7 @@
           "sizeX": 3,
           "sizeY": 1,
           "showHighLow": true
-        },              
+        },
         {
           "type": "lineGraph",
           "name": "hueTemp_temperature_entrance_history",
@@ -375,10 +375,10 @@
           "sizeX": 3,
           "sizeY": 2,
           "showLegend": true
-        }        
+        }
       ]
     }
 
-    
+
   ]
 }
