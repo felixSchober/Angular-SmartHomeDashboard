@@ -1,4 +1,4 @@
-<mat-tab-group [(selectedIndex)]="selectedTabIndex" class="cdark-theme">
+<mat-tab-group mat-stretch-tabs [(selectedIndex)]="selectedTabIndex" class="cdark-theme">
   <mat-tab label="{{page.name}}" *ngFor="let page of widgetTabs">
     <app-control-page [tabIndex]="page.tabIndex" [pageWidgets]="page.widgets"></app-control-page>
   </mat-tab>
