@@ -34,7 +34,7 @@
     "sass-loader": "^7.0.3",
     "socket.io-client": "^2.1.1",
     "svg-morpheus": "^0.3.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.29"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.0",
