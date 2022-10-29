@@ -32,7 +32,7 @@
     "moment": "^2.22.1",
     "rxjs-compat": "6.0.0",
     "sass-loader": "^7.0.3",
-    "socket.io-client": "^2.1.1",
+    "socket.io-client": "^2.5.0",
     "svg-morpheus": "^0.3.0",
     "zone.js": "^0.8.26"
   },
@@ -48,7 +48,7 @@
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~1.7.1",
+    "karma": "~6.4.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~1.4.2",
     "karma-jasmine": "~1.1.1",
